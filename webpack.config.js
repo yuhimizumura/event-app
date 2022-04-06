@@ -13,14 +13,16 @@ module.exports = {
         filename: 'main.js',
         path: outputPath
     },
-    devServer: {},
+    devServer: {
+        historyApiFallback: true,
+    },
 
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
+                use: ['babel-loader'],
                 exclude: /node_modules/,
-                loader: 'babel-loader'
             },
             {
                 // 拡張子 .ts の場合
@@ -28,6 +30,16 @@ module.exports = {
                 // TypeScript をコンパイルする
                 use: 'ts-loader',
             },
+            {
+                test: /\.css/,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: { url: false }
+                    }
+                ]
+            }
         ],
     },
     // import 文で .ts ファイルを解決するため
@@ -37,7 +49,7 @@ module.exports = {
     resolve: {
         // 拡張子を配列で指定
         extensions: [
-            '.ts', '.js','.tsx'
+            '.ts', '.js','jsx','.tsx','.css','.scss'
         ],
     },
 };
