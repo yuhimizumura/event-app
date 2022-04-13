@@ -23,18 +23,23 @@
   },
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^1.2.25",
     "@chakra-ui/react": "^1.8.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@types/react-router-dom": "^5.3.3",
     "@zxing/browser": "^0.1.1",
     "@zxing/library": "^0.19.1",
+    "aws-amplify": "^4.3.19",
     "css-loader": "^6.7.1",
     "framer-motion": "^4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-qr-reader": "^3.0.0-beta-1",
+    "react-redux": "^7.2.8",
     "react-router-dom": "^5.3.0",
+    "redux-debounced": "^0.5.0",
+    "redux-thunk": "^2.3.0",
     "style-loader": "^3.3.1"
   }
 }
