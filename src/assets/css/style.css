@@ -1,2 +1,6 @@
 .d-flex {
   display: flex; }
+
+img {
+  width: 100%;
+}
