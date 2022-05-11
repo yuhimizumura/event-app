@@ -1,7 +1,7 @@
 import React, {useEffect, useReducer} from "react";
 import ReactDOM from 'react-dom';
 import { store } from "./redux/storeConfig/store";
-import './assets/css/style.css'
+import './assets/css/style.scss'
 import {
     BrowserRouter,
     Switch,

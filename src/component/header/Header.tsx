@@ -1,28 +1,36 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Image from "../Image/Image";
+const logo = require("../../assets/img/img_logo.png")
 
 const Header = () => {
     return (
-        <header className='d-flex'>
-            <Logo />
-            <GMenu />
+        <header id="header" className="pt-1 pb-1">
+            <HeaderMenu />
         </header>
+    )
+}
+
+const HeaderMenu = () => {
+    return (
+        <nav>
+            <ul className='wrapper'>
+                <li>
+                    <Link to="/"><Logo /></Link>
+                </li>
+                <li><Link to="/search">イベントを探す</Link></li>
+                <li><Link to="/about">当サービスについて</Link></li>
+                <li><Link to="/login">ログイン</Link></li>
+            </ul>
+        </nav>
     )
 }
 
 const Logo = () => {
     return (
-        // <img src="" alt=""/>
-        <h1>イベントアプリ</h1>
-    )
-}
-
-const GMenu = () => {
-    return (
-        <ul className='d-flex'>
-            <li>イベントを探す</li>
-            <li>当サービスについて</li>
-            <li>ログイン</li>
-        </ul>
+        <h1 className="w-px-100 h-px-60">
+            <Image size="w-100 h-px-60" path={logo} alt="ロゴ画像" />
+        </h1>
     )
 }
 

@@ -131,8 +131,8 @@ const FrontTop = () => {
                             </dl>
                         </li>
                     </ul>
-                    <button>自分にあったイベントを探す　→　</button>
                 </div>
+                <button>自分にあったイベントを探す　→　</button>
             </section>
 
             {/*背景色変更する*/}

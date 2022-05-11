@@ -1,5 +1,6 @@
 const path = require('path');
 const outputPath = path.resolve(__dirname, 'dist');
+const Fiber = require('fibers')
 
 module.exports = {
     // モード値を production に設定すると最適化された状態で、
@@ -31,14 +32,18 @@ module.exports = {
                 use: 'ts-loader',
             },
             {
-                test: /\.css/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: { url: false }
+                test: /\.scss$/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader'
+                }, {
+                    loader: 'sass-loader',
+                    options: {
+                        implementation: require('sass'),
+                        fiber: Fiber
                     }
-                ]
+                }]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
