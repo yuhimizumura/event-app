@@ -1,6 +1,6 @@
 import React from "react";
 // import Swiper core and required modules
-import {Navigation, Pagination, Scrollbar, EffectCards,} from 'swiper';
+import {Navigation, Pagination, Scrollbar, EffectCards, Autoplay,} from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -19,9 +19,10 @@ const img4 = require("/src/assets/img/img_slide04.png")
 export default () => {
     return (
         <Swiper
-            modules={[Navigation, Pagination, Scrollbar, EffectCards]}
+            modules={[Navigation, Pagination, Scrollbar, EffectCards,Autoplay]}
             spaceBetween={50}
             navigation
+            autoplay={true}
             // pagination={{ clickable: true }}
             // scrollbar={{ draggable: true }}
             effect="cards"

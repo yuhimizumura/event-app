@@ -14,39 +14,36 @@ const FrontTop = () => {
     return (
         <div className="App">
             <Header />
-            {/*<CardSlider />*/}
-            {/*<CardSlider />*/}
             <div id="slider-wrap">
                 <CardSlider />
-                {/*<SimpleSlider />*/}
                 <div className="mask"></div>
                 <div className="title-area">
                     <h2>Appreciate the moment.</h2>
                     <h3>この瞬間に感謝せよ。</h3>
                 </div>
             </div>
-            <section id="section1" className="mt-8">
+            <section id="section1">
                 {/*丸の背景いれる*/}
                 <div className="section-title-area">
                     <h2>やってみたいから、やってみようへ</h2>
                     <p>サブタイトル</p>
                 </div>
 
-                <div className="d-flex">
+                <div className="d-flex between">
                     <dl>
-                        <dt>1.全会員本人確認済み</dt>
-                        <dd><Image path={about1} /></dd>
-                        <dd>ひとことこめんと</dd>
+                        <dt><Image path={about1} /></dt>
+                        <dd>1.全会員本人確認済み</dd>
+                        <dd>イベントアプリ（仮）では、登録時に全会員様の身分証確認を実施しておりますので、万が一の場合にも安全にご利用いただけます。</dd>
                     </dl>
                     <dl>
-                        <dt>2.タイトル</dt>
-                        <dd>画像</dd>
-                        <dd>ひとことこめんと</dd>
+                        <dt><Image path={about1} /></dt>
+                        <dd>1.全会員本人確認済み</dd>
+                        <dd>イベントアプリ（仮）では、登録時に全会員様の身分証確認を実施しておりますので、万が一の場合にも安全にご利用いただけます。</dd>
                     </dl>
                     <dl>
-                        <dt>3.タイトル</dt>
-                        <dd>画像</dd>
-                        <dd>ひとことこめんと</dd>
+                        <dt><Image path={about1} /></dt>
+                        <dd>1.全会員本人確認済み</dd>
+                        <dd>イベントアプリ（仮）では、登録時に全会員様の身分証確認を実施しておりますので、万が一の場合にも安全にご利用いただけます。</dd>
                     </dl>
                 </div>
 
@@ -58,16 +55,16 @@ const FrontTop = () => {
 
             <section id="section2">
                 {/*丸の背景いれる*/}
-                <div className="title-area">
+                <div className="section-title-area">
                     <h2>実際に開かれているイベントなど</h2>
                     <p>なんかいい感じの文言</p>
                 </div>
 
-                <div className="d-flex">
+                <div>
                 {/*    ４列×2  */}
-                    <ul id="event-list">
+                    <ul className="d-flex between">
                        <li>
-                           <Image path={slide2} />
+                           <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -76,7 +73,7 @@ const FrontTop = () => {
                             </dl>
                        </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -85,7 +82,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -94,7 +91,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -103,7 +100,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -112,7 +109,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -121,7 +118,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>
@@ -130,7 +127,7 @@ const FrontTop = () => {
                             </dl>
                         </li>
                         <li>
-                            <Image path={slide2} />
+                            <Image path={about1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
                                 <dd>日時： 2022/04/01</dd>

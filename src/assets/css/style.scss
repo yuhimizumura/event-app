@@ -3,6 +3,9 @@ $font-big: 42px;
 $font-middle: 24px;
 $font-small: 18px;
 
+//色
+$default-button-color: #242424;
+
 // 基本設定
 
 * {
@@ -20,6 +23,16 @@ ul {
   list-style: none;
 }
 
+//@function sectionCommon() {
+//  @extend .mt-8;
+//  @extend .wrap;
+//}
+
+@mixin sectionCommon() {
+  @extend .mt-8;
+  @extend .wrap;
+}
+
 .mx-auto {
   margin-right: auto;
   margin-left: auto;
@@ -33,11 +46,15 @@ ul {
 
 .section-title-area {
   text-align: center;
+  @extend .mb-3;
 }
 
 .d-flex {
   display: flex;
+}
 
+.between {
+  justify-content: space-between;
 }
 
 // 横幅設定
@@ -54,6 +71,7 @@ ul {
   .pr-#{$i} { padding-right :0em + $i;}
   .pb-#{$i} { padding-bottom :0em + $i;}
   .pl-#{$i} { padding-left :0em + $i;}
+  .px-#{$i} { padding-left :0em + $i; padding-right :0em + $i;}
   .py-#{$i} { padding-top :0em + $i; padding-bottom :0em + $i;}
 }
 
@@ -136,5 +154,33 @@ ul {
 
 
 #section1 {
-  @extend .wrap
+  @include sectionCommon();
+  dl {
+    width: calc(100% / 3 - 30px);
+  }
+}
+
+#section2 {
+  @include sectionCommon();
+  ul {
+    flex-wrap: wrap;
+    li {
+      width: calc(100% / 4 - 30px);
+      &:nth-child(n+5) {
+        @extend .mt-3;
+      }
+    }
+  }
+
+  button {
+    @extend .mx-auto;
+    @extend .mt-3;
+    @extend .px-2;
+    @extend .py-1;
+    display: block;
+    background: $default-button-color;
+    border: 1px solid $default-button-color;
+    border-radius: 2px;
+    color: #fff;
+  }
 }
