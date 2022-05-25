@@ -1,33 +1,41 @@
 import React from 'react';
 import Header from "../../component/header/Header";
 import Image from "../../component/Image/Image";
+import SimpleSlider from "../../component/slider";
+import CardSlider from "../../component/cardSlider";
 
 const slide1 = require("../../assets/img/img_slide01.jpg")
 const slide2 = require("../../assets/img/img_slide02.jpg")
 const slide3 = require("../../assets/img/img_slide03.jpg")
 
+const about1 = require("../../assets/img/img_about01.png")
+
 const FrontTop = () => {
     return (
         <div className="App">
-            <Header/>
+            <Header />
+            {/*<CardSlider />*/}
+            {/*<CardSlider />*/}
             <div id="slider-wrap">
-                {/*<Image path={slide1} />*/}
-                {/*<Image path={slide2} />*/}
-                <Image path={slide3}/>
-                <h2>この瞬間に感謝せよ。</h2>
-                <h3>Appreciate the moment.</h3>
-            </div>
-            <section id="section1">
-                {/*丸の背景いれる*/}
+                <CardSlider />
+                {/*<SimpleSlider />*/}
+                <div className="mask"></div>
                 <div className="title-area">
+                    <h2>Appreciate the moment.</h2>
+                    <h3>この瞬間に感謝せよ。</h3>
+                </div>
+            </div>
+            <section id="section1" className="mt-8">
+                {/*丸の背景いれる*/}
+                <div className="section-title-area">
                     <h2>やってみたいから、やってみようへ</h2>
                     <p>サブタイトル</p>
                 </div>
 
                 <div className="d-flex">
                     <dl>
-                        <dt>1.タイトル</dt>
-                        <dd>画像</dd>
+                        <dt>1.全会員本人確認済み</dt>
+                        <dd><Image path={about1} /></dd>
                         <dd>ひとことこめんと</dd>
                     </dl>
                     <dl>

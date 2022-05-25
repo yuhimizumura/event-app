@@ -2,6 +2,8 @@ import React, {useEffect, useReducer} from "react";
 import ReactDOM from 'react-dom';
 import { store } from "./redux/storeConfig/store";
 import './assets/css/style.scss'
+import "./assets/css/slick.css";
+import "./assets/css/slick-theme.css";
 import {
     BrowserRouter,
     Switch,

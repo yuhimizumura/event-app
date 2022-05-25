@@ -46,6 +46,16 @@ module.exports = {
                 }]
             },
             {
+                test: /\.css/,
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: { url: false }
+                    }
+                ]
+            },
+            {
                 test: /\.(png|jpe?g|gif|svg)$/i,
                 use: [
                     {
