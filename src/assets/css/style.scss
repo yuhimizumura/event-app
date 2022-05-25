@@ -6,6 +6,25 @@ $font-small: 18px;
 //色
 $default-button-color: #242424;
 
+//Breakpoints
+$breakpoints: (
+  tb: 'screen and (min-width: 600px)',
+  pc: 'screen and (min-width: 1025px)'
+);
+
+//mixin
+
+@mixin mq($bp) {
+  @media #{map-get($breakpoints,$bp)} {
+    @content
+  }
+}
+
+@mixin sectionCommon() {
+  @extend .mt-8;
+  @extend .wrap;
+}
+
 // 基本設定
 
 * {
@@ -23,15 +42,6 @@ ul {
   list-style: none;
 }
 
-//@function sectionCommon() {
-//  @extend .mt-8;
-//  @extend .wrap;
-//}
-
-@mixin sectionCommon() {
-  @extend .mt-8;
-  @extend .wrap;
-}
 
 .mx-auto {
   margin-right: auto;
