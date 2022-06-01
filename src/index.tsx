@@ -29,9 +29,9 @@ ReactDOM.render(
                   <Route exact path="/qr">
                       <QrHome />
                   </Route>
-                  <Route exact path="/login">
-                      <Login />
-                  </Route>
+                  {/*<Route exact path="/login">*/}
+                  {/*    <Login />*/}
+                  {/*</Route>*/}
                   <Route exact path="/mypage">
                       <MyPage />
                   </Route>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Image from "../Image/Image";
-const logo = require("../../assets/img/img_logo.png")
+const logo = require("../../assets/img/img_logo01.png")
 
 const Header = () => {
     return (
@@ -28,8 +28,9 @@ const HeaderMenu = () => {
 
 const Logo = () => {
     return (
-        <h1 className="w-px-100 h-px-60">
-            <Image size="w-100 h-px-60" path={logo} alt="ロゴ画像" />
+        <h1>
+            <Image size="h-px-60" path={logo} alt="ロゴ画像" />
+            <span>個人向けイベント開催サービス</span>
         </h1>
     )
 }

@@ -1,5 +1,6 @@
 //環境別文字サイズ
 $font-big: 42px;
+$font-title : 32px;
 $font-middle: 24px;
 $font-small: 18px;
 
@@ -23,6 +24,12 @@ $breakpoints: (
 @mixin sectionCommon() {
   @extend .mt-8;
   @extend .wrap;
+  h2 {
+    font-size: $font-title;
+  }
+  p {
+    font-size: $font-middle;
+  }
 }
 
 // 基本設定
@@ -42,6 +49,24 @@ ul {
   list-style: none;
 }
 
+
+// 横幅設定
+@for $i from 0 through 100 {
+  .w-#{$i} { width: 0% + $i; }
+  .w-px-#{$i} { width: 0px + $i; }
+  .h-px-#{$i} { height: 0px + $i; }
+  .mt-#{$i} { margin-top :0em + $i;}
+  .mr-#{$i} { margin-right :0em + $i;}
+  .mb-#{$i} { margin-bottom :0em + $i;}
+  .ml-#{$i} { margin-left :0em + $i;}
+  .my-#{$i} { margin-top :0em + $i; margin-bottom :0em + $i;}
+  .pt-#{$i} { padding-top :0em + $i;}
+  .pr-#{$i} { padding-right :0em + $i;}
+  .pb-#{$i} { padding-bottom :0em + $i;}
+  .pl-#{$i} { padding-left :0em + $i;}
+  .px-#{$i} { padding-left :0em + $i; padding-right :0em + $i;}
+  .py-#{$i} { padding-top :0em + $i; padding-bottom :0em + $i;}
+}
 
 .mx-auto {
   margin-right: auto;
@@ -67,30 +92,25 @@ ul {
   justify-content: space-between;
 }
 
-// 横幅設定
-@for $i from 0 through 100 {
-  .w-#{$i} { width: 0% + $i; }
-  .w-px-#{$i} { width: 0px + $i; }
-  .h-px-#{$i} { height: 0px + $i; }
-  .mt-#{$i} { margin-top :0em + $i;}
-  .mr-#{$i} { margin-right :0em + $i;}
-  .mb-#{$i} { margin-bottom :0em + $i;}
-  .ml-#{$i} { margin-left :0em + $i;}
-  .my-#{$i} { margin-top :0em + $i; margin-bottom :0em + $i;}
-  .pt-#{$i} { padding-top :0em + $i;}
-  .pr-#{$i} { padding-right :0em + $i;}
-  .pb-#{$i} { padding-bottom :0em + $i;}
-  .pl-#{$i} { padding-left :0em + $i;}
-  .px-#{$i} { padding-left :0em + $i; padding-right :0em + $i;}
-  .py-#{$i} { padding-top :0em + $i; padding-bottom :0em + $i;}
-}
 
 
 // header設定
 #header {
+  h1 {
+    display: flex;
+   align-items: center;
+    img {
+      width: 78px;
+      @extend .mx-auto
+    }
+    span {
+      font-size: 16px;
+      @extend .ml-1;
+    }
+  }
   .wrapper {
-    width: 100%;
-    max-width: 1180px;
+    width: 90%;
+    max-width: 1580px;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
@@ -121,18 +141,18 @@ ul {
 #slider-wrap {
   .slider-height {
     height: calc(100vh - 150px - 1em);
+    max-height: 800px;
   }
   @extend .w-95;
   @extend .my-0;
   @extend .mx-auto;
   position: relative;
-  //height: calc(100vh - 150px - 2em);
   img {
     width: 90%;
     @extend .mx-auto;
     display: block;
     height: calc(100vh - 150px - 2em);
-    //object-fit: cover;
+    max-height: 800px;
   }
   .mask {
     width: 90%;
@@ -143,6 +163,7 @@ ul {
     top: 0;
     left: 5%;
     z-index: 999;
+    max-height: 800px;
   }
   .title-area {
     position: absolute;
@@ -162,12 +183,44 @@ ul {
   }
 }
 
+#pre-section {
+  @extend .d-flex;
+  @extend .mx-auto;
+  width: 100px;
+  align-items: start;
+  p {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 4px;
+    font-size: $font-small;
+    span {
+      font-size: $font-title;
+    }
+  }
+  .center-line {
+    width: 1px;
+    height: 20vh;
+    background: $default-button-color;
+  }
+}
+
 
 #section1 {
   @include sectionCommon();
   dl {
     width: calc(100% / 3 - 30px);
   }
+  #result-message {
+    @extend .mt-5;
+    text-align: center;
+    h3 {
+      font-size: $font-title;
+    }
+    p {
+      font-size: $font-middle;
+    }
+  }
+
 }
 
 #section2 {
@@ -192,5 +245,79 @@ ul {
     border: 1px solid $default-button-color;
     border-radius: 2px;
     color: #fff;
+  }
+}
+
+#section3 {
+  @include sectionCommon();
+  dl {
+    width: calc(100% / 3 - 30px);
+  }
+}
+
+#section4 {
+  @extend .mt-8;
+  @extend .pb-10;
+  @extend .pt-3;
+  color: #fff;
+  h2 {
+    font-size: $font-title;
+  }
+  p {
+    font-size: $font-middle;
+  }
+  background: $default-button-color;
+  width: 100%;
+  iframe {
+    width: 100%;
+    height: 450px;
+  }
+  .wrapper {
+    width: 90%;
+    max-width: 1580px;
+    @extend .mx-auto;
+  }
+}
+
+#section5 {
+  @include sectionCommon();
+  dl {
+    width: calc(100% / 3 - 30px);
+  }
+}
+
+footer {
+  @extend .py-5;
+  background:$default-button-color;
+  color: #fff;
+  a {
+    color: #fff;
+  }
+  align-items: start;
+  .footer-list {
+    @extend .d-flex;
+    text-align: center;
+    ul {
+      @extend .w-50;
+      display: inline-block;
+      li {
+        margin-left: 35%;
+        text-align: left;
+      }
+    }
+  }
+  .copyright {
+    @extend .d-flex;
+    align-items: center;
+    width: 220px;
+    @extend .mx-auto;
+    @extend .mt-3;
+    p {
+      img {
+        @extend .ml-1;
+        width: 20px;
+        fill: #fff;
+      }
+    }
   }
 }
