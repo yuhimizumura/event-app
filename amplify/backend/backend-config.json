@@ -1,6 +1,6 @@
 {
   "auth": {
-    "eventapp6da5a2c5": {
+    "eventappe7f3677a": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -24,6 +24,23 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
+      }
+    }
+  },
+  "api": {
+    "eventappAPI": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "autheventappe7f3677a"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
       }
     }
   }
