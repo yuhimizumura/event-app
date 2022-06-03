@@ -1,6 +1,7 @@
 import React, {useEffect, useReducer} from "react";
 import ReactDOM from 'react-dom';
-import { store } from "./redux/storeConfig/store";
+import { PersistGate} from "redux-persist/integration/react";
+import store ,{ persistor } from "./redux/configureStore";
 import './assets/css/style.scss'
 import "./assets/css/slick.css";
 import "./assets/css/slick-theme.css";
@@ -31,7 +32,9 @@ ReactDOM.render(
   <React.StrictMode>
       <ApolloProvider client={client}>
           <Provider store={store}>
-              <App />
+              <PersistGate persistor={persistor} loading={null} >
+                <App />
+              </PersistGate>
           </Provider>
       </ApolloProvider>
   </React.StrictMode>,

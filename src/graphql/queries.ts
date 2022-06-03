@@ -33,3 +33,18 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      sei
+      mei
+      kanaSei
+      kanaMei
+      tel
+      post
+      address
+    }
+  }
+`;

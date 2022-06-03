@@ -10,9 +10,9 @@ import awsmobile from "../../aws-exports";
 const MyPage = () => {
 
     let location = useLocation();
-    const state = useSelector(state => state)
+    const state:any = useSelector(state => state)
 
-    console.log(state)
+    console.log(state.signInUser)
 
     const removeToken = () => {
         window.location.href = "/"
@@ -21,7 +21,7 @@ const MyPage = () => {
     return (
         <div className="App">
             {/*<QrHome />*/}
-            <h2>ここはマイページです</h2>
+            <h2>ようこそ！{state.signInUser.sei}{state.signInUser.mei}さん</h2>
 
             <AmplifyAuthenticator>
                 <AmplifySignOut onClick={() => removeToken()}/>

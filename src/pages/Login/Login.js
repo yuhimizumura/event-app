@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {AmplifyAuthenticator,AmplifySignUp,AmplifySignOut} from "@aws-amplify/ui-react";
 import {AuthState, onAuthUIStateChange} from '@aws-amplify/ui-components';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import authStatusSet from "../../redux/actions/auth";
 import {isEmpty} from "../../util/util";
-import {Redirect,useHistory} from "react-router-dom"
-import {Amplify, Auth,API,graphqlOperation} from "aws-amplify";
-import awsmobile from "../../aws-exports";
-import {getTodo, listTodos} from "../../graphql/queries";
+import {useHistory} from "react-router-dom"
+import {API,graphqlOperation} from "aws-amplify";
+import {getTodo, getUser} from "../../graphql/queries";
 import signInUserSet from "../../redux/actions/user";
 
 
 const Login = () => {
     const [authState, setAuthState] = React.useState();
     const [user, setUser] = React.useState();
-    const [token,setToken] = useState("")
     const dispatch = useDispatch()
-    const state = useSelector(state => state)
     const history = useHistory()
 
     // console.log(state)
@@ -41,18 +38,17 @@ const Login = () => {
         if (id === undefined) {
             uId = user.username
         }
-        const todo = await API.graphql(graphqlOperation(getTodo,{
+        const signInUser = await API.graphql(graphqlOperation(getUser,{
             id:uId
         }))
-        return todo
+        return signInUser
     }
 
     useEffect(() => {
         if (user === undefined) return
         const fetchId = user.userName
         fetchUser(fetchId).then(data => {
-            dispatch(signInUserSet(data.data))
-            // window.location.href = "/mypage"
+            dispatch(signInUserSet(data.data.getUser))
             history.push("/mypage")
         }).catch(error => {
             console.log(error)

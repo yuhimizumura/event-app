@@ -6,3 +6,14 @@ type Todo @model {
   aaaa: String
   test:String
 }
+
+type User @model {
+  id: ID!
+  sei: String
+  mei: String
+  kanaSei: String
+  kanaMei: String
+  tel: String
+  post: String
+  address:String
+}
