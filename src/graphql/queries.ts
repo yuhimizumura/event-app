@@ -7,6 +7,10 @@ export const getTodo = /* GraphQL */ `
     getTodo(id: $id) {
       id
       name
+      description
+      hoge
+      createdAt
+      updatedAt
     }
   }
 `;
