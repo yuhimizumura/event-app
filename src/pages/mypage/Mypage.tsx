@@ -1,31 +1,31 @@
 import React from 'react';
 import Header from "../../component/header/Header";
 import QrHome from "../../component/qrreader/qrCodeApp";
-import {AmplifyAuthenticator,AmplifySignOut} from "@aws-amplify/ui-react";
+import {AmplifyAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
 import {useSelector} from "react-redux";
-import {Redirect,useLocation} from "react-router-dom"
+import {Redirect, useLocation} from "react-router-dom"
+import {Amplify,Auth} from "aws-amplify";
+import awsmobile from "../../aws-exports";
 
 const MyPage = () => {
 
     let location = useLocation();
-    const state = useSelector(state => state)
-    console.log(location)
-    let   from   = location.state || { from: { pathname: "/mypage" } };
+    const state:any = useSelector(state => state)
 
-    console.log(from)
+    console.log(state.signInUser)
 
     const removeToken = () => {
-        // window.location.href = "/"
+        window.location.href = "/"
     }
 
     return (
         <div className="App">
             {/*<QrHome />*/}
-            <h2>ここはマイページです</h2>
+            <h2>ようこそ！{state.signInUser.sei}{state.signInUser.mei}さん</h2>
 
-           <AmplifyAuthenticator>
-               <AmplifySignOut onClick={() => removeToken()} />
-           </AmplifyAuthenticator>
+            <AmplifyAuthenticator>
+                <AmplifySignOut onClick={() => removeToken()}/>
+            </AmplifyAuthenticator>
         </div>
     );
 }

@@ -7,6 +7,10 @@ export const getTodo = /* GraphQL */ `
     getTodo(id: $id) {
       id
       name
+      description
+      hoge
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -26,6 +30,21 @@ export const listTodos = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      sei
+      mei
+      kanaSei
+      kanaMei
+      tel
+      post
+      address
     }
   }
 `;
