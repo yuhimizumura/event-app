@@ -1,22 +1,4 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-eventapp-dev-172551-authRole",
-      "UnauthRoleArn": "arn:aws:iam::164583009432:role/amplify-eventapp-dev-172551-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::164583009432:role/amplify-eventapp-dev-172551-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-eventapp-dev-172551-deployment",
-      "UnauthRoleName": "amplify-eventapp-dev-172551-unauthRole",
-      "StackName": "amplify-eventapp-dev-172551",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:164583009432:stack/amplify-eventapp-dev-172551/565b9020-bb03-11ec-a504-0e46c7669ec1",
-      "AmplifyAppId": "de41gp982nx33"
-    },
-    "categories": {
-      "auth": {
-        "eventapp6da5a2c5": {}
-      }
-    }
-  },
   "stg": {
     "awscloudformation": {
       "AuthRoleName": "amplify-eventapp-stg-133939-authRole",
@@ -32,6 +14,24 @@
     "categories": {
       "auth": {
         "eventappe7f3677a": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-eventapp-dev-172551-authRole",
+      "UnauthRoleArn": "arn:aws:iam::164583009432:role/amplify-eventapp-dev-172551-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::164583009432:role/amplify-eventapp-dev-172551-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-eventapp-dev-172551-deployment",
+      "UnauthRoleName": "amplify-eventapp-dev-172551-unauthRole",
+      "StackName": "amplify-eventapp-dev-172551",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:164583009432:stack/amplify-eventapp-dev-172551/565b9020-bb03-11ec-a504-0e46c7669ec1",
+      "AmplifyAppId": "de41gp982nx33"
+    },
+    "categories": {
+      "auth": {
+        "eventapp6da5a2c5": {}
       }
     }
   }

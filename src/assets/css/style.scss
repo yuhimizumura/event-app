@@ -6,6 +6,8 @@ $font-small: 18px;
 
 //色
 $default-button-color: #242424;
+$default-background-color: #242424;
+$white: #fff;
 
 //Breakpoints
 $breakpoints: (
@@ -92,13 +94,16 @@ ul {
   justify-content: space-between;
 }
 
-
-
 // header設定
 #header {
+  position: fixed;
+  top: 0;
+  z-index: 99999999999;
+  background: rgba(255,255,255,0.7);
+  @extend .w-100;
   h1 {
     display: flex;
-   align-items: center;
+    align-items: center;
     img {
       width: 78px;
       @extend .mx-auto
@@ -139,6 +144,7 @@ ul {
 }
 
 #slider-wrap {
+  margin-top: 91px;
   .slider-height {
     height: calc(100vh - 150px - 1em);
     max-height: 800px;
@@ -209,10 +215,32 @@ ul {
   @include sectionCommon();
   dl {
     width: calc(100% / 3 - 30px);
+    dd {
+      &:nth-of-type(1) {
+        font-size: $font-middle;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+      &:nth-of-type(2) {
+        line-height: 200%;
+      }
+    }
   }
+}
+
+#result-area {
+  background: #c7ebfa;
+  width: 100%;
+  @extend .mt-10;
+  @extend .py-5;
   #result-message {
-    @extend .mt-5;
     text-align: center;
+    @extend .wrap;
+    img {
+      display: block;
+      @extend .mx-auto;
+      @extend .w-50;
+    }
     h3 {
       font-size: $font-title;
     }
@@ -220,7 +248,6 @@ ul {
       font-size: $font-middle;
     }
   }
-
 }
 
 #section2 {
@@ -244,7 +271,7 @@ ul {
     background: $default-button-color;
     border: 1px solid $default-button-color;
     border-radius: 2px;
-    color: #fff;
+    color: $white;
   }
 }
 
@@ -252,6 +279,16 @@ ul {
   @include sectionCommon();
   dl {
     width: calc(100% / 3 - 30px);
+    dd {
+      &:nth-of-type(1) {
+        font-size: $font-middle;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+      &:nth-of-type(2) {
+        line-height: 200%;
+      }
+    }
   }
 }
 
@@ -259,7 +296,7 @@ ul {
   @extend .mt-8;
   @extend .pb-10;
   @extend .pt-3;
-  color: #fff;
+  color: $white;
   h2 {
     font-size: $font-title;
   }
@@ -284,14 +321,26 @@ ul {
   dl {
     width: calc(100% / 3 - 30px);
   }
+  ul {
+    li {
+      border-bottom: 1px solid #242424;
+      @extend .mb-3;
+      @extend .pb-1;
+      @extend .d-flex;
+      span {
+        @extend .ml-2;
+        @extend .mr-2;
+      }
+    }
+  }
 }
 
 footer {
   @extend .py-5;
   background:$default-button-color;
-  color: #fff;
+  color: $white;
   a {
-    color: #fff;
+    color: $white;
   }
   align-items: start;
   .footer-list {
@@ -301,6 +350,7 @@ footer {
       @extend .w-50;
       display: inline-block;
       li {
+        @extend .mb-1;
         margin-left: 35%;
         text-align: left;
       }
@@ -316,7 +366,7 @@ footer {
       img {
         @extend .ml-1;
         width: 20px;
-        fill: #fff;
+        fill: $white;
       }
     }
   }
