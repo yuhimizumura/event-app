@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Image from "../Image/Image";
+import { useState, useEffect } from 'react';
 
 const slide1 = require("../../assets/img/img_slide01.jpg")
 const slide2 = require("../../assets/img/img_slide02.jpg")
@@ -18,11 +19,35 @@ const slide4 = require("../../assets/img/img_slide04.jpg")
 const slide5 = require("../../assets/img/img_slide05.jpg")
 
 export default () => {
+
+    const getWindowDimensions = () => {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+            width,
+            height
+        };
+    }
+
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+    useEffect(() => {
+        const onResize = () => {
+            setWindowDimensions(getWindowDimensions());
+        }
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
+
+    let view = 2
+
+    if(windowDimensions.width < 640) {
+        view = 1
+    }
+
     return (
         <Swiper
             modules={[Navigation, Pagination, Scrollbar,Autoplay]}
             spaceBetween={50}
-            slidesPerView={2}
+            slidesPerView={view}
             navigation
             // pagination={{ clickable: true }}
             // scrollbar={{ draggable: true }}

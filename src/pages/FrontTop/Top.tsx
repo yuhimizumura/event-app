@@ -48,7 +48,7 @@ const FrontTop = () => {
                     <p>Let's try it</p>
                 </div>
 
-                <div className="d-flex between">
+                <div className="about-area">
                     <dl>
                         <dt><Image path={about1} /></dt>
                         <dd className="mb-2">1.全会員本人確認済み！</dd>
@@ -90,7 +90,7 @@ const FrontTop = () => {
 
                 <div>
                 {/*    ４列×2  */}
-                    <ul className="d-flex between">
+                    <ul className="event-area">
                        <li>
                            <Image path={events1} />
                             <dl>
@@ -181,7 +181,7 @@ const FrontTop = () => {
                     <p>Support</p>
                 </div>
 
-                <div className="d-flex between">
+                <div className="service-area">
                     <dl>
                         <dt><Image path={support1} /></dt>
                         <dd className="mb-2">1.事前相談サービス</dd>

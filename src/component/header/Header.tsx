@@ -35,17 +35,13 @@ const HeaderPcMenu = () => {
 
 const HeaderSpMenu = () => {
     return (
-        <nav className="dispSp w-95 mx-auto">
-            <div className="d-flex between text-center">
-                <div className="d-flex text-center">
-                    <HamburgerMenu/>
-                   <Link className="ml-3" to="/"><Logo /></Link>
-                </div>
-                <div className="d-flex text-center between">
-                    <span className="mr-1"><Image size="header-icon" path={logo} /></span>
-                    <span className="mr-1"><Image size="header-icon" path={logo} /></span>
-                    <span><Image size="header-icon" path={logo} /></span>
-                </div>
+        <nav className="dispSp">
+            <HamburgerMenu/>
+            <div className="sp-header">
+                <Link to="/"><Logo /></Link>
+                <Image size="header-icon" path={logo} />
+                <Image size="header-icon" path={logo} />
+                <Image size="header-icon" path={logo} />
             </div>
         </nav>
     )
@@ -57,7 +53,7 @@ const Logo = () => {
             <h1>
                 <Image size="logo" path={logo} alt="ロゴ画像" />
                 <span className="dispPc">個人向けイベント開催サービス いべこね！</span>
-                <span className="dispSp">いべこね！</span>
+                {/*<span className="dispSp">いべこね！</span>*/}
             </h1>
         </>
     )

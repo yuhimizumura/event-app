@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { PersistGate} from "redux-persist/integration/react";
 import store ,{ persistor } from "./redux/configureStore";
 import './assets/css/style.scss'
-import "./assets/css/slick.css";
-import "./assets/css/slick-theme.css";
 import "./assets/css/aws.scss";
 import {Provider} from "react-redux";
 import {I18n,Auth} from "aws-amplify"

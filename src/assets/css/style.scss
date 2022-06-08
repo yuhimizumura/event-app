@@ -121,20 +121,29 @@ ul {
   align-items: center;
 }
 
+.end {
+  justify-content: flex-end;
+}
+
 // header設定
 #header {
   position: fixed;
   top: 0;
   z-index: 99999999999;
   background: rgba(255,255,255,0.7);
-  .header-icon {
-    width: 32px;
-    color: #000000;
+  .sp-header {
+    @extend .d-flex;
+    @extend .end;
+    @extend .text-center;
+    width: calc(100% / 2.5);
+    &:first-child {
+      margin-right: auto;
+      width: calc(100% / 1.5);
+    }
   }
   .logo {
     @include mq("sp") {
-      //height: 24px;
-      width: 60px;
+      width: 50px;
     }
   }
   @extend .w-100;
@@ -145,10 +154,16 @@ ul {
     z-index: 9999999;
     img {
       width: 78px;
+      @include mq("sp") {
+        width: 60px;
+      }
       @extend .mx-auto
     }
     span {
       font-size: 16px;
+      @include mq("sp") {
+        font-size: 14px;
+      }
       @extend .ml-1;
     }
   }
@@ -334,16 +349,29 @@ ul {
 
 #section1 {
   @include sectionCommon();
-  dl {
-    width: calc(100% / 3 - 30px);
-    dd {
-      &:nth-of-type(1) {
-        font-size: $font-middle;
-        font-weight: bold;
-        white-space: nowrap;
+  .about-area {
+    @extend .d-flex;
+    @extend .between;
+    @include mq("sp") {
+      flex-direction: column;
+    }
+    dl {
+      width: calc(100% / 3 - 30px);
+      @include mq("sp") {
+       width: 100%;
       }
-      &:nth-of-type(2) {
-        line-height: 200%;
+      dd {
+        &:nth-of-type(1) {
+          font-size: $font-middle;
+          font-weight: bold;
+          white-space: nowrap;
+          @include mq("sp") {
+            white-space: normal;
+          }
+        }
+        &:nth-of-type(2) {
+          line-height: 200%;
+        }
       }
     }
   }
@@ -373,13 +401,24 @@ ul {
 
 #section2 {
   @include sectionCommon();
-  ul {
+  .event-area {
+    @extend .d-flex;
+    @extend .between;
     flex-wrap: wrap;
     li {
       width: calc(100% / 4 - 30px);
-      &:nth-child(n+5) {
-        @extend .mt-3;
+      @include mq("sp") {
+        width: calc(100% / 2 - 30px);
+        &:nth-child(n+3) {
+          margin-top: 3em;
+        }
       }
+      @include mq("pc") {
+        &:nth-child(n+5) {
+          margin-top: 3em;
+        }
+      }
+
     }
   }
 
@@ -398,8 +437,19 @@ ul {
 
 #section3 {
   @include sectionCommon();
+  .service-area {
+    @extend .d-flex;
+    @extend .between;
+    @include mq("sp") {
+      flex-direction: column;
+    }
+  }
   dl {
     width: calc(100% / 3 - 30px);
+    @include mq("sp") {
+      width: 100%;
+      flex-direction: column;
+    }
     dd {
       &:nth-of-type(1) {
         font-size: $font-middle;
@@ -467,13 +517,26 @@ footer {
   .footer-list {
     @extend .d-flex;
     text-align: center;
+    @include mq("sp") {
+      flex-direction: column;
+      text-align: left;
+    }
     ul {
       @extend .w-50;
+      @include mq("sp") {
+        width: 100%;
+        &:nth-of-type(2) {
+          margin-top: 3em;
+        }
+      }
       display: inline-block;
       li {
         @extend .mb-1;
         margin-left: 35%;
         text-align: left;
+        @include mq("sp") {
+          margin-left: 2em;
+        }
       }
     }
   }
