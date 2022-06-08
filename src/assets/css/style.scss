@@ -11,8 +11,9 @@ $white: #fff;
 
 //Breakpoints
 $breakpoints: (
-  tb: 'screen and (min-width: 600px)',
-  pc: 'screen and (min-width: 1025px)'
+  sp: 'screen and (max-width: 480px)',
+  tb: 'screen and (max-width: 960px)',
+  pc: 'screen and (min-width: 961px)'
 );
 
 //mixin
@@ -46,10 +47,28 @@ img {
   object-fit: cover;
 }
 
-
 ul {
   list-style: none;
 }
+
+//spのみ表示
+
+@include mq("tb") {
+  .dispPc {
+    display: none;
+  }
+}
+
+@include mq("pc") {
+  .dispSp {
+    display: none;
+  }
+}
+
+
+//pcのみ表示
+
+
 
 
 // 横幅設定
@@ -94,16 +113,36 @@ ul {
   justify-content: space-between;
 }
 
+.column {
+  flex-direction: column;
+}
+
+.text-center {
+  align-items: center;
+}
+
 // header設定
 #header {
   position: fixed;
   top: 0;
   z-index: 99999999999;
   background: rgba(255,255,255,0.7);
+  .header-icon {
+    width: 32px;
+    color: #000000;
+  }
+  .logo {
+    @include mq("sp") {
+      //height: 24px;
+      width: 60px;
+    }
+  }
   @extend .w-100;
   h1 {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 9999999;
     img {
       width: 78px;
       @extend .mx-auto
@@ -141,6 +180,88 @@ ul {
       }
     }
   }
+  /* Position and sizing of burger button */
+  .bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 10px;
+    top: 26px;
+  }
+
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: #373a47;
+    span {
+      background: #cf1a1a;
+    }
+  }
+
+  /* Color/shape of burger icon bars on hover*/
+  .bm-burger-bars-hover {
+    background: #005b99;
+  }
+
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    width: 36px !important;
+    height: 30px !important;
+    left: 8px !important;
+    top: 18px !important;
+  }
+
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: $default-button-color;
+    height: 32px !important;
+  }
+
+  /*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+  .bm-menu-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    @extend .w-80;
+    height: 100%;
+  }
+
+  /* General sidebar styles */
+  .bm-menu {
+    background: white;
+    @extend .pt-2;
+    @extend .pl-2;
+    font-size: 1.15em;
+  }
+
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+    @extend .mt-2;
+  }
+
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+  }
+
+  /* Styling of overlay */
+  .bm-overlay {
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
 }
 
 #slider-wrap {

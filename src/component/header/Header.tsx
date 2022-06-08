@@ -1,19 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Image from "../Image/Image";
+import HamburgerMenu from "../menu";
 const logo = require("../../assets/img/img_logo01.png")
+const twitter = require("../../assets/img/img_icon01.png")
 
 const Header = () => {
     return (
         <header id="header" className="pt-1 pb-1">
-            <HeaderMenu />
+            <HeaderPcMenu />
+            <HeaderSpMenu />
         </header>
     )
 }
 
-const HeaderMenu = () => {
+// const handleToggle = (event:any) => {
+//     console.log(event.target.value)
+// }
+
+const HeaderPcMenu = () => {
     return (
-        <nav>
+        <nav className="dispPc">
             <ul className='wrapper'>
                 <li>
                     <Link to="/"><Logo /></Link>
@@ -26,12 +33,33 @@ const HeaderMenu = () => {
     )
 }
 
+const HeaderSpMenu = () => {
+    return (
+        <nav className="dispSp w-95 mx-auto">
+            <div className="d-flex between text-center">
+                <div className="d-flex text-center">
+                    <HamburgerMenu/>
+                   <Link className="ml-3" to="/"><Logo /></Link>
+                </div>
+                <div className="d-flex text-center between">
+                    <span className="mr-1"><Image size="header-icon" path={logo} /></span>
+                    <span className="mr-1"><Image size="header-icon" path={logo} /></span>
+                    <span><Image size="header-icon" path={logo} /></span>
+                </div>
+            </div>
+        </nav>
+    )
+}
+
 const Logo = () => {
     return (
-        <h1>
-            <Image size="h-px-60" path={logo} alt="ロゴ画像" />
-            <span>個人向けイベント開催サービス</span>
-        </h1>
+        <>
+            <h1>
+                <Image size="logo" path={logo} alt="ロゴ画像" />
+                <span className="dispPc">個人向けイベント開催サービス いべこね！</span>
+                <span className="dispSp">いべこね！</span>
+            </h1>
+        </>
     )
 }
 
