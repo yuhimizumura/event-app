@@ -30,9 +30,13 @@ const FrontTop = () => {
             <div id="slider-wrap">
                 <CardSlider />
                 <div className="mask"></div>
-                <div className="title-area">
+                <div className="title-area dispPc">
                     <h2>Connect with us at events</h2>
                     <h3>イベントで繋がる、イベントで輪を広げる</h3>
+                </div>
+                <div className="title-area dispSp">
+                    <h2>Connect <br /> with us at events</h2>
+                    <h3>イベントで繋がる<br />イベントで輪を広げる</h3>
                 </div>
             </div>
 
@@ -44,25 +48,26 @@ const FrontTop = () => {
             <section id="section1">
                 {/*丸の背景いれる*/}
                 <div className="section-title-area">
-                    <h2>やってみたいから、やってみようへ</h2>
+                    <h2 className="dispPc">やってみたいから、やってみようへ</h2>
+                    <h2 className="dispSp">やってみたいから<br />やってみようへ</h2>
                     <p>Let's try it</p>
                 </div>
 
                 <div className="about-area">
                     <dl>
                         <dt><Image path={about1} /></dt>
-                        <dd className="mb-2">1.全会員本人確認済み！</dd>
+                        <dt>1.全会員本人確認済み！</dt>
                         <dd>イベントアプリ（仮）では、登録時に全会員様の身分証確認を実施しておりますので、万が一の場合にも安全にご利用いただけます。</dd>
                     </dl>
                     <dl>
                         <dt><Image path={about2} /></dt>
-                        <dd className="mb-2">2.事前決済システム導入！</dd>
+                        <dt>2.事前決済システム導入！</dt>
                         <dd>イベントアプリ（仮）では、イベント参加時に事前に登録した方法にて決済をいただくシステムを導入しております。現地でのお金のやりとりをなくし
                         スムーズな運用ができます。</dd>
                     </dl>
                     <dl>
                         <dt><Image path={about3} /></dt>
-                        <dd className="mb-2">3.QRコードで楽々イベント運営！</dd>
+                        <dt>3.QRコードで楽々イベント運営！</dt>
                         <dd>イベントアプリ（仮）では、イベント運営に便利なQRコードでの来場者管理が行えます。手間な受付業務などをスキップすることができます。</dd>
                     </dl>
                 </div>
@@ -70,7 +75,8 @@ const FrontTop = () => {
 
             <div id="result-area">
                 <div id="result-message">
-                    <h3>今日からできるイベント運営！</h3>
+                    <h3 className="dispPc">今日からできるイベント運営！</h3>
+                    <h3 className="dispSp">今日からできる<br />イベント運営！</h3>
                     <Image path={event} />
                     <p>イベントアプリ（仮）では、主催者様、来場者様共にスムーズで快適なイベントのお手伝いをいたします。</p>
                 </div>
@@ -95,72 +101,72 @@ const FrontTop = () => {
                            <Image path={events1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                        </li>
                         <li>
                             <Image path={events2} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events3} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events4} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events4} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events3} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events2} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                         <li>
                             <Image path={events1} />
                             <dl>
                                 <dt>イベントタイトル</dt>
-                                <dd>日時： 2022/04/01</dd>
-                                <dd>参加人数：10人</dd>
-                                <dd>場所：大阪府近郊</dd>
+                                <dd><i className="fa-solid fa-clock"></i>日時： 2022/04/01</dd>
+                                <dd><i className="fa-solid fa-user-group"></i>参加人数：10人</dd>
+                                <dd><i className="fa-solid fa-map-pin"></i>場所：大阪府近郊</dd>
                             </dl>
                         </li>
                     </ul>
@@ -184,20 +190,20 @@ const FrontTop = () => {
                 <div className="service-area">
                     <dl>
                         <dt><Image path={support1} /></dt>
-                        <dd className="mb-2">1.事前相談サービス</dd>
+                        <dd>1.事前相談サービス</dd>
                         <dd>イベントアプリ（仮）では、初めてのお客様にも不安なくご使用頂くために、イベント開催に向けた
                         事前相談サービスを行っております。
                         お気軽にチャットまたは、お問い合わせフォームよりご連絡ください。</dd>
                     </dl>
                     <dl>
                         <dt><Image path={support2} /></dt>
-                        <dd className="mb-2">2.イベント分析サービス</dd>
+                        <dd>2.イベント分析サービス</dd>
                         <dd>イベントアプリ（仮）では、一目でわかるようにイベントの結果を閲覧できるようにいたします。
                             次回開催に向けた、改善ポイントを見つけることできます。</dd>
                     </dl>
                     <dl>
                         <dt><Image path={support3} /></dt>
-                        <dd className="mb-2">3.運営立ち会いサービス</dd>
+                        <dd>3.運営立ち会いサービス</dd>
                         <dd>イベントアプリ（仮）では、運営の進行に不安がある方に対し、別途有料サービスにて当日立ち会いサービスを
                         行っております。時間、場所、条件によって異なりますのでお気軽にチャットまたは、お問い合わせフォームよりご連絡ください。</dd>
                     </dl>
@@ -237,10 +243,24 @@ const FrontTop = () => {
                 </div>
 
                 {/*新着情報など*/}
-                <ul>
+                <ul className="dispPc">
                     <li>2022/04/01 <span>NEWS</span> ホームページを開設しました。</li>
                     <li>2022/04/01 <span>RELEASE</span> ホームページを開設しました。</li>
-                    <li>2022/04/01 <span>PICKUP</span> ホームページを開設しました。</li>
+                    <li>2022/04/01 <span>PICKUP</span> ホームページを開設しました。この開設
+                        にあたり大変な思いをした。なかなかに大変であった。それはもう大変だった。ホームページを開設しました。この開設
+                        にあたり大変な思いをした。なかなかに大変であった。それはもう大変だった。</li>
+                </ul>
+                <ul className="dispSp">
+                    <li><span className="news-header">2022/04/01 <span>NEWS</span></span>
+                        <span className="news-text">ホームページを開設しました。</span>
+                    </li>
+                    <li><span className="news-header">2022/04/01 <span>NEWS</span></span>
+                        <span className="news-text">ホームページを開設しました。</span>
+                    </li>
+                    <li><span className="news-header">2022/04/01 <span>NEWS</span></span>
+                        <span className="news-text">ホームページを開設しました。この開設
+                            にあたり大変な思いをした。なかなかに大変であった。それはもう大変だった。</span>
+                    </li>
                 </ul>
             </section>
 
@@ -262,7 +282,7 @@ const FrontTop = () => {
                         </ul>
                     </div>
                     <div className="copyright">
-                        <p>© 2022 いべこね！</p>
+                        <p>© 2022 <span>いべこね！ </span></p>
                         <p><Image path={twitter} /></p>
                         <p><Image path={instagram} /></p>
                     </div>

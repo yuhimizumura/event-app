@@ -29,7 +29,7 @@ export default () => {
             effect="cards"
             grabCursor={true}
             loop={true}
-            className={"slider-height"}
+            className={"slider-height swiper-button-white"}
         >
             <SwiperSlide><Image path={slide1} /></SwiperSlide>
             <SwiperSlide><Image path={slide2} /></SwiperSlide>

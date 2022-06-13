@@ -1,8 +1,15 @@
 //環境別文字サイズ
 $font-big: 42px;
+$font-sp-big : 42px;
 $font-title : 32px;
+$font-sp-title : 24px;
+$font-section-title : 20px;
+$font-sp-section-title : 20px;
 $font-middle: 24px;
-$font-small: 18px;
+$font-sp-middle : 16px;
+$font-text: 16px;
+$font-sp-small: 10px;
+$font-sp-text: 14px;
 
 //色
 $default-button-color: #242424;
@@ -11,13 +18,11 @@ $white: #fff;
 
 //Breakpoints
 $breakpoints: (
-  sp: 'screen and (max-width: 480px)',
-  tb: 'screen and (max-width: 960px)',
+  sp: 'screen and (max-width: 960px)',
   pc: 'screen and (min-width: 961px)'
 );
 
 //mixin
-
 @mixin mq($bp) {
   @media #{map-get($breakpoints,$bp)} {
     @content
@@ -27,16 +32,22 @@ $breakpoints: (
 @mixin sectionCommon() {
   @extend .mt-8;
   @extend .wrap;
+  font-family: 'Noto Serif JP', serif;
   h2 {
     font-size: $font-title;
+    @include mq("sp") {
+      font-size: $font-sp-title;
+    }
   }
   p {
     font-size: $font-middle;
+    @include mq("sp") {
+      font-size: $font-sp-middle;
+    }
   }
 }
 
 // 基本設定
-
 * {
   margin: 0;
   padding: 0;
@@ -51,23 +62,18 @@ ul {
   list-style: none;
 }
 
-//spのみ表示
 
-@include mq("tb") {
-  .dispPc {
+.dispSp {
+  @include mq("pc") {
     display: none;
   }
 }
 
-@include mq("pc") {
-  .dispSp {
+.dispPc {
+  @include mq("sp") {
     display: none;
   }
 }
-
-
-//pcのみ表示
-
 
 
 
@@ -95,7 +101,10 @@ ul {
 }
 
 .wrap {
-  width: 100%;
+  width: 90%;
+  @include mq("sp") {
+    max-width: 640px;
+  }
   max-width: 1180px;
   @extend .mx-auto;
 }
@@ -133,12 +142,16 @@ ul {
   background: rgba(255,255,255,0.7);
   .sp-header {
     @extend .d-flex;
-    @extend .end;
     @extend .text-center;
-    width: calc(100% / 2.5);
-    &:first-child {
-      margin-right: auto;
-      width: calc(100% / 1.5);
+    width: calc(100% - 75px);
+    margin-left: 60px;
+    .icons {
+      margin-left: auto;
+      i {
+        &:first-child {
+          @extend .mr-1;
+        }
+      }
     }
   }
   .logo {
@@ -147,6 +160,10 @@ ul {
     }
   }
   @extend .w-100;
+  a {
+    text-decoration: none;
+    color: $default-background-color;
+  }
   h1 {
     display: flex;
     align-items: center;
@@ -161,10 +178,14 @@ ul {
     }
     span {
       font-size: 16px;
-      @include mq("sp") {
-        font-size: 14px;
+      font-family: 'Dela Gothic One', cursive;
+      font-weight: 400;
+      @include mq("pc") {
+        margin-left: 1em;
       }
-      @extend .ml-1;
+      @include mq("sp") {
+        margin-left: 0.5em;
+      }
     }
   }
   .wrapper {
@@ -175,6 +196,9 @@ ul {
     align-items: center;
     display: flex;
     li {
+      line-height: 200%;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-weight: 300;
       &:first-child {
         margin-right: auto;
       }
@@ -195,46 +219,32 @@ ul {
       }
     }
   }
-  /* Position and sizing of burger button */
   .bm-burger-button {
     position: fixed;
     width: 36px;
     height: 30px;
     left: 10px;
-    top: 26px;
+    top: 22px;
   }
-
-  /* Color/shape of burger icon bars */
   .bm-burger-bars {
     background: #373a47;
     span {
       background: #cf1a1a;
     }
   }
-
-  /* Color/shape of burger icon bars on hover*/
   .bm-burger-bars-hover {
     background: #005b99;
   }
-
-  /* Position and sizing of clickable cross button */
   .bm-cross-button {
     width: 36px !important;
     height: 30px !important;
     left: 8px !important;
-    top: 18px !important;
+    top: 14px !important;
   }
-
-  /* Color/shape of close button cross */
   .bm-cross {
     background: $default-button-color;
     height: 32px !important;
   }
-
-  /*
-  Sidebar wrapper styles
-  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-  */
   .bm-menu-wrap {
     position: fixed;
     top: 0;
@@ -242,45 +252,65 @@ ul {
     @extend .w-80;
     height: 100%;
   }
-
-  /* General sidebar styles */
   .bm-menu {
     background: white;
     @extend .pt-2;
-    @extend .pl-2;
     font-size: 1.15em;
   }
-
-  /* Morph shape necessary with bubble or elastic */
   .bm-morph-shape {
     fill: #373a47;
   }
-
-  /* Wrapper for item list */
   .bm-item-list {
     color: #b8b7ad;
     padding: 0.8em;
     @extend .mt-2;
   }
-
-  /* Individual item */
   .bm-item {
     display: inline-block;
     text-decoration: none;
     outline: none;
   }
-
-  /* Styling of overlay */
   .bm-overlay {
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
   }
 
+  .menu-item {
+    line-height: 200%;
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 300;
+    @extend .ml-2;
+    @extend .mb-1;
+    font-size: $font-middle;
+    @include mq("sp") {
+      font-size: $font-sp-middle;
+    }
+  }
 }
 
 #slider-wrap {
   margin-top: 91px;
+
+  .swiper-button-prev {
+    &:after {
+      color: $white;
+      z-index: 999999;
+      content: "\f104";
+      transform: scale(0.5);
+      font-family: FontAwesome;
+    }
+  }
+  .swiper-button-next {
+    &:after {
+      color: $white;
+      z-index: 999999;
+      content: "\f105";
+      transform: scale(0.5);
+      font-family: FontAwesome;
+    }
+  }
+
   .slider-height {
     height: calc(100vh - 150px - 1em);
     max-height: 800px;
@@ -314,13 +344,25 @@ ul {
     transform: translate(-50%,-50%);
     color: white;
     text-align: center;
+    width: 80%;
     z-index: 9999;
     h2 {
       font-size: $font-big;
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Bebas Neue', cursive;
+      @include mq("sp") {
+        font-size: $font-sp-big;
+        line-height: 100%;
+        margin-bottom: 0.2em;
+      }
     }
     h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 600;
       letter-spacing: 10px;
+      @include mq("sp") {
+        font-size: $font-sp-middle;
+        line-height: 100%;
+      }
     }
   }
 }
@@ -329,23 +371,29 @@ ul {
   @extend .d-flex;
   @extend .mx-auto;
   width: 100px;
+  @include mq("sp") {
+    width: 50px;
+  }
   align-items: start;
   p {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     letter-spacing: 4px;
-    font-size: $font-small;
+    font-size: $font-text;
     span {
       font-size: $font-title;
+      font-family: 'Noto Serif JP', serif;
     }
   }
   .center-line {
     width: 1px;
-    height: 20vh;
+    height: 30vh;
+    @include mq("sp") {
+      height: 35vh;
+    }
     background: $default-button-color;
   }
 }
-
 
 #section1 {
   @include sectionCommon();
@@ -359,18 +407,28 @@ ul {
       width: calc(100% / 3 - 30px);
       @include mq("sp") {
        width: 100%;
+       margin-bottom: 4em; //@extend .mb-2;
+      }
+      dt {
+        font-family: 'Noto Serif JP', serif;
+        font-weight: 600;
+        font-size: $font-sp-section-title;
+        @extend .mb-1;
+        white-space: nowrap;
+        @include mq("sp") {
+          &:first-child {
+            margin-bottom: 0; // @extend .mb-0;
+          }
+          margin-bottom: 1em; // @extend .mb-1;
+        }
       }
       dd {
-        &:nth-of-type(1) {
-          font-size: $font-middle;
-          font-weight: bold;
-          white-space: nowrap;
-          @include mq("sp") {
-            white-space: normal;
-          }
-        }
-        &:nth-of-type(2) {
-          line-height: 200%;
+        font-family: 'M PLUS 1p', sans-serif;
+        font-weight: 300;
+        line-height: 200%;
+        font-size: $font-text;
+        @include mq("sp") {
+          font-size: $font-sp-text;
         }
       }
     }
@@ -389,12 +447,27 @@ ul {
       display: block;
       @extend .mx-auto;
       @extend .w-50;
+      @include mq("sp") {
+        width: 80%;
+      }
     }
     h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 600;
       font-size: $font-title;
+      @include mq("sp") {
+        font-size: $font-sp-title;
+        line-height: 150%;
+      }
     }
     p {
-      font-size: $font-middle;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-weight: 300;
+      line-height: 200%;
+      font-size: $font-text;
+      @include mq("sp") {
+        font-size: $font-sp-text;
+      }
     }
   }
 }
@@ -405,6 +478,29 @@ ul {
     @extend .d-flex;
     @extend .between;
     flex-wrap: wrap;
+    dt {
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 600;
+      font-size: $font-section-title;
+      @include mq("sp") {
+        font-size: $font-sp-middle;
+        line-height: 150%;
+      }
+    }
+    dd {
+      font-size: $font-text;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-weight: 300;
+      line-height: 200%;
+      i {
+        width: 15px;
+        text-align: center;
+        margin-right: 0.5em;
+      }
+      @include mq("sp") {
+        font-size: 12px; //sp-text
+      }
+    }
     li {
       width: calc(100% / 4 - 30px);
       @include mq("sp") {
@@ -418,7 +514,6 @@ ul {
           margin-top: 3em;
         }
       }
-
     }
   }
 
@@ -449,15 +544,23 @@ ul {
     @include mq("sp") {
       width: 100%;
       flex-direction: column;
+      margin-bottom: 4em;
     }
     dd {
       &:nth-of-type(1) {
-        font-size: $font-middle;
+        font-size: $font-sp-section-title;
         font-weight: bold;
         white-space: nowrap;
+        @extend .mb-1;
+        @include mq("sp") {
+          margin-bottom: 1em; //mb-1
+        }
       }
       &:nth-of-type(2) {
+        font-family: 'M PLUS 1p', sans-serif;
+        font-weight: 300;
         line-height: 200%;
+        font-size: $font-sp-text;
       }
     }
   }
@@ -468,11 +571,36 @@ ul {
   @extend .pb-10;
   @extend .pt-3;
   color: $white;
+  font-family: 'Noto Serif JP', serif;
+  .swiper-button-prev {
+    &:after {
+      color: $white;
+      z-index: 999999;
+      content: "\f104";
+      transform: scale(0.5);
+      font-family: FontAwesome;
+    }
+  }
+  .swiper-button-next {
+    &:after {
+      color: $white;
+      z-index: 999999;
+      content: "\f105";
+      transform: scale(0.5);
+      font-family: FontAwesome;
+    }
+  }
   h2 {
     font-size: $font-title;
+    @include mq("sp") {
+      font-size: $font-sp-title;
+    }
   }
   p {
     font-size: $font-middle;
+    @include mq("sp") {
+      font-size: $font-sp-middle;
+    }
   }
   background: $default-button-color;
   width: 100%;
@@ -485,28 +613,60 @@ ul {
     max-width: 1580px;
     @extend .mx-auto;
   }
+  dl {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 300;
+    line-height: 200%;
+  }
 }
 
 #section5 {
   @include sectionCommon();
   dl {
-    width: calc(100% / 3 - 30px);
-  }
-  ul {
-    li {
-      border-bottom: 1px solid #242424;
-      @extend .mb-3;
-      @extend .pb-1;
-      @extend .d-flex;
-      span {
-        @extend .ml-2;
-        @extend .mr-2;
-      }
+    @include mq("pc"){
+      width: calc(100% / 3 - 30px);
     }
   }
+  ul {
+    line-height: 200%;
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 300;
+    li {
+      border-bottom: 1px solid #242424;
+      @include mq("pc"){
+        margin-bottom: 3em; //@extend .mb-3;
+        padding-bottom: 1em; //@extend .pb-1;
+        display: flex; //@extend .d-flex;
+        span {
+          width: 80px;
+          margin-left: 2em; //@extend .ml-2;
+          margin-right: 2em; //@extend .mr-2;
+        }
+      }
+      @include mq("sp") {
+        margin-bottom: 2em; //@extend .mb-3
+        padding-bottom: 0.5em; //@extend .pb-1;
+      }
+    }
+    //sp限定
+    .news-header {
+      display: block;
+      font-size: $font-sp-small;
+      margin-bottom: 0.5em;
+      font-weight: 600;
+    }
+    .news-text {
+      font-size: $font-sp-text;
+      line-height: 150%;
+    }
+  }
+
 }
 
 footer {
+  font-family: 'M PLUS 1p', sans-serif;
+  font-weight: 300;
+  line-height: 200%;
   @extend .py-5;
   background:$default-button-color;
   color: $white;
@@ -531,7 +691,10 @@ footer {
       }
       display: inline-block;
       li {
-        @extend .mb-1;
+        &:first-child {
+          font-weight: 600;
+        }
+        margin-bottom: 0.5em;
         margin-left: 35%;
         text-align: left;
         @include mq("sp") {
@@ -543,10 +706,14 @@ footer {
   .copyright {
     @extend .d-flex;
     align-items: center;
-    width: 220px;
+    width: 270px;
     @extend .mx-auto;
     @extend .mt-3;
     p {
+      span {
+        margin-left: 0.5em;
+        font-family: 'Dela Gothic One', cursive;
+      }
       img {
         @extend .ml-1;
         width: 20px;

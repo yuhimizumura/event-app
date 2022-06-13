@@ -5,9 +5,8 @@ import {useDispatch} from "react-redux";
 import authStatusSet from "../../redux/actions/auth";
 import {isEmpty} from "../../util/util";
 import {useHistory} from "react-router-dom"
-import {API,graphqlOperation} from "aws-amplify";
-import {getTodo, getUser} from "../../graphql/queries";
 import signInUserSet from "../../redux/actions/user";
+import {fetchUser} from "../../services/user";
 
 
 const Login = () => {
@@ -15,8 +14,6 @@ const Login = () => {
     const [user, setUser] = React.useState();
     const dispatch = useDispatch()
     const history = useHistory()
-
-    // console.log(state)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {
@@ -33,21 +30,12 @@ const Login = () => {
         });
     }, []);
 
-    const fetchUser = async (id) => {
-        let uId = id
-        if (id === undefined) {
-            uId = user.username
-        }
-        const signInUser = await API.graphql(graphqlOperation(getUser,{
-            id:uId
-        }))
-        return signInUser
-    }
-
     useEffect(() => {
         if (user === undefined) return
-        const fetchId = user.userName
-        fetchUser(fetchId).then(data => {
+        let fetchId = user.username
+        const res = fetchUser(fetchId)
+        res.then(data => {
+            console.log(data)
             dispatch(signInUserSet(data.data.getUser))
             history.push("/mypage")
         }).catch(error => {
@@ -59,9 +47,7 @@ const Login = () => {
     return authState === AuthState.SignedIn && user ? (
         <div className="App">
             <div>Hello, {user.username}</div>
-            {/*{fetchUser()}*/}
             <AmplifySignOut />
-            {/*<Redirect to={{pathname:"/mypage"}} />*/}
         </div>
         ) : (
         <AmplifyAuthenticator>

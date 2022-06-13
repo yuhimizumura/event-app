@@ -6,26 +6,29 @@ import {useSelector} from "react-redux";
 import {Redirect, useLocation} from "react-router-dom"
 import {Amplify,Auth} from "aws-amplify";
 import awsmobile from "../../aws-exports";
+import {Link} from "react-router-dom"
 
 const MyPage = () => {
 
     let location = useLocation();
     const state:any = useSelector(state => state)
 
-    console.log(state.signInUser)
-
     const removeToken = () => {
+        localStorage.clear()
         window.location.href = "/"
     }
 
     return (
         <div className="App">
             {/*<QrHome />*/}
-            <h2>ようこそ！{state.signInUser.sei}{state.signInUser.mei}さん</h2>
+            <Header />
+            <h2 className="mt-5">ようこそ！{state.signInUser.sei}{state.signInUser.mei}さん</h2>
 
             <AmplifyAuthenticator>
                 <AmplifySignOut onClick={() => removeToken()}/>
             </AmplifyAuthenticator>
+
+            <Link to="/">トップページを見る</Link>
         </div>
     );
 }
