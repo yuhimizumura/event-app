@@ -16,6 +16,7 @@ $default-button-color: #242424;
 $default-background-color: #242424;
 $white: #fff;
 
+
 //Breakpoints
 $breakpoints: (
   sp: 'screen and (max-width: 960px)',
@@ -45,6 +46,10 @@ $breakpoints: (
       font-size: $font-sp-middle;
     }
   }
+}
+
+@mixin headerTopMargin() {
+  margin-top: 91px;
 }
 
 // 基本設定
@@ -290,8 +295,7 @@ ul {
 }
 
 #slider-wrap {
-  margin-top: 91px;
-
+  @include headerTopMargin();
   .swiper-button-prev {
     &:after {
       color: $white;
@@ -721,4 +725,12 @@ footer {
       }
     }
   }
+}
+
+
+//新規会員登録フォーム
+
+#add-user-area {
+  @include headerTopMargin();
+  @extend .wrap;
 }

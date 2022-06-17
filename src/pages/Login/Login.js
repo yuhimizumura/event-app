@@ -35,9 +35,12 @@ const Login = () => {
         let fetchId = user.username
         const res = fetchUser(fetchId)
         res.then(data => {
-            console.log(data)
+            //ログインした時点でデータが存在しない場合はユーザ登録画面へ遷移
+            if(isEmpty(data.getUser)) {
+                history.push("/add-user")
+            }
             dispatch(signInUserSet(data.data.getUser))
-            history.push("/mypage")
+            // history.push("/mypage")
         }).catch(error => {
             console.log(error)
         })
