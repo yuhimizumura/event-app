@@ -8,6 +8,8 @@ import {withAuthenticator} from "@aws-amplify/ui-react";
 import awsconfig from "./aws-exports";
 import Amplify from "aws-amplify";
 import AddUser from "./pages/AddUser";
+import AddConfirm from "./pages/AddUser/confirm";
+import AddThanks from "./pages/AddUser/thanks";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -40,6 +42,12 @@ const App = () => {
                 </Route>
                 <Route exact path="/add-user">
                    <AddUser />
+                </Route>
+                <Route exact path="/add-confirm">
+                    <AddConfirm />
+                </Route>
+                <Route exact path="/add-thanks">
+                    <AddThanks />
                 </Route>
                 <Route exact path="/mypage">
                     <MyPage />

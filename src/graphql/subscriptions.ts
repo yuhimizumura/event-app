@@ -9,6 +9,8 @@ export const onCreateTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
       createdAt
       updatedAt
     }
@@ -21,6 +23,8 @@ export const onUpdateTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
       createdAt
       updatedAt
     }
@@ -33,6 +37,59 @@ export const onDeleteTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
       createdAt
       updatedAt
     }

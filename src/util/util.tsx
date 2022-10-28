@@ -1,5 +1,4 @@
 import {Auth} from "aws-amplify";
-import {fetchUser} from "../services/user";
 
 export const isEmpty = (obj:any) => {
     if (obj === null || obj === undefined) {
@@ -40,7 +39,6 @@ export const getRefreshToken = async () => {
 
 export const getUserId = async () => {
     const id = Auth.currentSession().then(data => {
-        console.log(data)
         if(isEmpty(data)) throw new Error("not User")
         return data.getAccessToken().payload.username
     }).catch(error => {
@@ -126,4 +124,18 @@ export const prefList = {
         {"code": 45, "name": "宮崎県"},
         {"code": 46, "name": "鹿児島県"},
         {"code": 47, "name": "沖縄県"}]
+}
+
+export const ageList = {
+    "age": [
+        {"code": 1, "name": "10代"},
+        {"code": 2, "name": "20代"},
+        {"code": 3, "name": "30代"},
+        {"code": 4, "name": "40代"},
+        {"code": 5, "name": "50代"},
+        {"code": 6, "name": "60代"},
+        {"code": 7, "name": "70代"},
+        {"code": 8, "name": "それ以上"},
+        {"code": 9, "name": "未回答"},
+        ]
 }

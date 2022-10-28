@@ -6,6 +6,7 @@ $font-sp-title : 24px;
 $font-section-title : 20px;
 $font-sp-section-title : 20px;
 $font-middle: 24px;
+$font-small: 12px;
 $font-sp-middle : 16px;
 $font-text: 16px;
 $font-sp-small: 10px;
@@ -15,6 +16,8 @@ $font-sp-text: 14px;
 $default-button-color: #242424;
 $default-background-color: #242424;
 $white: #fff;
+$button: #3f92db;
+$error: #fd4242;
 
 
 //Breakpoints
@@ -89,8 +92,11 @@ ul {
   .h-px-#{$i} { height: 0px + $i; }
   .mt-#{$i} { margin-top :0em + $i;}
   .mr-#{$i} { margin-right :0em + $i;}
+  .mr-px-#{$i} { margin-right :0px + $i;}
   .mb-#{$i} { margin-bottom :0em + $i;}
   .ml-#{$i} { margin-left :0em + $i;}
+  .ml-px-#{$i} { margin-left :0px + $i;}
+  .mx-px-#{$i} { margin-left :0px + $i; margin-right :0px + $i;}
   .my-#{$i} { margin-top :0em + $i; margin-bottom :0em + $i;}
   .pt-#{$i} { padding-top :0em + $i;}
   .pr-#{$i} { padding-right :0em + $i;}
@@ -111,6 +117,17 @@ ul {
     max-width: 640px;
   }
   max-width: 1180px;
+  @extend .mx-auto;
+}
+
+
+.form-wrap {
+  width: 90%;
+  @include mq("sp") {
+    width: 100%;
+    max-width: 640px;
+  }
+  max-width: 970px;
   @extend .mx-auto;
 }
 
@@ -732,5 +749,155 @@ footer {
 
 #add-user-area {
   @include headerTopMargin();
-  @extend .wrap;
+  background: #f3f3f3;
+  @extend .py-3;
+  .d-block {
+    display: block;
+  }
+  h1 {
+    text-align: center;
+    font-size: $font-middle;
+    color: #fff;
+    @extend .w-100,.mb-3;
+    padding: 10px 0;
+    background: $button;
+  }
+
+  .d-flex {
+    display: flex;
+    @include mq("sp") {
+      flex-direction: column;
+    }
+  }
+
+  .form_th {
+    background: #dbd9d9;
+    font-weight: 600;
+    font-size: $font-text;
+    width: 230px;
+    @extend .py-2,.px-1;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+      width: calc(100% - 2em);
+      padding: 2em 0 2em 2em;
+    }
+    border-bottom: 1px solid #fff;
+  }
+  .form_td {
+    @extend .py-2,.px-1;
+    background: #fff;
+    width: 670px;
+    @include mq("sp") {
+      width: calc(100% - 2em);
+      padding: 2em 0 2em 2em;
+    }
+    border-bottom: 1px solid #dbd9d9;
+  }
+  .input {
+    height: 32px;
+    line-height: 32px;
+    max-width: 100%;
+    border: 1px solid #dbd9d9;
+    border-radius: 4px;
+    padding-left: 5px;
+  }
+  select {
+    height: 32px;
+    line-height: 32px;
+    max-width: 100%;
+    border: 1px solid #dbd9d9;
+    border-radius: 4px;
+    padding-left: 5px;
+  }
+  .button {
+    background: $button !important;
+    color: #fff;
+    @extend .py-1,.mt-2;
+    min-width: 180px;
+    max-width: 250px;
+    border-radius: 4px;
+    border-color: $button;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+    &:hover {
+      background: #7da6c4;
+      transition: 0.3s;
+      opacity: 0.8;
+      border-color: #7da6c4;
+    }
+  }
+  .back-button {
+    background: #b7b5b5;
+    color: #fff;
+    @extend .py-1,.mt-2;
+    min-width: 180px;
+    max-width: 250px;
+    border-radius: 4px;
+    border-color: #b7b5b5;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+    &:hover {
+      background: #dbd9d9;
+      transition: 0.3s;
+      opacity: 0.8;
+      border-color: #dbd9d9;
+    }
+  }
+  .g-1{
+    width: calc(100% / 1) - 10%;
+  }
+
+  .g-2 {
+    width: calc(100% / 2) - 10%;
+    @include mq("sp") {
+      width: calc(100% / 2) - 15%;
+    }
+  }
+
+  .g-3 {
+    width: calc(100% / 3) - 10%;
+  }
+
+  .g-4 {
+    width: calc(100% / 4) - 10%;
+  }
+
+  .d-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .required {
+    display: block;
+    width: 24px;
+    background: #e33838;
+    border-radius: 4px;
+    color: #fff;
+    font-size: $font-small;
+    @include mq("sp") {
+      font-size: $font-sp-small;
+    }
+    padding: 2px 5px;
+  }
+
+  .text-small {
+    font-size: $font-small;
+    @include mq("sp") {
+      font-size: $font-sp-small;
+    }
+  }
+
+  .error {
+    color: $error;
+    font-size: $font-small;
+    @include mq("sp") {
+      font-size: $font-sp-small;
+    }
+    @extend .pt-1;
+  }
 }

@@ -1,4 +1,5 @@
 export const SET_SIGNINUSER_DATA = "SET_SIGNINUSER_DATA"
+export const REMOVE_SIGNIN_USER_DATA = "REMOVE_SIGNIN_USER_DATA"
 
 // アクションクリエイター
 const signInUserSet = (data) =>  {
@@ -8,6 +9,13 @@ const signInUserSet = (data) =>  {
         payload:data,
     }
 
+}
+
+export const signInUserRemove = () => {
+    return {
+        type: REMOVE_SIGNIN_USER_DATA,
+        payload: Object,
+    }
 }
 
 export default signInUserSet

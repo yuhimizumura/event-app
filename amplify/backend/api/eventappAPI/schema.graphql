@@ -10,10 +10,11 @@ type Todo @model {
 type User @model {
   id: ID!
   sei: String
-  mei: String
-  kanaSei: String
-  kanaMei: String
+  email: String
+  gender: String
+  age : String
   tel: String
-  post: String
-  address:String
+  sns: String
+  sns_name: String
+  pref: String
 }

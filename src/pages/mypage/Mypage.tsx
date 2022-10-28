@@ -1,42 +1,46 @@
 import React, {useEffect} from 'react';
 import Header from "../../component/header/Header";
-import QrHome from "../../component/qrreader/qrCodeApp";
 import {AmplifyAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
-import {useSelector} from "react-redux";
-import {Redirect, useLocation} from "react-router-dom"
-import {Amplify,Auth} from "aws-amplify";
-import awsmobile from "../../aws-exports";
-import {Link} from "react-router-dom"
-import {getAccessToken, getIdToken, getRefreshToken} from "../../util/util";
-import {fetchUser} from "../../services/user";
-
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useHistory} from "react-router-dom"
+import Footer from "../../component/footer/Footer";
+import {signInUserRemove} from "../../redux/actions/user";
+import {isEmpty} from "../../util/util";
+import {addUserRemove} from "../../redux/actions/add";
 const MyPage = () => {
 
-    let location = useLocation();
     const state:any = useSelector(state => state)
+    const history = useHistory()
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+      console.log(state)
+      if (isEmpty(state.signInUser)) {
+        handleLogout()
+      }
+    },[])
 
-    const logout = () => {
-        localStorage.clear()
-        window.location.href = "/login"
-    }
-
-    const removeToken = () => {
-        localStorage.clear()
-        window.location.href = "/"
+    const handleLogout = () => {
+      // ユーザ情報を削除
+      dispatch(addUserRemove())
+      dispatch(signInUserRemove())
+      history.push("/")
     }
 
     return (
         <div className="App">
-            {/*<QrHome />*/}
             <Header />
-            <h2 className="mt-5">ようこそ！{state.signInUser.sei}{state.signInUser.mei}さん</h2>
+            <div className="wrap">
+                <h2 className="mt-5">ようこそ！{state.signInUser.sei}さん</h2>
+                <div className="w-25">
+                  <AmplifyAuthenticator>
+                    <AmplifySignOut buttonText={"ログアウト"} handleAuthStateChange={() => handleLogout()} />
+                  </AmplifyAuthenticator>
+                </div>
+                <Link to="/">トップページを見る</Link>
+            </div>
 
-            <AmplifyAuthenticator>
-                <AmplifySignOut onClick={() => removeToken()}/>
-            </AmplifyAuthenticator>
-
-            <Link to="/">トップページを見る</Link>
+            <Footer />
         </div>
     );
 }

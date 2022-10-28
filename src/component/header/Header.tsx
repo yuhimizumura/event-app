@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import Image from "../Image/Image";
 import HamburgerMenu from "../menu";
@@ -8,17 +8,36 @@ const logo = require("../../assets/img/img_logo01.png")
 const Header = () => {
 
     const state:any = useSelector(state => state)
-    console.log(state.authStatus.nextAuthState)
+
+    // const [link,setLink] = useState<string>("/login")
+    // const [linkName,setLinkName] = useState<string>("ログイン")
+    let link = "/login"
+    let name = "ログイン"
+
+    if (state.signInUser.id !== undefined && state.signInUser.id !== "" || state.addUser.id !== undefined && state.addUser.id !== "") {
+      // setLink("/mypage")
+      // setLinkName("マイページ")
+      link = "mypage"
+      name = "マイページ"
+    }
+
+
 
     return (
         <header id="header" className="pt-1 pb-1">
-            <HeaderPcMenu />
-            <HeaderSpMenu />
+            <HeaderPcMenu link={link} name={name} />
+            <HeaderSpMenu link={link} name={name} />
         </header>
     )
 }
 
-const HeaderPcMenu = () => {
+type Props = {
+  link:string,
+  name:string
+}
+
+const HeaderPcMenu = (props:Props) => {
+    const {link,name} = props
     return (
         <nav className="dispPc">
             <ul className='wrapper'>
@@ -26,14 +45,15 @@ const HeaderPcMenu = () => {
                     <Link to="/"><Logo /></Link>
                 </li>
                 <li><Link to="/search">イベントを探す</Link></li>
-                <li><Link to="/about">当サービスについて</Link></li>
-                <li><a href="/login">ログイン</a></li>
+                <li><Link to="/about">サービスについて</Link></li>
+                <li><a href={link}>{name}</a></li>
             </ul>
         </nav>
     )
 }
 
-const HeaderSpMenu = () => {
+const HeaderSpMenu = (props:Props) => {
+    const {link,name} = props
     return (
         <nav className="dispSp">
             <HamburgerMenu/>
@@ -43,7 +63,7 @@ const HeaderSpMenu = () => {
                     <Link to="/search">
                         <i className="fa-solid fa-magnifying-glass fa-lg"></i>
                     </Link>
-                    <a href="/login">
+                    <a href={link}>
                         <i className="fa-solid fa-user fa-lg"></i>
                     </a>
                 </div>

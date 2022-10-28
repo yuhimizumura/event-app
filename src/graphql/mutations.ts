@@ -12,6 +12,8 @@ export const createTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
       createdAt
       updatedAt
     }
@@ -27,6 +29,8 @@ export const updateTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
       createdAt
       updatedAt
     }
@@ -42,6 +46,68 @@ export const deleteTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      sei
+      email
+      gender
+      age
+      tel
+      sns
+      sns_name
+      pref
       createdAt
       updatedAt
     }

@@ -3,6 +3,8 @@ import Header from "../../component/header/Header";
 import Image from "../../component/Image/Image";
 import CardSlider from "../../component/cardSlider";
 import MovieSlider from "../../component/movieSlider";
+import Footer from "../../component/footer/Footer";
+import {useSelector} from "react-redux";
 
 const twitter =  require("../../assets/img/img_icon01.svg")
 const instagram =  require("../../assets/img/img_icon02.svg")
@@ -21,7 +23,6 @@ const events1 = require("../../assets/img/img_event01.jpg")
 const events2 = require("../../assets/img/img_event02.jpg")
 const events3 = require("../../assets/img/img_event03.jpg")
 const events4 = require("../../assets/img/img_event04.jpg")
-
 
 const FrontTop = () => {
     return (
@@ -235,7 +236,7 @@ const FrontTop = () => {
                 <p><span>N</span>ext News</p>
             </div>
 
-            <section id="section5">
+            <section id="section5" className="mb-8">
                 {/*丸の背景いれる*/}
                 <div className="section-title-area">
                     <h2>お知らせ</h2>
@@ -264,30 +265,7 @@ const FrontTop = () => {
                 </ul>
             </section>
 
-            <footer className="mt-8">
-                <div className="wrap">
-                    <div className="footer-list">
-                        <ul>
-                            <li>SERVICE - サービス</li>
-                            <li><a href="#">ログイン</a></li>
-                            <li><a href="#">新規会員登録</a></li>
-                            <li><a href="#">イベント検索</a></li>
-                        </ul>
-                        <ul>
-                            <li>SUPPORT - サポート</li>
-                            <li><a href="#">運営会社</a></li>
-                            <li><a href="#">プライバシーポリシー</a></li>
-                            <li><a href="#">ご利用案内</a></li>
-                            <li><a href="#">お問い合わせ</a></li>
-                        </ul>
-                    </div>
-                    <div className="copyright">
-                        <p>© 2022 <span>いべこね！ </span></p>
-                        <p><Image path={twitter} /></p>
-                        <p><Image path={instagram} /></p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
 
         </div>
     );

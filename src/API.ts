@@ -7,12 +7,16 @@ export type CreateTodoInput = {
   name: string,
   description?: string | null,
   hoge?: string | null,
+  aaaa?: string | null,
+  test?: string | null,
 };
 
 export type ModelTodoConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   hoge?: ModelStringInput | null,
+  aaaa?: ModelStringInput | null,
+  test?: ModelStringInput | null,
   and?: Array< ModelTodoConditionInput | null > | null,
   or?: Array< ModelTodoConditionInput | null > | null,
   not?: ModelTodoConditionInput | null,
@@ -64,6 +68,8 @@ export type Todo = {
   name?: string,
   description?: string | null,
   hoge?: string | null,
+  aaaa?: string | null,
+  test?: string | null,
   createdAt?: string,
   updatedAt?: string,
 };
@@ -73,9 +79,68 @@ export type UpdateTodoInput = {
   name?: string | null,
   description?: string | null,
   hoge?: string | null,
+  aaaa?: string | null,
+  test?: string | null,
 };
 
 export type DeleteTodoInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  sei?: string | null,
+  email?: string | null,
+  gender?: string | null,
+  age?: string | null,
+  tel?: string | null,
+  sns?: string | null,
+  sns_name?: string | null,
+  pref?: string | null,
+};
+
+export type ModelUserConditionInput = {
+  sei?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  gender?: ModelStringInput | null,
+  age?: ModelStringInput | null,
+  tel?: ModelStringInput | null,
+  sns?: ModelStringInput | null,
+  sns_name?: ModelStringInput | null,
+  pref?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+};
+
+export type User = {
+  __typename: "User",
+  id?: string,
+  sei?: string | null,
+  email?: string | null,
+  gender?: string | null,
+  age?: string | null,
+  tel?: string | null,
+  sns?: string | null,
+  sns_name?: string | null,
+  pref?: string | null,
+  createdAt?: string,
+  updatedAt?: string,
+};
+
+export type UpdateUserInput = {
+  id: string,
+  sei?: string | null,
+  email?: string | null,
+  gender?: string | null,
+  age?: string | null,
+  tel?: string | null,
+  sns?: string | null,
+  sns_name?: string | null,
+  pref?: string | null,
+};
+
+export type DeleteUserInput = {
   id: string,
 };
 
@@ -84,6 +149,8 @@ export type ModelTodoFilterInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   hoge?: ModelStringInput | null,
+  aaaa?: ModelStringInput | null,
+  test?: ModelStringInput | null,
   and?: Array< ModelTodoFilterInput | null > | null,
   or?: Array< ModelTodoFilterInput | null > | null,
   not?: ModelTodoFilterInput | null,
@@ -111,6 +178,27 @@ export type ModelTodoConnection = {
   nextToken?: string | null,
 };
 
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
+  sei?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  gender?: ModelStringInput | null,
+  age?: ModelStringInput | null,
+  tel?: ModelStringInput | null,
+  sns?: ModelStringInput | null,
+  sns_name?: ModelStringInput | null,
+  pref?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items?:  Array<User >,
+  nextToken?: string | null,
+};
+
 export type CreateTodoMutationVariables = {
   input?: CreateTodoInput,
   condition?: ModelTodoConditionInput | null,
@@ -123,6 +211,8 @@ export type CreateTodoMutation = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -140,6 +230,8 @@ export type UpdateTodoMutation = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -157,6 +249,74 @@ export type DeleteTodoMutation = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUserMutationVariables = {
+  input?: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input?: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input?: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -173,6 +333,8 @@ export type GetTodoQuery = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -193,6 +355,56 @@ export type ListTodosQuery = {
       name: string,
       description?: string | null,
       hoge?: string | null,
+      aaaa?: string | null,
+      test?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id?: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      sei?: string | null,
+      email?: string | null,
+      gender?: string | null,
+      age?: string | null,
+      tel?: string | null,
+      sns?: string | null,
+      sns_name?: string | null,
+      pref?: string | null,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -207,6 +419,8 @@ export type OnCreateTodoSubscription = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -219,6 +433,8 @@ export type OnUpdateTodoSubscription = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -231,6 +447,59 @@ export type OnDeleteTodoSubscription = {
     name: string,
     description?: string | null,
     hoge?: string | null,
+    aaaa?: string | null,
+    test?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    sei?: string | null,
+    email?: string | null,
+    gender?: string | null,
+    age?: string | null,
+    tel?: string | null,
+    sns?: string | null,
+    sns_name?: string | null,
+    pref?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

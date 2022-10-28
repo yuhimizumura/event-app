@@ -1,12 +1,15 @@
 import React, {useEffect} from 'react';
 import {AmplifyAuthenticator,AmplifySignUp,AmplifySignOut} from "@aws-amplify/ui-react";
 import {AuthState, onAuthUIStateChange} from '@aws-amplify/ui-components';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import authStatusSet from "../../redux/actions/auth";
 import {isEmpty} from "../../util/util";
 import {useHistory} from "react-router-dom"
-import signInUserSet from "../../redux/actions/user";
+import signInUserSet,{signInUserRemove} from "../../redux/actions/user";
 import {fetchUser} from "../../services/user";
+import Header from "../../component/header/Header";
+import Footer from "../../component/footer/Footer";
+import addUserSet, {addUserRemove} from "../../redux/actions/add";
 
 
 const Login = () => {
@@ -14,6 +17,8 @@ const Login = () => {
     const [user, setUser] = React.useState();
     const dispatch = useDispatch()
     const history = useHistory()
+    const state = useSelector(state => state)
+    console.log(state)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {
@@ -35,22 +40,44 @@ const Login = () => {
         let fetchId = user.username
         const res = fetchUser(fetchId)
         res.then(data => {
-            //ログインした時点でデータが存在しない場合はユーザ登録画面へ遷移
-            if(isEmpty(data.getUser)) {
-                history.push("/add-user")
-            }
             dispatch(signInUserSet(data.data.getUser))
-            // history.push("/mypage")
+            if (data.data.getUser !== null) {
+                history.push("/mypage")
+            } else {
+                const payload = {
+                    id: fetchId
+                }
+                dispatch(addUserSet(payload))
+                console.log(state)
+            }
         }).catch(error => {
             console.log(error)
         })
     },[user])
 
+    const handleAdd = () => {
+        history.push("/add-user")
+    }
+
+    const handleLogout = () => {
+        // ユーザ情報を削除
+        dispatch(addUserRemove())
+        dispatch(signInUserRemove())
+        history.push("/")
+    }
 
     return authState === AuthState.SignedIn && user ? (
         <div className="App">
-            <div>Hello, {user.username}</div>
-            <AmplifySignOut />
+            <Header />
+            <div className="wrap my-8">
+                <h1>ようこそ、ゲストさん！</h1>
+                <p>下記ボタンより、会員登録を完了してください。</p>
+                <button className="" onClick={() => handleAdd()}>本会員登録へ進む</button>
+                <AmplifyAuthenticator>
+                    <AmplifySignOut buttonText={"ログアウト"} handleAuthStateChange={() => handleLogout()} />
+                </AmplifyAuthenticator>
+            </div>
+            <Footer />
         </div>
         ) : (
         <AmplifyAuthenticator>
@@ -58,13 +85,13 @@ const Login = () => {
                 {
                     type: "username",
                     label: " ユーザ名(Email) *",
-                    placeholder: "ユーザ名を入力",
+                    placeholder: "ユーザ名を入力してください。",
                     required: true,
                 },
                 {
                     type: "password",
                     label: " パスワード *",
-                    placeholder: "パスワードを入力",
+                    placeholder: "パスワードを入力してください。",
                     required: true,
                 },
                 ]

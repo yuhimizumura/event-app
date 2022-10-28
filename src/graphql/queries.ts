@@ -9,6 +9,8 @@ export const getTodo = /* GraphQL */ `
       name
       description
       hoge
+      aaaa
+      test
       createdAt
       updatedAt
     }
@@ -26,6 +28,8 @@ export const listTodos = /* GraphQL */ `
         name
         description
         hoge
+        aaaa
+        test
         createdAt
         updatedAt
       }
@@ -33,18 +37,44 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
-
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
       sei
-      mei
-      kanaSei
-      kanaMei
+      email
+      gender
+      age
       tel
-      post
-      address
+      sns
+      sns_name
+      pref
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        sei
+        email
+        gender
+        age
+        tel
+        sns
+        sns_name
+        pref
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

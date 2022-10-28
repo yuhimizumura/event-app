@@ -1,4 +1,4 @@
-import {SET_SIGNINUSER_DATA} from "../../actions/user";
+import {SET_SIGNINUSER_DATA,REMOVE_SIGNIN_USER_DATA} from "../../actions/user";
 
 const initialState = {
     payload:Object
@@ -11,6 +11,8 @@ export const signInUserReducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       }
+    case REMOVE_SIGNIN_USER_DATA:
+      return {}
     default:
       return state
   }
