@@ -7,6 +7,7 @@ import Footer from "../../component/footer/Footer";
 import {signInUserRemove} from "../../redux/actions/user";
 import {isEmpty} from "../../util/util";
 import {addUserRemove} from "../../redux/actions/add";
+import QRCode from "react-qr-code";
 const MyPage = () => {
 
     const state:any = useSelector(state => state)
@@ -14,7 +15,7 @@ const MyPage = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-      console.log(state)
+
       if (isEmpty(state.signInUser)) {
         handleLogout()
       }
@@ -31,8 +32,11 @@ const MyPage = () => {
         <div className="App">
             <Header />
             <div className="wrap">
-                <h2 className="mt-5">ようこそ！{state.signInUser.sei}さん</h2>
+                <h2 className="mt-5 mb-3">ようこそ！{state.signInUser.sei}さん</h2>
                 <div className="w-25">
+                  <div className="mb-3">
+                    <QRCode value={"https://google.com"} />
+                  </div>
                   <AmplifyAuthenticator>
                     <AmplifySignOut buttonText={"ログアウト"} handleAuthStateChange={() => handleLogout()} />
                   </AmplifyAuthenticator>

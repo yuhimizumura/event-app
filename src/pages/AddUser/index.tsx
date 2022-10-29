@@ -14,6 +14,7 @@ import addUserSet from "../../redux/actions/add";
 const AddUser = () => {
 
     const state:any = useSelector(state => state)
+    console.log(state)
     const user = state.signInUser
     const form = state.addUser
     const [id,setId] = useState<string>("")
@@ -45,6 +46,9 @@ const AddUser = () => {
 
     useEffect(() => {
         getUserInfo("id").then(data => {
+            if (data == undefined) {
+                history.push("/")
+            }
             setId(data)
         })
 
@@ -52,10 +56,10 @@ const AddUser = () => {
             setEmail(data)
         })
 
-        if (!isEmpty(user)) {
-            history.push("/mypage")
-            return
-        }
+        // if (!isEmpty(user)) {
+        //     history.push("/mypage")
+        //     return
+        // }
     },[])
 
     useEffect(() => {
@@ -199,17 +203,6 @@ const AddUser = () => {
         }
     }
 
-    //電話番号
-    // const telValidation = (str:string) => {
-    //     if (str === undefined || str.length < 1) {
-    //         setErrorTel("電話番号を入力してください。")
-    //     } else if (str.length > 11) {
-    //         setErrorTel("電話番号を11桁以下で入力してください。")
-    //     } else {
-    //         setErrorTel("")
-    //     }
-    // }
-
     const tel1Validation = (str:string) => {
         if (str === undefined || str.length < 1) {
             setErrorTel1("電話番号1を入力してください。")
@@ -288,7 +281,7 @@ const AddUser = () => {
         dispatch(addUserSet(payload))
 
         if (isSubmit) {
-            history.push('/add-confirm')
+            history.push({ pathname: '/add-confirm', state: payload})
         }
 
     }
@@ -374,11 +367,11 @@ const AddUser = () => {
                                 <label htmlFor="tel">電話番号</label>
                             </div>
                             <div className="form_td">
-                                <input onChange={(event) => handleSetInput(event,"tel1")} id="tel1" type="tel" name="tel1" value={tel1} className="input g-3" />
+                                <input onChange={(event) => handleSetInput(event,"tel1")} id="tel1" type="tel" name="tel1" defaultValue={tel1 !== "" ? tel1 : ""} className="input g-3" />
                                 <span className="mx-px-10">-</span>
-                                <input onChange={(event) => handleSetInput(event,"tel2")} id="tel2" type="tel" name="tel2" value={tel2} className="input g-3"/>
+                                <input onChange={(event) => handleSetInput(event,"tel2")} id="tel2" type="tel" name="tel2" defaultValue={tel2 !== "" ? tel2 : ""} className="input g-3"/>
                                 <span className="mx-px-10">-</span>
-                                <input onChange={(event) => handleSetInput(event,"tel3")} id="tel3" type="tel" name="tel3" value={tel3} className="input g-3"/>
+                                <input onChange={(event) => handleSetInput(event,"tel3")} id="tel3" type="tel" name="tel3" defaultValue={tel3 !== "" ? tel3 : ""} className="input g-3"/>
                                 { errorTel1 !== "" &&
                                     <p className="error">{errorTel1}</p>
                                 }

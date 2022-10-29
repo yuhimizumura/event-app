@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import FrontTop from "./pages/FrontTop/Top";
 import QrHome from "./component/qrreader/qrCodeApp";
 import Login from "./pages/Login/Login";
@@ -10,6 +10,8 @@ import Amplify from "aws-amplify";
 import AddUser from "./pages/AddUser";
 import AddConfirm from "./pages/AddUser/confirm";
 import AddThanks from "./pages/AddUser/thanks";
+import {useSelector} from "react-redux";
+import {isEmpty} from "./util/util";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -27,7 +29,11 @@ const config = {
 
 Amplify.configure(config);
 
+
 const App = () => {
+    const state:any = useSelector(state => state)
+    const ref = document.referrer
+    console.log(ref)
     return (
         <BrowserRouter >
             <Switch>
@@ -38,16 +44,24 @@ const App = () => {
                     <QrHome />
                 </Route>
                 <Route exact path="/login">
-                    <Login />
+                    {
+                        isEmpty(state.signInUser) ? <Login /> : <Redirect to="/mypage" />
+                    }
                 </Route>
                 <Route exact path="/add-user">
-                   <AddUser />
+                    {
+                        isEmpty(state.signInUser) ? <AddUser /> : <Redirect to="/mypage" />
+                    }
                 </Route>
                 <Route exact path="/add-confirm">
-                    <AddConfirm />
+                    {
+                        isEmpty(state.signInUser) ? <AddConfirm /> : <Redirect to="/mypage" />
+                    }
                 </Route>
                 <Route exact path="/add-thanks">
-                    <AddThanks />
+                    {
+                        isEmpty(state.signInUser) ? <AddThanks /> : <Redirect to="/mypage" />
+                    }
                 </Route>
                 <Route exact path="/mypage">
                     <MyPage />
@@ -56,6 +70,7 @@ const App = () => {
         </BrowserRouter>
     )
 }
+
 
 export default App;
 

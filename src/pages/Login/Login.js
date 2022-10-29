@@ -18,7 +18,6 @@ const Login = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const state = useSelector(state => state)
-    console.log(state)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {

@@ -1,46 +1,60 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../component/header/Header";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useHistory, useLocation} from "react-router-dom"
 import {
   getUserInfo, isEmpty,
 } from "../../util/util";
 import Footer from "../../component/footer/Footer";
+import {addUserRemove} from "../../redux/actions/add";
 
 const AddConfirm = () => {
 
   const [id,setId] = useState<string>("")
   const [email,setEmail] = useState<string>("")
   const state:any = useSelector(state => state)
-  const user = state.signInUser
+  const add = state.addUser
+  const location = useLocation()
 
   useEffect(() => {
-    // if (id === "") {
-    //   history.push("/login")
-    //   return
-    // }
-    // if (!isEmpty(user)) {
-    //   history.push("/mypage")
-    //   return
-    // }
+    getUserInfo("id").then(data => {
+      if (data == undefined || !checkAccess() || isEmpty(location.state)) {
+        throw new Error("not Id")
+      }
+      setId(data)
+    }).catch(error => {
+      history.push("/add-user")
+    })
+
+    getUserInfo("email").then(data => {
+      if (data === undefined || !checkAccess() || isEmpty(location.state)) {
+        throw new Error("not Email")
+      }
+      setEmail(data)
+    }).catch(error => {
+      history.push("/add-user")
+    })
   },[])
 
-  getUserInfo("id").then(data => {
-    setId(data)
-  }).catch(error => {
-    console.log(error)
-  })
+  const checkAccess = () => {
+    let r = false
+    if (add.sei !== undefined || add.sei !== "") r = true
+    if (add.gender !== undefined || add.gender !== "") r = true
+    if (add.age !== undefined || add.age !== "") r = true
+    if (add.tel1 !== undefined || add.tel1 !== "") r = true
+    if (add.tel2 !== undefined || add.tel2 !== "") r = true
+    if (add.tel3 !== undefined || add.tel3 !== "") r = true
+    if (add.sns !== undefined || add.sns !== "") r = true
+    if (add.pref !== undefined || add.pref !== "") r = true
 
-  getUserInfo("email").then(data => {
-    setEmail(data)
-  }).catch(error => {
-    console.log(error)
-  })
+    return r
+  }
 
   const history = useHistory();
 
   const handleSubmit = () => {
-    history.push('/add-thanks')
+    console.log(add)
+    history.push({ pathname: '/add-thanks', state: add})
   }
 
   const handleBackSubmit = () => {
@@ -139,8 +153,8 @@ const AddConfirm = () => {
             </div>
           </div>
           <div className="d-flex w-50 between mx-auto">
-            <input className="w-25 back-button d-block" type="submit" onClick={handleBackSubmit} value={"戻る"}/>
-            <input className="w-25 button d-block" type="submit" onClick={handleSubmit} value={"登録"}/>
+            <input className="w-25 back-button d-block" type="button" onClick={handleBackSubmit} value={"戻る"}/>
+            <input className="w-25 button d-block" type="button" onClick={handleSubmit} value={"登録"}/>
           </div>
         </form>
       </div>

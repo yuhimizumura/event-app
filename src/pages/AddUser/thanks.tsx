@@ -6,8 +6,9 @@ import {
 } from "../../util/util";
 import Footer from "../../component/footer/Footer";
 import {addUserRemove} from "../../redux/actions/add";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {addUser} from "../../services/user";
+import signInUserSet from "../../redux/actions/user";
 
 const AddThanks = () => {
 
@@ -16,42 +17,54 @@ const AddThanks = () => {
   const add = state.addUser
   const history = useHistory(); // historyを用意する
   const dispatch = useDispatch()
-  const user = state.signInUser
+  const location = useLocation()
 
   useEffect(() => {
 
-    const payload:any =  {
-      id: add.id,
-      sei: add.sei,
-      email: add.email,
-      gender: add.gender,
-      age: add.age,
-      tel: `${add.tel1}-${add.tel2}-${add.tel3}`,
-      sns: add.sns,
-      sns_name: add.sns_name,
-      pref: add.pref,
+    getUserInfo("id").then(data => {
+      if (data == undefined || !checkAccess() || isEmpty(location.state)) {
+        throw new Error("not Id")
+      }
+      setId(data)
+    }).catch(error => {
+      history.push("/add-user")
+      return
+    })
+
+    if(!isEmpty(location.state)) {
+      const payload:any =  {
+        id: add.id,
+        sei: add.sei,
+        email: add.email,
+        gender: add.gender,
+        age: add.age,
+        tel: `${add.tel1}-${add.tel2}-${add.tel3}`,
+        sns: add.sns,
+        sns_name: add.sns_name === undefined || add.sns_name === "" ? " " : add.sns_name,
+        pref: add.pref,
+      }
+
+      addUser(payload)
     }
-
-    addUser(payload)
-
-    // if (id === "") {
-    //   history.push("/login")
-    //   return
-    // }
-    // if (!isEmpty(user)) {
-    //   history.push("/mypage")
-    //   return
-    // }
   },[])
 
-  getUserInfo("id").then(data => {
-    setId(data)
-  }).catch(error => {
-    console.log(error)
-  })
+  const checkAccess = () => {
+    let r = false
+    if (add.sei !== undefined || add.sei !== "") r = true
+    if (add.gender !== undefined || add.gender !== "") r = true
+    if (add.age !== undefined || add.age !== "") r = true
+    if (add.tel1 !== undefined || add.tel1 !== "") r = true
+    if (add.tel2 !== undefined || add.tel2 !== "") r = true
+    if (add.tel3 !== undefined || add.tel3 !== "") r = true
+    if (add.sns !== undefined || add.sns !== "") r = true
+    if (add.pref !== undefined || add.pref !== "") r = true
+
+    return r
+  }
 
   const handleLink = (link:string) => {
     //　登録で一時的に保存していたStateを削除
+    dispatch(signInUserSet(add))
     dispatch(addUserRemove())
     history.push(link)
   }

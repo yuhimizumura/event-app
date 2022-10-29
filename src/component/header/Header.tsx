@@ -3,25 +3,26 @@ import { Link } from "react-router-dom";
 import Image from "../Image/Image";
 import HamburgerMenu from "../menu";
 import {useSelector} from "react-redux";
+import {isEmpty} from "../../util/util";
 const logo = require("../../assets/img/img_logo01.png")
 
 const Header = () => {
 
     const state:any = useSelector(state => state)
-
-    // const [link,setLink] = useState<string>("/login")
-    // const [linkName,setLinkName] = useState<string>("ログイン")
     let link = "/login"
     let name = "ログイン"
 
-    if (state.signInUser.id !== undefined && state.signInUser.id !== "" || state.addUser.id !== undefined && state.addUser.id !== "") {
-      // setLink("/mypage")
-      // setLinkName("マイページ")
+    if (state.signInUser.id !== undefined && state.signInUser.id !== "") {
       link = "mypage"
       name = "マイページ"
     }
 
-
+    if (state.addUser.id !== undefined && state.addUser.id !== "" && isEmpty(state.signInUser)) {
+      name = "仮マイページ"
+    } else if (state.signInUser.id !== undefined && state.signInUser.id !== "") {
+      link = "mypage"
+      name = "マイページ"
+    }
 
     return (
         <header id="header" className="pt-1 pb-1">
