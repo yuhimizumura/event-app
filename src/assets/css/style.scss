@@ -83,6 +83,37 @@ ul {
   }
 }
 
+.button {
+  background: $button;
+  color: #fff;
+  @extend .py-1,.w-100;
+  min-width: 180px;
+  max-width: 250px;
+  border-radius: 4px;
+  border-color: $button;
+  font-size: $font-text;
+  @include mq("sp") {
+    margin-bottom: 2rem;
+    font-size: $font-sp-text;
+  }
+  &:hover {
+    cursor: pointer;
+    background: #7da6c4;
+    transition: 0.3s;
+    opacity: 0.8;
+    border-color: #7da6c4;
+  }
+}
+
+#root {
+  min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+  position: relative;/* ←相対位置 */
+  padding-bottom: 440px;
+  @include mq("sp") {
+    padding-bottom: 650px;
+  }
+  box-sizing: border-box;
+}
 
 
 // 横幅設定
@@ -685,10 +716,12 @@ ul {
 }
 
 footer {
+  position: absolute;/* ←絶対位置 */
+  bottom: 0;
   font-family: 'M PLUS 1p', sans-serif;
   font-weight: 300;
   line-height: 200%;
-  @extend .py-5;
+  @extend .py-5,.w-100;
   background:$default-button-color;
   color: $white;
   a {
@@ -809,25 +842,6 @@ footer {
     border-radius: 4px;
     padding-left: 5px;
   }
-  .button {
-    background: $button !important;
-    color: #fff;
-    @extend .py-1,.mt-2;
-    min-width: 180px;
-    max-width: 250px;
-    border-radius: 4px;
-    border-color: $button;
-    font-size: $font-text;
-    @include mq("sp") {
-      font-size: $font-sp-text;
-    }
-    &:hover {
-      background: #7da6c4;
-      transition: 0.3s;
-      opacity: 0.8;
-      border-color: #7da6c4;
-    }
-  }
   .back-button {
     background: #b7b5b5;
     color: #fff;
@@ -901,3 +915,132 @@ footer {
     @extend .pt-1;
   }
 }
+
+// ログイン
+
+#login {
+  @include headerTopMargin();
+  margin-top: 8rem;
+  .d-block {
+    display: block;
+  }
+  .d-flex {
+    display: flex;
+    @include mq("sp") {
+      flex-direction: column;
+    }
+  }
+  .center {
+    text-align: center;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+    line-height: 200%;
+  }
+  h2 {
+    font-weight: normal;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+  }
+  .add-button {
+    @extend .button;
+  }
+  .logout-button {
+    @extend .button;
+    background: #b7b5b5;
+    border-color: #b7b5b5;
+    &:hover {
+      background: #dbd9d9;
+      border-color: #dbd9d9;
+    }
+  }
+  .between {
+    justify-content: space-between;
+  }
+  .d-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .button-area {
+    max-width: 600px;
+    @include mq("sp") {
+      max-width: 250px;
+      margin-bottom: 5rem;
+    }
+  }
+  .alert-text {
+    color: $error;
+    font-weight: bold;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+    @extend .px-1;
+  }
+}
+
+//会員登録完了ページ
+#add-user-area {
+  @include headerTopMargin();
+  margin-top: 6rem;
+  //height: calc(100vh - 440px - 91px);
+  @include mq("pc") {
+    height: calc(100vh - 440px - 91px);
+  }
+  .d-block {
+    display: block;
+  }
+  .d-flex {
+    display: flex;
+    @include mq("sp") {
+      flex-direction: column;
+    }
+  }
+  .center {
+    text-align: center;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+    line-height: 200%;
+  }
+  h2 {
+    font-weight: normal;
+    font-size: $font-text;
+    @include mq("sp") {
+      font-size: $font-sp-text;
+    }
+  }
+  .mypage-button {
+    @extend .button;
+  }
+  .top-button {
+    @extend .button;
+    background: $error !important;
+    border-color: $error;
+    &:hover {
+      background: #F55252;
+      border-color: #F55252;
+    }
+  }
+  .between {
+    justify-content: space-between;
+  }
+  .d-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .button-area {
+    max-width: 600px;
+    @include mq("sp") {
+      max-width: 250px;
+      margin-bottom: 5rem;
+    }
+  }
+}
+

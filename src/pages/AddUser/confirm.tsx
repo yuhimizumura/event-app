@@ -53,7 +53,6 @@ const AddConfirm = () => {
   const history = useHistory();
 
   const handleSubmit = () => {
-    console.log(add)
     history.push({ pathname: '/add-thanks', state: add})
   }
 
@@ -153,8 +152,8 @@ const AddConfirm = () => {
             </div>
           </div>
           <div className="d-flex w-50 between mx-auto">
-            <input className="w-25 back-button d-block" type="button" onClick={handleBackSubmit} value={"戻る"}/>
-            <input className="w-25 button d-block" type="button" onClick={handleSubmit} value={"登録"}/>
+            <input className="w-25 back-button d-block" type="submit" onClick={handleBackSubmit} value={"戻る"}/>
+            <input className="w-25 button d-block" type="submit" onClick={handleSubmit} value={"登録"}/>
           </div>
         </form>
       </div>

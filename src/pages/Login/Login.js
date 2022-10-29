@@ -10,6 +10,7 @@ import {fetchUser} from "../../services/user";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import addUserSet, {addUserRemove} from "../../redux/actions/add";
+import {Auth} from "aws-amplify";
 
 
 const Login = () => {
@@ -62,22 +63,28 @@ const Login = () => {
         // ユーザ情報を削除
         dispatch(addUserRemove())
         dispatch(signInUserRemove())
+        Auth.signOut()
         history.push("/")
     }
 
     return authState === AuthState.SignedIn && user ? (
-        <div className="App">
-            <Header />
-            <div className="wrap my-8">
-                <h1>ようこそ、ゲストさん！</h1>
-                <p>下記ボタンより、会員登録を完了してください。</p>
-                <button className="" onClick={() => handleAdd()}>本会員登録へ進む</button>
-                <AmplifyAuthenticator>
-                    <AmplifySignOut buttonText={"ログアウト"} handleAuthStateChange={() => handleLogout()} />
-                </AmplifyAuthenticator>
+            <div id="login" className="App">
+                <Header />
+                <div className="center-contents">
+                    <div className="wrap">
+                        <div className="center">
+                            <h2>仮会員登録ありがとうございます。</h2>
+                            <p>まだ、<span className="alert-text">本会員登録</span>は完了しておりません</p>
+                            <p>下記ボタンより、会員登録を完了してください。</p>
+                        </div>
+                        <div className="d-flex mx-auto mt-3 between w-100 button-area">
+                            <button className="add-button" onClick={() => handleAdd()}>本会員登録へ進む</button>
+                            <button className="logout-button" onClick={() => handleLogout()}>ログアウト</button>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
         ) : (
         <AmplifyAuthenticator>
             <AmplifySignUp slot="sign-up" formFields={[

@@ -72,15 +72,18 @@ const AddThanks = () => {
   return (
     <div className="App">
       <Header />
-      <div id="add-user-area">
-        <h1 className="text-center ">新規会員登録</h1>
-        <div className="form-wrap">
-          <p>会員登録ありがとうございます！</p>
-          <p>様々なイベントに参加しよう！</p>
-          <p onClick={() => handleLink("/mypage")}>マイページ</p>
-          <p onClick={() => handleLink("/")}>トップページ</p>
+        <div id="add-user-area">
+          <div className="wrap">
+            <div className="center">
+              <h2>本会員登録ありがとうございます。</h2>
+              <p>これから、たくさんのイベントに参加してみましょう！</p>
+            </div>
+            <div className="d-flex mx-auto mt-3 between w-100 button-area">
+              <button className="mypage-button" onClick={() => handleLink('/mypage')}>マイページ</button>
+              <button className="top-button" onClick={() => handleLink('/#section2')}>イベントを探す</button>
+            </div>
+          </div>
         </div>
-      </div>
       <Footer />
     </div>
   );
