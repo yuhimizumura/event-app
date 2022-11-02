@@ -45,6 +45,7 @@ const AddUser = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         getUserInfo("id").then(data => {
             if (data == undefined) {
                 history.push("/")
