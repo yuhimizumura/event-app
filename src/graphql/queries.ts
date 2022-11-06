@@ -49,6 +49,7 @@ export const getUser = /* GraphQL */ `
       sns
       sns_name
       pref
+      profile
       createdAt
       updatedAt
     }
@@ -71,6 +72,7 @@ export const listUsers = /* GraphQL */ `
         sns
         sns_name
         pref
+        profile
         createdAt
         updatedAt
       }

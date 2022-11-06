@@ -97,6 +97,7 @@ export type CreateUserInput = {
   sns?: string | null,
   sns_name?: string | null,
   pref?: string | null,
+  profile?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -108,6 +109,7 @@ export type ModelUserConditionInput = {
   sns?: ModelStringInput | null,
   sns_name?: ModelStringInput | null,
   pref?: ModelStringInput | null,
+  profile?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -124,6 +126,7 @@ export type User = {
   sns?: string | null,
   sns_name?: string | null,
   pref?: string | null,
+  profile?: string | null,
   createdAt?: string,
   updatedAt?: string,
 };
@@ -138,6 +141,7 @@ export type UpdateUserInput = {
   sns?: string | null,
   sns_name?: string | null,
   pref?: string | null,
+  profile?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -188,6 +192,7 @@ export type ModelUserFilterInput = {
   sns?: ModelStringInput | null,
   sns_name?: ModelStringInput | null,
   pref?: ModelStringInput | null,
+  profile?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -273,6 +278,7 @@ export type CreateUserMutation = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -295,6 +301,7 @@ export type UpdateUserMutation = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -317,6 +324,7 @@ export type DeleteUserMutation = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -380,6 +388,7 @@ export type GetUserQuery = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -405,6 +414,7 @@ export type ListUsersQuery = {
       sns?: string | null,
       sns_name?: string | null,
       pref?: string | null,
+      profile?: string | null,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -466,6 +476,7 @@ export type OnCreateUserSubscription = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -483,6 +494,7 @@ export type OnUpdateUserSubscription = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -500,6 +512,7 @@ export type OnDeleteUserSubscription = {
     sns?: string | null,
     sns_name?: string | null,
     pref?: string | null,
+    profile?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

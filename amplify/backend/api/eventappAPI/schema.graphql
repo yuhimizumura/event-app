@@ -17,4 +17,5 @@ type User @model {
   sns: String
   sns_name: String
   pref: String
+  profile: String
 }

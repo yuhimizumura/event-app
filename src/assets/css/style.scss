@@ -1039,10 +1039,11 @@ footer {
 }
 
 #mypage {
+  line-height: 200%;
   @include headerTopMargin();
   margin-top: 6rem;
   .user-area {
-    align-items: end;
+    align-items: baseline;
     justify-content: center;
     h2 {
       font-size: $font-title;
@@ -1060,6 +1061,147 @@ footer {
         font-size: $font-sp-text;
       }
       margin-bottom: 3px;
+    }
+  }
+
+  #profile {
+    .dashed-line {
+      border-top: 1px dashed #b3b3b3;
+      p {
+        font-size: $font-text;
+        font-weight: 500;
+        @include mq("sp") {
+          font-size: $font-sp-text;
+        }
+      }
+    }
+  }
+
+  #interest {
+    h3 {
+      @extend .mb-1;
+      font-family: "M PLUS 1p", sans-serif;
+      font-weight: 400;
+      font-size: $font-middle;
+      @include mq("sp") {
+        font-size: $font-sp-middle;
+      }
+    }
+    .interest-area {
+      @extend .d-flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      dl {
+        @extend .mb-1;
+        padding: 5px 0;
+        line-height: 150%;
+        border: 1px solid #222;
+        border-radius: 4px;
+        width: calc(20% - 10px);
+        min-width: 45px;
+        text-align: center;
+        margin-right: 10px;
+        &:nth-of-type(5n) {
+          margin-right: 0;
+        }
+        dd {
+          font-size: $font-small;
+          @include mq("sp") {
+            font-size: $font-sp-small;
+          }
+        }
+      }
+    }
+  }
+
+  #event {
+    h3 {
+      @extend .mb-1;
+      font-family: "M PLUS 1p", sans-serif;
+      font-weight: 400;
+      font-size: $font-middle;
+      @include mq("sp") {
+        font-size: $font-sp-middle;
+      }
+    }
+    .event-area {
+      li {
+        position: relative;
+        border: 1px solid #222;
+        border-radius: 4px;
+        @extend .mb-2;
+        .max {
+          position: absolute;
+          left: 57%;
+          top: 50%;
+          transform: translate(-50%,-50%);
+          font-family: "M PLUS 1p", sans-serif;
+          font-size: $font-big;
+          color: rgba(234,57,34,0.53);
+          letter-spacing: 20px;
+          white-space: nowrap;
+        }
+        .limit {
+          span {
+            line-height: 20px;
+          }
+          letter-spacing: 5px;
+          display: inline-grid;
+          align-content: center;
+          background: $error;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          color: #fff;
+          text-align: center;
+          font-size: $font-small;
+          font-weight: bold;
+          position: absolute;
+          right: -18px;
+          top: -27px;
+        }
+        .little {
+          span {
+            line-height: 20px;
+          }
+          letter-spacing: 5px;
+          align-content: center;
+          display: inline-grid;
+          background: #EAAC22;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          color: #fff;
+          text-align: center;
+          font-weight: bold;
+          font-size: $font-small;
+          position: absolute;
+          right: -18px;
+          top: -27px;
+        }
+        .day {
+          display: inline-block;
+          background: #2596E8;
+          color: #ffffff;
+          border-right: 1px solid #222;
+          border-bottom: 1px solid #222;
+          font-size: $font-small;
+          position: relative;
+          top: -1px;
+          letter-spacing: 3px;
+          padding: 0 10px;
+        }
+        .limit-text {
+          color: $error;
+        }
+        .little-text {
+          color: #EAAC22;
+        }
+        dl {
+          @extend .ml-1,.mt-1,.mb-1;
+          font-size: $font-small;
+        }
+      }
     }
   }
 }

@@ -268,6 +268,7 @@ const AddUser = () => {
             "sns":sns,
             "sns_name": sns_name,
             "pref": pref,
+            "profile":"よろしくお願いいたします。"
         }
 
         nameValidation(sei)

@@ -56,6 +56,7 @@ export const onCreateUser = /* GraphQL */ `
       sns
       sns_name
       pref
+      profile
       createdAt
       updatedAt
     }
@@ -73,6 +74,7 @@ export const onUpdateUser = /* GraphQL */ `
       sns
       sns_name
       pref
+      profile
       createdAt
       updatedAt
     }
@@ -90,6 +92,7 @@ export const onDeleteUser = /* GraphQL */ `
       sns
       sns_name
       pref
+      profile
       createdAt
       updatedAt
     }

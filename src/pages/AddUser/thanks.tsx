@@ -43,6 +43,7 @@ const AddThanks = () => {
         sns: add.sns,
         sns_name: add.sns_name === undefined || add.sns_name === "" ? " " : add.sns_name,
         pref: add.pref,
+        profile: add.profile
       }
 
       addUser(payload)
