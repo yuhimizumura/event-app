@@ -439,7 +439,7 @@ const AddUser = () => {
                             </div>
                         </div>
                     </div>
-                    <button type="button" className={`w-25 mx-auto d-block ${isSubmit ? 'button' : 'back-button'}`} onClick={handleSubmit}>確認画面へ</button>
+                    <button type="button" className={`w-25 mt-2 mx-auto d-block ${isSubmit ? 'add-button' : 'back-button'}`} onClick={handleSubmit}>確認画面へ</button>
                 </form>
             </div>
         <Footer />

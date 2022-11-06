@@ -34,5 +34,23 @@
         "eventapp6da5a2c5": {}
       }
     }
+  },
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-eventapp-develop-13432-authRole",
+      "UnauthRoleArn": "arn:aws:iam::469631579604:role/amplify-eventapp-develop-13432-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::469631579604:role/amplify-eventapp-develop-13432-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-eventapp-develop-13432-deployment",
+      "UnauthRoleName": "amplify-eventapp-develop-13432-unauthRole",
+      "StackName": "amplify-eventapp-develop-13432",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:469631579604:stack/amplify-eventapp-develop-13432/91bef800-57a7-11ed-97a6-06570c26424b",
+      "AmplifyAppId": "d1p4c81fxx2d14"
+    },
+    "categories": {
+      "auth": {
+        "eventappe7f3677a": {}
+      }
+    }
   }
 }

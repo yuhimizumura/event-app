@@ -71,7 +71,7 @@ const AddConfirm = () => {
           <div className="d-flex">
             <div className="d-flex">
               <div className="form_th">
-                <label htmlFor="sei">お名前<span>*</span></label>
+                <label htmlFor="sei">お名前</label>
               </div>
               <div className="form_td">
                 <span>{state.addUser.sei}</span>
@@ -152,7 +152,7 @@ const AddConfirm = () => {
               </div>
             </div>
           </div>
-          <div className="d-flex w-50 between mx-auto">
+          <div className="d-flex w-50 mt-2 between mx-auto">
             <input className="w-25 back-button d-block" type="submit" onClick={handleBackSubmit} value={"戻る"}/>
             <input className="w-25 button d-block" type="submit" onClick={handleSubmit} value={"登録"}/>
           </div>

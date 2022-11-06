@@ -842,22 +842,16 @@ footer {
     border-radius: 4px;
     padding-left: 5px;
   }
+  .add-button {
+    @extend .button;
+
+  }
   .back-button {
+    @extend .button;
     background: #b7b5b5;
-    color: #fff;
-    @extend .py-1,.mt-2;
-    min-width: 180px;
-    max-width: 250px;
-    border-radius: 4px;
     border-color: #b7b5b5;
-    font-size: $font-text;
-    @include mq("sp") {
-      font-size: $font-sp-text;
-    }
     &:hover {
       background: #dbd9d9;
-      transition: 0.3s;
-      opacity: 0.8;
       border-color: #dbd9d9;
     }
   }
@@ -1040,6 +1034,32 @@ footer {
     @include mq("sp") {
       max-width: 250px;
       margin-bottom: 5rem;
+    }
+  }
+}
+
+#mypage {
+  @include headerTopMargin();
+  margin-top: 6rem;
+  .user-area {
+    align-items: end;
+    justify-content: center;
+    h2 {
+      font-size: $font-title;
+      font-weight: 500;
+      margin-right: 4px;
+      @include mq("sp") {
+        font-size: $font-sp-title;
+      }
+    }
+    p {
+      color: #b3b3b3;
+      font-size: $font-text;
+      font-weight: 500;
+      @include mq("sp") {
+        font-size: $font-sp-text;
+      }
+      margin-bottom: 3px;
     }
   }
 }
