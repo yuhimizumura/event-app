@@ -19,6 +19,7 @@ const MyPage = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const [user, setUser] = useState(state.signInUser)
+  const [isEdit,setIsEdit] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -49,19 +50,41 @@ const MyPage = () => {
     history.push("/")
   }
 
+  const handleEdit = (edit:boolean) => {
+      setIsEdit(!edit)
+  }
+
   return (
     <div className="App">
       <Header/>
       <div id="mypage" className="wrap">
         <Image path={guest_icon}/>
-        <div className="d-flex text-end user-area mb-2">
+        {
+          isEdit &&
+          <input className="change-image" type="file"/>
+        }
+        <div className="d-flex text-end user-area mb-1">
           <h2>{user.sei}</h2>
           <p><i className="fa-solid fa-map-pin mr-px-4"></i>{user.pref}</p>
         </div>
 
+        <button className={isEdit ? "button-active" : "button"} onClick={() => handleEdit(isEdit)}>
+          {
+            isEdit ?
+                <span>保存<i className="fa-solid fa-pen ml-px-5"></i></span>
+                :
+                <span>編集<i className="fa-solid fa-pen ml-px-5"></i></span>
+          }
+        </button>
+
         <section id="profile">
           <div className="dashed-line">
-            <p className="mt-2">{user.profile}</p>
+            {
+              isEdit ?
+              <textarea defaultValue={user.profile} name="profile" id="profile-text-area"></textarea>
+              :
+              <p className="mt-2">{user.profile}</p>
+            }
           </div>
         </section>
 
@@ -71,43 +94,86 @@ const MyPage = () => {
             <dl>
               <dt>🏍</dt>
               <dd>バイク</dd>
+              {
+                isEdit &&
+                  <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>📷</dt>
               <dd>カメラ</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🎮</dt>
               <dd>ゲーム</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🎵</dt>
               <dd>音楽</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🍜</dt>
               <dd>ラーメン</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🏍</dt>
               <dd>バイク</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>📷</dt>
               <dd>カメラ</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🎮</dt>
               <dd>ゲーム</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
             <dl>
               <dt>🎵</dt>
               <dd>音楽</dd>
+              {
+                isEdit &&
+                <dd className="minus">-</dd>
+              }
             </dl>
-            <dl>
-              <dt>🍜</dt>
-              <dd>ラーメン</dd>
+            <dl className="border-none">
+              <dt className="plus">＋</dt>
             </dl>
+            {/*<dl>*/}
+            {/*  <dt>🍜</dt>*/}
+            {/*  <dd>ラーメン</dd>*/}
+            {/*  {*/}
+            {/*    isEdit &&*/}
+            {/*    <dd className="minus">-</dd>*/}
+            {/*  }*/}
+            {/*</dl>*/}
           </div>
         </section>
 

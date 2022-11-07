@@ -1039,9 +1039,34 @@ footer {
 }
 
 #mypage {
+  .button {
+    max-width: 100px;
+    text-align: center;
+    display: block;
+    @extend .mx-auto;
+    background: $button !important;
+    border: 1px solid $button;
+    padding: 5px 0;
+  }
+  .button-active {
+    @extend .button;
+    padding: 5px 0;
+    background: $error !important;
+    border: 1px solid $error;
+  }
+  .change-image {
+    display: block;
+    @extend .mx-auto,.mb-1;
+  }
   line-height: 200%;
   @include headerTopMargin();
   margin-top: 6rem;
+  max-width: 640px;
+  img {
+    max-width: 300px;
+    display: block;
+    @extend .mx-auto;
+  }
   .user-area {
     align-items: baseline;
     justify-content: center;
@@ -1067,6 +1092,13 @@ footer {
   #profile {
     .dashed-line {
       border-top: 1px dashed #b3b3b3;
+      textarea {
+        width: calc(100% - 2em);
+        min-height: 100px;
+        border: 1px solid #b3b3b3;
+        border-radius: 4px;
+        @extend .mt-2,.py-1,.px-1;
+      }
       p {
         font-size: $font-text;
         font-weight: 500;
@@ -1092,6 +1124,7 @@ footer {
       flex-wrap: wrap;
       justify-content: flex-start;
       dl {
+        position: relative;
         @extend .mb-1;
         padding: 5px 0;
         line-height: 150%;
@@ -1110,6 +1143,34 @@ footer {
             font-size: $font-sp-small;
           }
         }
+        .minus {
+          font-size: $font-text;
+          background: $error;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          line-height: 18px;
+          color: #fff;
+          position: absolute;
+          top: -10px;
+          right: -5px;
+        }
+        .plus {
+          font-size: $font-text;
+          background: $button;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+      .border-none {
+        border: none;
       }
     }
   }
