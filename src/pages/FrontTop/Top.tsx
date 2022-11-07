@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from "../../component/header/Header";
 import Image from "../../component/Image/Image";
 import CardSlider from "../../component/cardSlider";
@@ -25,6 +25,9 @@ const events3 = require("../../assets/img/img_event03.jpg")
 const events4 = require("../../assets/img/img_event04.jpg")
 
 const FrontTop = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    },[])
     return (
         <div className="App">
             <Header />

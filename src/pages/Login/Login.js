@@ -21,6 +21,7 @@ const Login = () => {
     const state = useSelector(state => state)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         return onAuthUIStateChange((nextAuthState, authData) => {
             setAuthState(nextAuthState);
             setUser(authData)

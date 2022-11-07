@@ -32,8 +32,6 @@ Amplify.configure(config);
 
 const App = () => {
     const state:any = useSelector(state => state)
-    const ref = document.referrer
-    console.log(ref)
     return (
         <BrowserRouter >
             <Switch>

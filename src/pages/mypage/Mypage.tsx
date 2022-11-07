@@ -21,6 +21,7 @@ const MyPage = () => {
   const [user, setUser] = useState(state.signInUser)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (isEmpty(state.signInUser)) {
       handleLogout()
     }

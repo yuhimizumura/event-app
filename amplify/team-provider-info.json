@@ -52,5 +52,23 @@
         "eventappe7f3677a": {}
       }
     }
+  },
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-eventapp-production-135124-authRole",
+      "UnauthRoleArn": "arn:aws:iam::469631579604:role/amplify-eventapp-production-135124-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::469631579604:role/amplify-eventapp-production-135124-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-eventapp-production-135124-deployment",
+      "UnauthRoleName": "amplify-eventapp-production-135124-unauthRole",
+      "StackName": "amplify-eventapp-production-135124",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:469631579604:stack/amplify-eventapp-production-135124/d5073b20-5e57-11ed-86fa-0a313e9dbcef",
+      "AmplifyAppId": "d1p4c81fxx2d14"
+    },
+    "categories": {
+      "auth": {
+        "eventappe7f3677a": {}
+      }
+    }
   }
 }
