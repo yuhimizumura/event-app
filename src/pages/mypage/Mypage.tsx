@@ -163,9 +163,13 @@ const MyPage = () => {
                 <dd className="minus">-</dd>
               }
             </dl>
-            <dl className="border-none">
-              <dt className="plus">＋</dt>
-            </dl>
+            {
+              isEdit &&
+                <dl className="border-none">
+                  <dt className="plus">＋</dt>
+                </dl>
+            }
+
             {/*<dl>*/}
             {/*  <dt>🍜</dt>*/}
             {/*  <dd>ラーメン</dd>*/}
@@ -182,7 +186,7 @@ const MyPage = () => {
           <ul className="event-area">
             <li>
               <p className="max">受付終了</p>
-              <p className="day">2021年12月01日</p>
+              <p className="day">2022年12月01日</p>
               <dl>
                 <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
                 <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>
@@ -191,7 +195,7 @@ const MyPage = () => {
               </dl>
             </li>
             <li>
-              <p className="day">2021年12月01日</p>
+              <p className="day">2022年11月15日</p>
               <dl>
                 <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
                 <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>
@@ -201,7 +205,7 @@ const MyPage = () => {
             </li>
             <li>
               <p className="limit"><span>満員</span><span>御礼</span></p>
-              <p className="day">2021年12月01日</p>
+              <p className="day">2022年11月11日</p>
               <dl>
                 <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
                 <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span className="limit-text">8/8人</span></dd>
@@ -211,7 +215,7 @@ const MyPage = () => {
             </li>
             <li>
               <p className="little"><span>残り</span><span>僅か</span></p>
-              <p className="day">2021年12月01日</p>
+              <p className="day">2022年11月7日</p>
               <dl>
                 <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
                 <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span className="little-text">6/8人</span></dd>
@@ -223,6 +227,7 @@ const MyPage = () => {
         </section>
 
 
+        <p>↓ログアウトボタン仮置き</p>
         <button className="logout-button" onClick={() => handleLogout()}>ログアウト</button>
 
 
