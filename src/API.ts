@@ -6,17 +6,11 @@ export type CreateTodoInput = {
   id?: string | null,
   name: string,
   description?: string | null,
-  hoge?: string | null,
-  aaaa?: string | null,
-  test?: string | null,
 };
 
 export type ModelTodoConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  hoge?: ModelStringInput | null,
-  aaaa?: ModelStringInput | null,
-  test?: ModelStringInput | null,
   and?: Array< ModelTodoConditionInput | null > | null,
   or?: Array< ModelTodoConditionInput | null > | null,
   not?: ModelTodoConditionInput | null,
@@ -64,23 +58,17 @@ export type ModelSizeInput = {
 
 export type Todo = {
   __typename: "Todo",
-  id?: string,
-  name?: string,
+  id: string,
+  name: string,
   description?: string | null,
-  hoge?: string | null,
-  aaaa?: string | null,
-  test?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateTodoInput = {
   id: string,
   name?: string | null,
   description?: string | null,
-  hoge?: string | null,
-  aaaa?: string | null,
-  test?: string | null,
 };
 
 export type DeleteTodoInput = {
@@ -117,7 +105,7 @@ export type ModelUserConditionInput = {
 
 export type User = {
   __typename: "User",
-  id?: string,
+  id: string,
   sei?: string | null,
   email?: string | null,
   gender?: string | null,
@@ -127,8 +115,8 @@ export type User = {
   sns_name?: string | null,
   pref?: string | null,
   profile?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateUserInput = {
@@ -152,9 +140,6 @@ export type ModelTodoFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
-  hoge?: ModelStringInput | null,
-  aaaa?: ModelStringInput | null,
-  test?: ModelStringInput | null,
   and?: Array< ModelTodoFilterInput | null > | null,
   or?: Array< ModelTodoFilterInput | null > | null,
   not?: ModelTodoFilterInput | null,
@@ -178,7 +163,7 @@ export type ModelIDInput = {
 
 export type ModelTodoConnection = {
   __typename: "ModelTodoConnection",
-  items?:  Array<Todo >,
+  items:  Array<Todo >,
   nextToken?: string | null,
 };
 
@@ -200,12 +185,12 @@ export type ModelUserFilterInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items?:  Array<User >,
+  items:  Array<User >,
   nextToken?: string | null,
 };
 
 export type CreateTodoMutationVariables = {
-  input?: CreateTodoInput,
+  input: CreateTodoInput,
   condition?: ModelTodoConditionInput | null,
 };
 
@@ -215,16 +200,13 @@ export type CreateTodoMutation = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type UpdateTodoMutationVariables = {
-  input?: UpdateTodoInput,
+  input: UpdateTodoInput,
   condition?: ModelTodoConditionInput | null,
 };
 
@@ -234,16 +216,13 @@ export type UpdateTodoMutation = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type DeleteTodoMutationVariables = {
-  input?: DeleteTodoInput,
+  input: DeleteTodoInput,
   condition?: ModelTodoConditionInput | null,
 };
 
@@ -253,16 +232,13 @@ export type DeleteTodoMutation = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type CreateUserMutationVariables = {
-  input?: CreateUserInput,
+  input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -285,7 +261,7 @@ export type CreateUserMutation = {
 };
 
 export type UpdateUserMutationVariables = {
-  input?: UpdateUserInput,
+  input: UpdateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -308,7 +284,7 @@ export type UpdateUserMutation = {
 };
 
 export type DeleteUserMutationVariables = {
-  input?: DeleteUserInput,
+  input: DeleteUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -331,7 +307,7 @@ export type DeleteUserMutation = {
 };
 
 export type GetTodoQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetTodoQuery = {
@@ -340,9 +316,6 @@ export type GetTodoQuery = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -362,9 +335,6 @@ export type ListTodosQuery = {
       id: string,
       name: string,
       description?: string | null,
-      hoge?: string | null,
-      aaaa?: string | null,
-      test?: string | null,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -373,7 +343,7 @@ export type ListTodosQuery = {
 };
 
 export type GetUserQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetUserQuery = {
@@ -428,9 +398,6 @@ export type OnCreateTodoSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -442,9 +409,6 @@ export type OnUpdateTodoSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -456,9 +420,6 @@ export type OnDeleteTodoSubscription = {
     id: string,
     name: string,
     description?: string | null,
-    hoge?: string | null,
-    aaaa?: string | null,
-    test?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

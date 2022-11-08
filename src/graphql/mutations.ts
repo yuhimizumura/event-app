@@ -11,9 +11,6 @@ export const createTodo = /* GraphQL */ `
       id
       name
       description
-      hoge
-      aaaa
-      test
       createdAt
       updatedAt
     }
@@ -28,9 +25,6 @@ export const updateTodo = /* GraphQL */ `
       id
       name
       description
-      hoge
-      aaaa
-      test
       createdAt
       updatedAt
     }
@@ -45,9 +39,6 @@ export const deleteTodo = /* GraphQL */ `
       id
       name
       description
-      hoge
-      aaaa
-      test
       createdAt
       updatedAt
     }

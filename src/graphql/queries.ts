@@ -8,9 +8,6 @@ export const getTodo = /* GraphQL */ `
       id
       name
       description
-      hoge
-      aaaa
-      test
       createdAt
       updatedAt
     }
@@ -27,9 +24,6 @@ export const listTodos = /* GraphQL */ `
         id
         name
         description
-        hoge
-        aaaa
-        test
         createdAt
         updatedAt
       }

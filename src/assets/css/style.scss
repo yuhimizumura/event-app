@@ -1047,12 +1047,14 @@ footer {
     background: $button !important;
     border: 1px solid $button;
     padding: 5px 0;
+    margin-bottom: 2em;
   }
   .button-active {
     @extend .button;
     padding: 5px 0;
     background: $error !important;
     border: 1px solid $error;
+    margin-bottom: 2em;
   }
   .change-image {
     display: block;
@@ -1074,6 +1076,18 @@ footer {
       font-size: $font-title;
       font-weight: 500;
       margin-right: 4px;
+      @include mq("sp") {
+        font-size: $font-sp-title;
+      }
+    }
+    input {
+      width: 100%;
+      padding: 5px;
+      max-width: 200px;
+      margin-right: 5px;
+      border-radius: 4px;
+      font-size: $font-title;
+      border: 1px solid #b3b3b3;
       @include mq("sp") {
         font-size: $font-sp-title;
       }

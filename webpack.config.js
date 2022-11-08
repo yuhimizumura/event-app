@@ -1,6 +1,7 @@
 const path = require('path');
 const outputPath = path.resolve(__dirname, 'dist');
 const Fiber = require('fibers')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     // モード値を production に設定すると最適化された状態で、
@@ -14,6 +15,7 @@ module.exports = {
         filename: 'main.js',
         path: outputPath
     },
+    performance: { hints: false },
     devServer: {
         historyApiFallback: true,
     },
@@ -65,9 +67,19 @@ module.exports = {
                         },
                     },
                 ],
-            }
+            },
         ],
     },
+    // plugins: [
+    //     new HtmlWebpackPlugin({
+    //         template: '/dist/index.html',
+    //         minify: {
+    //             removeComments: true,
+    //             collapseWhitespace: true,
+    //             removeAttributeQuotes: true
+    //         },
+    //     })
+    // ],
     // import 文で .ts ファイルを解決するため
     // これを定義しないと import 文で拡張子を書く必要が生まれる。
     // フロントエンドの開発では拡張子を省略することが多いので、
@@ -78,4 +90,5 @@ module.exports = {
             '.ts', '.js','jsx','.tsx','.css','.scss'
         ],
     },
+
 };

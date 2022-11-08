@@ -21,11 +21,19 @@ const Login = () => {
     const state = useSelector(state => state)
 
     useEffect(() => {
+
         window.scrollTo(0, 0)
+        if(authState === undefined) {
+          Auth.currentAuthenticatedUser().then(authData => {
+                setAuthState(AuthState.SignedIn);
+                setUser(authData);
+              });
+        }
+
         return onAuthUIStateChange((nextAuthState, authData) => {
+            // if (isEmpty(nextAuthState) || isEmpty(authData)) return
             setAuthState(nextAuthState);
             setUser(authData)
-            if (isEmpty(nextAuthState) || isEmpty(authData)) return
 
             const data = {
                 "nextAuthState":nextAuthState,
@@ -37,23 +45,24 @@ const Login = () => {
     }, []);
 
     useEffect(() => {
-        if (user === undefined) return
-        let fetchId = user.username
-        const res = fetchUser(fetchId)
-        res.then(data => {
-            dispatch(signInUserSet(data.data.getUser))
-            if (data.data.getUser !== null) {
-                history.push("/mypage")
-            } else {
-                const payload = {
-                    id: fetchId
+        if (user !== undefined) {
+            let fetchId = user.username
+            const res = fetchUser(fetchId)
+            res.then(data => {
+                dispatch(signInUserSet(data.data.getUser))
+                if (data.data.getUser !== null) {
+                    history.push("/mypage")
+                } else {
+                    const payload = {
+                        id: fetchId
+                    }
+                    dispatch(addUserSet(payload))
+                    console.log(state)
                 }
-                dispatch(addUserSet(payload))
-                console.log(state)
-            }
-        }).catch(error => {
-            console.log(error)
-        })
+            }).catch(error => {
+                console.log(error)
+            })
+        }
     },[user])
 
     const handleAdd = () => {
@@ -79,8 +88,8 @@ const Login = () => {
                             <p>下記ボタンより、会員登録を完了してください。</p>
                         </div>
                         <div className="d-flex mx-auto mt-3 between w-100 button-area">
-                            <button className="add-button" onClick={() => handleAdd()}>本会員登録へ進む</button>
-                            <button className="logout-button" onClick={() => handleLogout()}>ログアウト</button>
+                            <button type="button" className="add-button" onClick={() => handleAdd()}>本会員登録へ進む</button>
+                            <button type="button" className="logout-button" onClick={() => handleLogout()}>ログアウト</button>
                         </div>
                     </div>
                 </div>
@@ -91,13 +100,13 @@ const Login = () => {
             <AmplifySignUp slot="sign-up" formFields={[
                 {
                     type: "username",
-                    label: " ユーザ名(Email) *",
+                    label: " ユーザ名(Email)",
                     placeholder: "ユーザ名を入力してください。",
                     required: true,
                 },
                 {
                     type: "password",
-                    label: " パスワード *",
+                    label: " パスワード",
                     placeholder: "パスワードを入力してください。",
                     required: true,
                 },

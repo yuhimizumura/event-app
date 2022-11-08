@@ -1,0 +1,18 @@
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type User @model {
+  id: ID!
+  sei: String
+  email: String
+  gender: String
+  age: String
+  tel: String
+  sns: String
+  sns_name: String
+  pref: String
+  profile: String
+}

@@ -1,18 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import Header from "../../component/header/Header";
-import {AmplifyAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useHistory} from "react-router-dom"
 import Footer from "../../component/footer/Footer";
 import signInUserSet, {signInUserRemove} from "../../redux/actions/user";
 import {isEmpty} from "../../util/util";
 import addUserSet, {addUserRemove} from "../../redux/actions/add";
-import QRCode from "react-qr-code";
 import Image from "../../component/Image/Image";
 import {fetchUser} from "../../services/user";
-import {Auth} from "aws-amplify";
-
+import Amplify, {Storage,Auth} from "aws-amplify";
+import awsconfig from "../../aws-exports";
 const guest_icon = require("../../assets/img/mypage/icon_user_1.svg")
+import { S3Client, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
+
+const config = {
+  aws_project_region: awsconfig.aws_project_region,
+  aws_appsync_graphqlEndpoint: awsconfig.aws_appsync_graphqlEndpoint,
+  aws_appsync_region: awsconfig.aws_appsync_region,
+  aws_appsync_authenticationType: awsconfig.aws_appsync_authenticationType,
+  Auth: {
+    identityPoolId: awsconfig.aws_cognito_identity_pool_id,
+    region: awsconfig.aws_cognito_region,
+    identityPoolRegion: awsconfig.aws_cognito_region,
+    userPoolId: awsconfig.aws_user_pools_id,
+    userPoolWebClientId: awsconfig.aws_user_pools_web_client_id,
+  },
+  Storage: {
+    AWSS3: {
+      bucket: awsconfig.aws_user_files_s3_bucket, //REQUIRED -  Amazon S3 bucket name
+      region: awsconfig.aws_user_files_s3_bucket_region, //OPTIONAL -  Amazon service region
+    }
+  }
+};
+
+Amplify.configure(config);
 const MyPage = () => {
 
   const state: any = useSelector(state => state)
@@ -20,12 +41,32 @@ const MyPage = () => {
   const dispatch = useDispatch()
   const [user, setUser] = useState(state.signInUser)
   const [isEdit,setIsEdit] = useState(false)
+  const [image, setImage] = useState<File>()
+
+  const fetchS3Objects = async (bucket:any) => {
+    const currentCredentials = await Auth.currentCredentials()
+    const identityId = currentCredentials.identityId
+    Storage.list('private/', {
+      level: 'private',
+      identityId: identityId // the identityId of that user
+    })
+      .then(result => console.log(result))
+      .catch(err => console.log(err));
+  }
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
     if (isEmpty(state.signInUser)) {
       handleLogout()
     }
+
+    const r = fetchS3Objects(awsconfig.aws_user_files_s3_bucket)
+    r.then((data) => {
+      console.log(data)
+    }).catch((err) => {
+      console.log(err)
+    })
 
     // マイページに入ったら再度APIコール
     const res = fetchUser(state.signInUser.id)
@@ -36,10 +77,6 @@ const MyPage = () => {
       console.log(error)
     })
   }, [])
-
-  // useEffect(() => {
-  //   console.log(state.signInUser)
-  // },[state.signInUser])
 
 
   const handleLogout = () => {
@@ -54,6 +91,41 @@ const MyPage = () => {
       setIsEdit(!edit)
   }
 
+  const handleImageChange = async (e:ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const img: File = e.target.files[0]
+        setImage(img)
+    }
+  }
+
+  const handleSave = async () => {
+
+    if (image === undefined) return
+    //
+
+    // const currentCredentials = await Auth.currentCredentials()
+    // const identityId = currentCredentials.identityId
+
+    // Storage.configure({
+    //   region: awsconfig.aws_user_files_s3_bucket_region,
+    //   bucket: awsconfig.aws_user_files_s3_bucket,
+    //   identityPoolId: awsconfig.aws_cognito_identity_pool_id,
+    //   level: "private",
+    // });
+
+    console.log("upload...")
+
+    Storage.put(image.name, image,{
+      level: 'private',
+      contentType: image.type
+    })
+      .then (result => {
+        console.log(result)
+      }).catch(err => {
+        console.log(err)
+    });
+  }
+
   return (
     <div className="App">
       <Header/>
@@ -61,17 +133,28 @@ const MyPage = () => {
         <Image path={guest_icon}/>
         {
           isEdit &&
-          <input className="change-image" type="file"/>
+          <input
+              className="change-image"
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => handleImageChange(e)}
+          />
         }
         <div className="d-flex text-end user-area mb-1">
-          <h2>{user.sei}</h2>
+          {
+            isEdit ?
+              <input type="text" defaultValue={user.sei}/>
+              :
+              <h2>{user.sei}</h2>
+          }
           <p><i className="fa-solid fa-map-pin mr-px-4"></i>{user.pref}</p>
         </div>
 
         <button className={isEdit ? "button-active" : "button"} onClick={() => handleEdit(isEdit)}>
           {
             isEdit ?
-                <span>保存<i className="fa-solid fa-pen ml-px-5"></i></span>
+                <span>保存<i className="fa-solid fa-pen ml-px-5" onClick={() => handleSave()}></i></span>
                 :
                 <span>編集<i className="fa-solid fa-pen ml-px-5"></i></span>
           }

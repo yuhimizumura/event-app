@@ -25,6 +25,12 @@ const config = {
         userPoolId: awsconfig.aws_user_pools_id,
         userPoolWebClientId: awsconfig.aws_user_pools_web_client_id,
     },
+    Storage: {
+        AWSS3: {
+            bucket: awsconfig.aws_user_files_s3_bucket,
+            region: awsconfig.aws_user_files_s3_bucket_region
+        }
+    }
 };
 
 Amplify.configure(config);
