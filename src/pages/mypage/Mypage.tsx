@@ -46,14 +46,17 @@ const MyPage = () => {
   const fetchS3Objects = async (bucket:any) => {
     const currentCredentials = await Auth.currentCredentials()
     const identityId = currentCredentials.identityId
-    Storage.list('private/', {
+    Storage.list('', {
       level: 'private',
       identityId: identityId // the identityId of that user
     })
-      .then(result => console.log(result))
-      .catch(err => console.log(err));
+      .then(
+        result => console.log(result)
+      )
+      .catch(
+        err => console.log(err)
+      );
   }
-
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -61,12 +64,7 @@ const MyPage = () => {
       handleLogout()
     }
 
-    const r = fetchS3Objects(awsconfig.aws_user_files_s3_bucket)
-    r.then((data) => {
-      console.log(data)
-    }).catch((err) => {
-      console.log(err)
-    })
+   fetchS3Objects(awsconfig.aws_user_files_s3_bucket)
 
     // マイページに入ったら再度APIコール
     const res = fetchUser(state.signInUser.id)
