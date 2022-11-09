@@ -1,4 +1,8 @@
-import {Auth} from "aws-amplify";
+import {Auth, Storage} from "aws-amplify";
+import {useDispatch} from "react-redux";
+import {addUserRemove} from "../redux/actions/add";
+import {signInUserRemove} from "../redux/actions/user";
+import {useHistory} from "react-router-dom";
 
 export const isEmpty = (obj:any) => {
     if (obj === null || obj === undefined) {
@@ -138,4 +142,75 @@ export const ageList = {
         {"code": 8, "name": "それ以上"},
         {"code": 9, "name": "未回答"},
         ]
+}
+
+export const categoryData = [
+    {
+        key: '1',
+        name: '車',
+        icon: 'fa-solid fa-car'
+    },
+    {
+        key: '2',
+        name: 'バイク',
+        icon: 'fa-solid fa-motorcycle'
+    },
+    {
+        key: '3',
+        name: '自転車',
+        icon: 'fa-solid fa-bicycle'
+    },
+    {
+        key: '4',
+        name: 'アウトドア',
+        icon: 'fa-solid fa-campground'
+    },
+    {
+        key: '5',
+        name: '音楽',
+        icon: 'fa-solid fa-music'
+    },
+    {
+        key: '6',
+        name: 'カメラ',
+        icon: 'fa-solid fa-camera'
+    },
+    {
+        key: '7',
+        name: '食べ物',
+        icon: 'fa-solid fa-utensils'
+    },
+    {
+        key: '8',
+        name: 'アニメ',
+        icon: 'fa-solid fa-tv'
+    },
+    {
+        key: '9',
+        name: '旅行',
+        icon: 'fa-solid fa-person-walking-luggage'
+    },
+    {
+        key: '10',
+        name: 'その他',
+        icon: 'fa-solid fa-alien-8bit'
+    },
+]
+
+
+export const fetchS3Objects = async () => {
+    const currentCredentials = await Auth.currentCredentials()
+    const identityId = currentCredentials.identityId
+    return Storage.list('', {
+        level: 'private',
+        identityId: identityId // the identityId of that user
+    })
+        .then(
+            result => {
+                return result
+            }
+        )
+        .catch(
+            err => console.log(err)
+        );
 }

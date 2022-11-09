@@ -44,8 +44,10 @@ export const getUser = /* GraphQL */ `
       sns_name
       pref
       profile
+      category
       createdAt
       updatedAt
+      category
     }
   }
 `;
@@ -67,6 +69,7 @@ export const listUsers = /* GraphQL */ `
         sns_name
         pref
         profile
+        category
         createdAt
         updatedAt
       }

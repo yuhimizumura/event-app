@@ -15,4 +15,5 @@ type User @model {
   sns_name: String
   pref: String
   profile: String
+  category: String
 }
