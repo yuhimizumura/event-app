@@ -1,18 +1,19 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import Header from "../../component/header/Header";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import Footer from "../../component/footer/Footer";
 import signInUserSet, {signInUserRemove} from "../../redux/actions/user";
 import {categoryData, fetchS3Objects, isEmpty, prefList} from "../../util/util";
-import addUserSet, {addUserRemove} from "../../redux/actions/add";
+import {addUserRemove} from "../../redux/actions/add";
 import Image from "../../component/Image/Image";
 import {fetchUser, upUser} from "../../services/user";
 import Amplify, {Storage, Auth} from "aws-amplify";
 import awsconfig from "../../aws-exports";
 
 const guest_icon = require("../../assets/img/mypage/icon_user_1.svg")
-import {S3Client, HeadObjectCommand, ListObjectsV2Command} from '@aws-sdk/client-s3'
+
+import { S3Client, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -43,7 +44,6 @@ type category = {
 }
 
 const MyPage = () => {
-
     const state: any = useSelector(state => state)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -55,6 +55,38 @@ const MyPage = () => {
     const [name, setName] = useState<string>('')
     const [profile, setProfile] = useState<string>('')
 
+    const fetchS3Objects2 = async (bucket:string) => {
+        // try {
+            // const s3client = new S3Client({
+            //     region: awsconfig.aws_user_files_s3_bucket_region,
+            //     credentials: await Auth.currentCredentials()
+            // })
+            // const output = await s3client.send(
+            //     new ListObjectsV2Command({
+            //         Bucket: bucket
+            //     })
+            // )
+            // console.log(output)
+            // if (!output.Contents) return []
+            //
+            // const heads = []
+            // for (let i =0; i < output.Contents.length; i++) {
+            //     const c = output.Contents[i]
+            //     const head:any = await s3client.send(
+            //         new HeadObjectCommand({
+            //             Bucket: bucket,
+            //             Key: c.Key
+            //         })
+            //     )
+            //     heads.push({ foo: decodeURIComponent(head.Metadata.foo) })
+            // }
+            // return heads
+        // } catch (err) {
+        //     console.error(err)
+        // }
+    }
+
+
     useEffect(() => {
         // ログイン情報がなければログアウト
         if (isEmpty(state.signInUser)) {
@@ -65,12 +97,13 @@ const MyPage = () => {
         window.scrollTo(0, 0)
 
         // アイコン画像読み込み
-        const img = fetchS3Objects()
-        img.then((data) => {
-            console.log(data)
-        }).catch((err) => {
-            console.log(err)
-        })
+        fetchS3Objects2("ああああ.jpeg")
+        // img.then((data:any) => {
+        //     console.log(data[0])
+        //     setImage(data[0])
+        // }).catch((err) => {
+        //     console.log(err)
+        // })
 
         // マイページに入ったら再度APIコール
         const res = fetchUser(state.signInUser.id)
@@ -123,7 +156,7 @@ const MyPage = () => {
         // 画像アップロード処理
         if (image !== undefined) {
             Storage.put(image.name, image, {
-                level: 'private',
+                level: 'public',
                 contentType: image.type
             }).then(result => {
                 console.log(result)
@@ -225,11 +258,15 @@ const MyPage = () => {
         setProfile(e.target.value)
     }
 
+    // const imgPath = `https://eventappb633564a57ed4160b1452ab4919b316a14441-dev.s3.ap-northeast-1.amazonaws.com/public/%E3%81%82%E3%81%82%E3%81%82%E3%81%82.jpeg`
+
     return (
         <div className="App">
             <Header/>
             <div id="mypage" className="wrap">
-                <Image path={guest_icon}/>
+                {/*<Image path={guest_icon}/>*/}
+                {/*<img src={`data:image/jpeg;base64,${image}`} style={{ width: '300px' }}/>*/}
+                {/*<img src={imgPath} />*/}
                 {
                     isEdit &&
                     <input

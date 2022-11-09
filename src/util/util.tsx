@@ -202,7 +202,7 @@ export const fetchS3Objects = async () => {
     const currentCredentials = await Auth.currentCredentials()
     const identityId = currentCredentials.identityId
     return Storage.list('', {
-        level: 'private',
+        level: 'public',
         identityId: identityId // the identityId of that user
     })
         .then(
