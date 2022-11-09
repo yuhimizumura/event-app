@@ -54,6 +54,7 @@ const MyPage = () => {
     const [pref, setPref] = useState<string>('')
     const [name, setName] = useState<string>('')
     const [profile, setProfile] = useState<string>('')
+    const [imageName,setImageName] = useState<string>('')
 
     const fetchS3Objects2 = async (bucket:string) => {
         // try {
@@ -97,13 +98,13 @@ const MyPage = () => {
         window.scrollTo(0, 0)
 
         // アイコン画像読み込み
-        fetchS3Objects2("ああああ.jpeg")
-        // img.then((data:any) => {
-        //     console.log(data[0])
-        //     setImage(data[0])
-        // }).catch((err) => {
-        //     console.log(err)
-        // })
+        Storage.get('ああああ.jpeg', {
+            level: 'public'
+        }).then(result => {
+            setImageName(result)
+        }).catch(err => {
+            console.log(err)
+        });
 
         // マイページに入ったら再度APIコール
         const res = fetchUser(state.signInUser.id)
@@ -266,7 +267,7 @@ const MyPage = () => {
             <div id="mypage" className="wrap">
                 {/*<Image path={guest_icon}/>*/}
                 {/*<img src={`data:image/jpeg;base64,${image}`} style={{ width: '300px' }}/>*/}
-                {/*<img src={imgPath} />*/}
+                <img src={imageName} />
                 {
                     isEdit &&
                     <input
