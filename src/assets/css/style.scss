@@ -1391,6 +1391,8 @@ footer {
   img {
     max-width: 300px;
     display: block;
+    height: 300px;
+    border-radius: 50%;
     @extend .mx-auto;
   }
 
@@ -1479,7 +1481,7 @@ footer {
         width: calc(20% - 10px);
         min-width: 45px;
         text-align: center;
-        margin-right: 10px;
+        margin-right: 5px;
       }
 
       .plus {
@@ -1504,7 +1506,7 @@ footer {
         line-height: 150%;
         border: 1px solid $black;
         border-radius: 4px;
-        width: calc(20% - 10px);
+        width: calc(20% - 11px);
         min-width: 45px;
         text-align: center;
         margin-right: 10px;

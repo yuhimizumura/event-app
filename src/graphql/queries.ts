@@ -45,9 +45,9 @@ export const getUser = /* GraphQL */ `
       pref
       profile
       category
+      image_type
       createdAt
       updatedAt
-      category
     }
   }
 `;
@@ -70,6 +70,7 @@ export const listUsers = /* GraphQL */ `
         pref
         profile
         category
+        image_type
         createdAt
         updatedAt
       }

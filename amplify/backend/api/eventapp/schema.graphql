@@ -16,4 +16,5 @@ type User @model {
   pref: String
   profile: String
   category: String
+  image_type:String
 }

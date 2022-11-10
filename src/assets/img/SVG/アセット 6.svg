@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.32 62.42">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke: #231815;
+        stroke-width: 2.31px;
+      }
+
+      .cls-3 {
+        letter-spacing: -.32em;
+      }
+
+      .cls-4 {
+        fill: #231815;
+        font-family: TA-F1blockline-83pv-RKSJ-H, TA-F1blockline;
+        font-size: 7.19px;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <g id="_レイヤー_1-2" data-name="レイヤー 1">
+    <g>
+      <g>
+        <rect class="cls-1" x="1.16" y="15.17" width="79.01" height="46.09" rx="4.63" ry="4.63"/>
+        <path class="cls-2" d="M55.57,49.89c-.56,.21-1.14,.38-1.74,.51-.89,.2-1.82,.3-2.77,.3-7.09,0-12.84-5.75-12.84-12.84s5.75-12.84,12.84-12.84,12.84,5.75,12.84,12.84c0,1.01-.12,1.99-.34,2.93"/>
+        <circle class="cls-1" cx="51.07" cy="37.85" r="18.97"/>
+        <path class="cls-1" d="M23.75,15.17l-1.53,3.57c-.5,1.17-1.95,2.13-3.22,2.13H10.79c-1.27,0-2.77-.94-3.32-2.08l-1.75-3.61"/>
+        <line class="cls-2" x1="8.48" y1="20.24" x2="8.48" y2="56.2"/>
+        <line class="cls-2" x1="21.32" y1="20.24" x2="21.32" y2="47.51"/>
+        <line class="cls-2" x1="21.32" y1="51.8" x2="21.32" y2="61.26"/>
+        <path class="cls-2" d="M35.26,15.17l4.16-11.83c.42-1.2,1.81-2.18,3.08-2.18h22.2c1.27,0,2.68,.97,3.13,2.16l4.48,11.85"/>
+        <path class="cls-2" d="M16,15.17l1.17-3.73c.38-1.21,1.74-2.21,3.01-2.21h5.53c1.27,0,2.65,.99,3.05,2.19l1.26,3.74"/>
+        <path class="cls-2" d="M62.26,44.15c-.45,.8-.98,1.54-1.59,2.22s-1.33,1.34-2.09,1.89"/>
+      </g>
+      <text class="cls-4" transform="translate(43.1 33.87) rotate(16.07)"><tspan class="cls-5"><tspan x="0" y="0">いべ</tspan></tspan><tspan class="cls-5" x="0" y="7.79">こ</tspan><tspan class="cls-3" x="7.21" y="7.79">ね！</tspan></text>
+    </g>
+  </g>
+</svg>

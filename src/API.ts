@@ -87,6 +87,7 @@ export type CreateUserInput = {
   pref?: string | null,
   profile?: string | null,
   category?: string | null,
+  image_type?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -100,6 +101,7 @@ export type ModelUserConditionInput = {
   pref?: ModelStringInput | null,
   profile?: ModelStringInput | null,
   category?: ModelStringInput | null,
+  image_type?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -118,6 +120,7 @@ export type User = {
   pref?: string | null,
   profile?: string | null,
   category?: string | null,
+  image_type?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -134,6 +137,7 @@ export type UpdateUserInput = {
   pref?: string | null,
   profile?: string | null,
   category?: string | null,
+  image_type?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -183,6 +187,7 @@ export type ModelUserFilterInput = {
   pref?: ModelStringInput | null,
   profile?: ModelStringInput | null,
   category?: ModelStringInput | null,
+  image_type?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -261,6 +266,7 @@ export type CreateUserMutation = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -285,6 +291,7 @@ export type UpdateUserMutation = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -309,6 +316,7 @@ export type DeleteUserMutation = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -368,6 +376,7 @@ export type GetUserQuery = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -395,6 +404,7 @@ export type ListUsersQuery = {
       pref?: string | null,
       profile?: string | null,
       category?: string | null,
+      image_type?: string | null,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -449,6 +459,7 @@ export type OnCreateUserSubscription = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -468,6 +479,7 @@ export type OnUpdateUserSubscription = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -487,6 +499,7 @@ export type OnDeleteUserSubscription = {
     pref?: string | null,
     profile?: string | null,
     category?: string | null,
+    image_type?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

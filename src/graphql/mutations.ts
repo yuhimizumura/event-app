@@ -61,6 +61,7 @@ export const createUser = /* GraphQL */ `
       pref
       profile
       category
+      image_type
       createdAt
       updatedAt
     }
@@ -83,6 +84,7 @@ export const updateUser = /* GraphQL */ `
       pref
       profile
       category
+      image_type
       createdAt
       updatedAt
     }
@@ -105,6 +107,7 @@ export const deleteUser = /* GraphQL */ `
       pref
       profile
       category
+      image_type
       createdAt
       updatedAt
     }

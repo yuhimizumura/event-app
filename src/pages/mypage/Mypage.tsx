@@ -56,39 +56,8 @@ const MyPage = () => {
     const [profile, setProfile] = useState<string>('')
     const [imageName,setImageName] = useState<string>('')
 
-    const fetchS3Objects2 = async (bucket:string) => {
-        // try {
-            // const s3client = new S3Client({
-            //     region: awsconfig.aws_user_files_s3_bucket_region,
-            //     credentials: await Auth.currentCredentials()
-            // })
-            // const output = await s3client.send(
-            //     new ListObjectsV2Command({
-            //         Bucket: bucket
-            //     })
-            // )
-            // console.log(output)
-            // if (!output.Contents) return []
-            //
-            // const heads = []
-            // for (let i =0; i < output.Contents.length; i++) {
-            //     const c = output.Contents[i]
-            //     const head:any = await s3client.send(
-            //         new HeadObjectCommand({
-            //             Bucket: bucket,
-            //             Key: c.Key
-            //         })
-            //     )
-            //     heads.push({ foo: decodeURIComponent(head.Metadata.foo) })
-            // }
-            // return heads
-        // } catch (err) {
-        //     console.error(err)
-        // }
-    }
-
-
     useEffect(() => {
+        let isMounted = true;
         // ログイン情報がなければログアウト
         if (isEmpty(state.signInUser)) {
             handleLogout()
@@ -97,30 +66,48 @@ const MyPage = () => {
         // ページトップへ遷移しておく
         window.scrollTo(0, 0)
 
+        // マイページに入ったら再度APIコール
+        const res = fetchUser(state.signInUser.id)
+        res.then((data: any) => {
+            updateUsers(data.data.getUser)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        return () => {
+            console.log("...unmounted")
+            isMounted = false;
+        };
+    }, [])
+
+    /**
+     * ユーザState更新
+     *
+     */
+    const updateUsers = (user:any) => {
+        console.log("getUser:",user)
+        dispatch(signInUserSet(user))
+
+        setCategory(user.category !== null ? user.category.split(',') : [])
+        setPref(user.pref)
+        setName(user.sei)
+        setProfile(user.profile)
+        setId(user.id)
+
+        let iconName = 'icon_user_1.svg'
+        if (user.image_type !== undefined && user.image_type !== "") {
+            iconName = `${user.id}.jpeg`
+        }
+
         // アイコン画像読み込み
-        Storage.get('ああああ.jpeg', {
+        Storage.get(iconName, {
             level: 'public'
         }).then(result => {
             setImageName(result)
         }).catch(err => {
             console.log(err)
         });
-
-        // マイページに入ったら再度APIコール
-        const res = fetchUser(state.signInUser.id)
-        res.then((data: any) => {
-            dispatch(signInUserSet(data.data.getUser))
-            const user = data.data.getUser
-            console.log(user)
-            setCategory(user.category !== null ? user.category.split(',') : [])
-            setPref(user.pref)
-            setName(user.sei)
-            setProfile(user.profile)
-            setId(user.id)
-        }).catch((error) => {
-            console.log(error)
-        })
-    }, [])
+    }
 
 
     /**
@@ -146,6 +133,7 @@ const MyPage = () => {
      * @param {ChangeEvent<HTMLInputElement>} e 画像オブジェクト
      */
     const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        console.log("change Image...")
         if (e.target.files !== null) {
             const img: File = e.target.files[0]
             setImage(img)
@@ -154,13 +142,21 @@ const MyPage = () => {
 
     const handleSave = async () => {
         console.log("upload...")
+
         // 画像アップロード処理
         if (image !== undefined) {
-            Storage.put(image.name, image, {
+            Storage.put(`${id}.jpeg`, image, {
                 level: 'public',
-                contentType: image.type
+                contentType: 'jpeg'
             }).then(result => {
-                console.log(result)
+                Storage.get(result.key, {
+                    level: 'public'
+                }).then(result => {
+                    console.log(result)
+                    setImageName(result)
+                }).catch(err => {
+                    console.log(err)
+                });
             }).catch(err => {
                 console.log(err)
             });
@@ -172,16 +168,19 @@ const MyPage = () => {
             sei: name,
             profile: profile,
             pref: pref,
-            category: category.toString()
+            category: category.toString(),
+            image_type: image?.type
         }
 
         // データ更新
         const res = upUser(payload)
-        res.then((data) => {
-            console.log(data)
+        res.then((data:any) => {
+            updateUsers(data.data.updateUser)
         }).catch((err) => {
             console.log(err)
         })
+
+        setIsEdit(!isEdit)
 
     }
 
@@ -265,20 +264,18 @@ const MyPage = () => {
         <div className="App">
             <Header/>
             <div id="mypage" className="wrap">
-                {/*<Image path={guest_icon}/>*/}
-                {/*<img src={`data:image/jpeg;base64,${image}`} style={{ width: '300px' }}/>*/}
                 <img src={imageName} />
                 {
                     isEdit &&
                     <input
-                        className="change-image"
+                        className="change-image mt-1"
                         type="file"
                         accept="image/*"
                         multiple
                         onChange={(e) => handleImageChange(e)}
                     />
                 }
-                <div className="d-flex text-end user-area mb-1">
+                <div className="d-flex text-end user-area mt-1 mb-1">
                     {
                         isEdit ?
                             <input type="text" defaultValue={name} onChange={(e) => handleChangeName(e)}/>
@@ -301,10 +298,10 @@ const MyPage = () => {
                     }
                 </div>
 
-                <button className={isEdit ? "button-active" : "button"} onClick={() => handleEdit(isEdit)}>
+                <button className={isEdit ? "button-active" : "button"} onClick={() => handleSave()}>
                     {
                         isEdit ?
-                            <span>保存<i className="fa-solid fa-pen ml-px-5" onClick={() => handleSave()}></i></span>
+                            <span>保存<i className="fa-solid fa-pen ml-px-5" ></i></span>
                             :
                             <span>編集<i className="fa-solid fa-pen ml-px-5"></i></span>
                     }
@@ -342,7 +339,7 @@ const MyPage = () => {
                         }
                         { //カテゴリ増やすボタン
                             isEdit && category.length < 10 &&
-                            <a href="#modal" className="plus-modal border-none modal-button">
+                            <a href="#modal" className={`plus-modal border-none modal-button ${category.length === 5 ? "mt-1" :''}`}>
                                 <span className="plus">＋</span>
                             </a>
                         }
@@ -357,8 +354,8 @@ const MyPage = () => {
                                             categoryData.map((val: category) => {
                                                 return (
                                                     <div key={val.key}>
-                                                        <label htmlFor="category" className="category-line">
-                                                            <input onChange={(e) => handleChangeCategory(e)}
+                                                        <label htmlFor={`category${val.key}`} className="category-line">
+                                                            <input id={`category${val.key}`} onChange={(e) => handleChangeCategory(e)}
                                                                    type="checkbox" defaultValue={val.key}
                                                                    checked={category.indexOf(val.key) !== -1}/>
                                                             <span className="ml-px-5 category-label">{val.name}</span>

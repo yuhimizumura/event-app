@@ -193,7 +193,7 @@ export const categoryData = [
     {
         key: '10',
         name: 'その他',
-        icon: 'fa-solid fa-alien-8bit'
+        icon: 'fa-solid fa-question'
     },
 ]
 
