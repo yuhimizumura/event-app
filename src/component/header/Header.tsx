@@ -64,9 +64,9 @@ const HeaderSpMenu = (props:Props) => {
                     <Link to="/search">
                         <i className="fa-solid fa-magnifying-glass fa-lg"></i>
                     </Link>
-                    <a href={link}>
+                    <Link to={link}>
                         <i className="fa-solid fa-user fa-lg"></i>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>

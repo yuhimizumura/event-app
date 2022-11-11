@@ -74,7 +74,7 @@ const AddThanks = () => {
   return (
     <div className="App">
       <Header />
-        <div id="add-user-area">
+        <div id="add-user-area" className="thanks">
           <div className="wrap">
             <div className="center">
               <h2>本会員登録ありがとうございます。</h2>

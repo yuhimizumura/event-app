@@ -1,8 +1,5 @@
 import {Auth, Storage} from "aws-amplify";
-import {useDispatch} from "react-redux";
-import {addUserRemove} from "../redux/actions/add";
-import {signInUserRemove} from "../redux/actions/user";
-import {useHistory} from "react-router-dom";
+import {ageListModel, categoryListModel, prefListModel} from "../model/util/UtilModel";
 
 export const isEmpty = (obj:any) => {
     if (obj === null || obj === undefined) {
@@ -79,7 +76,17 @@ export const getUserInfo = async (key:string) => {
     return await res
 }
 
-export const prefList = {
+/**
+ * 全角数字を半角数字へ変更する
+ * @param {string} str 番号
+ */
+export const changeFormatNumber = (str:string) => {
+    return str.replace(/[０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+}
+
+export const prefList:prefListModel = {
     "pref": [
         {"code": 1, "name": "北海道"},
         {"code": 2, "name": "青森県"},
@@ -130,7 +137,7 @@ export const prefList = {
         {"code": 47, "name": "沖縄県"}]
 }
 
-export const ageList = {
+export const ageList:ageListModel = {
     "age": [
         {"code": 1, "name": "10代"},
         {"code": 2, "name": "20代"},
@@ -144,7 +151,7 @@ export const ageList = {
         ]
 }
 
-export const categoryData = [
+export const categoryData:categoryListModel = [
     {
         key: '1',
         name: '車',

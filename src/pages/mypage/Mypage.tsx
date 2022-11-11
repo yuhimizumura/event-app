@@ -80,6 +80,10 @@ const MyPage = () => {
         };
     }, [])
 
+    useEffect(() => {
+        // window.location.reload()
+    },[imageName])
+
     /**
      * ユーザState更新
      *
@@ -88,14 +92,19 @@ const MyPage = () => {
         console.log("getUser:",user)
         dispatch(signInUserSet(user))
 
-        setCategory(user.category !== null ? user.category.split(',') : [])
+
+        if (user.category !== null && user.category !== "" && user.category !== undefined) {
+            setCategory(user.category.split(','))
+        } else {
+            setCategory([])
+        }
         setPref(user.pref)
         setName(user.sei)
         setProfile(user.profile)
         setId(user.id)
 
         let iconName = 'icon_user_1.svg'
-        if (user.image_type !== undefined && user.image_type !== "") {
+        if (user.image_type !== undefined && user.image_type !== "" && user.image_type !== null) {
             iconName = `${user.id}.jpeg`
         }
 
@@ -103,6 +112,7 @@ const MyPage = () => {
         Storage.get(iconName, {
             level: 'public'
         }).then(result => {
+            console.log("image:",result)
             setImageName(result)
         }).catch(err => {
             console.log(err)
@@ -196,6 +206,10 @@ const MyPage = () => {
                 return val
             }
         })
+
+        if (isEmpty(tmp)) {
+            return ""
+        }
 
         if (type === "name") {
             return tmp[0].name

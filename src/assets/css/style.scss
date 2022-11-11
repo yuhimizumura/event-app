@@ -88,14 +88,20 @@ ul {
 
 .dispSp {
   @include mq("pc") {
-    display: none;
+    display: none !important;
   }
 }
 
 .dispPc {
   @include mq("sp") {
-    display: none;
+    display: none !important;
   }
+}
+
+.d-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .button {
@@ -249,11 +255,10 @@ ul {
   background: rgba(255, 255, 255, 0.7);
 
   .sp-header {
-    @extend .d-flex;
+    @extend .d-flex-row;
     @extend .text-center;
     width: calc(100% - 75px);
     margin-left: 60px;
-
     .icons {
       margin-left: auto;
 
@@ -420,6 +425,47 @@ ul {
     font-size: $font-middle;
     @include mq("sp") {
       font-size: $font-sp-middle;
+    }
+  }
+}
+
+#spMenuBar {
+  @extend .d-flex-row;
+  background: $dark;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: $white;
+  stroke: $white;
+  z-index: 9999999999999999999999;
+  padding: 5px 0;
+  .wrap {
+    width: 95%;
+    @extend .mx-auto;
+    @extend .d-flex-row;
+    li {
+      padding: 5px 0;
+      width: 20%;
+      &:nth-of-type(3){
+        background: $button;
+        border-radius: 60px;
+      }
+      white-space: nowrap;
+      i {
+        height: 16px;
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+      span {
+        font-size: $font-sp-small;
+        display: block;
+        text-align: center;
+      }
     }
   }
 }
@@ -970,6 +1016,24 @@ footer {
     border: 1px solid $gray-button-hover;
     border-radius: 4px;
     padding-left: 5px;
+    transform: scale(1.0);
+  }
+
+  .radio {
+    @extend .ml-px-10;
+  }
+
+  .radio-label {
+    @include mq("pc") {
+      &:nth-of-type(n+2) {
+        margin-left: 1rem;
+      }
+    }
+    @include mq("sp") {
+      &:nth-of-type(n+2) {
+        margin-top: 0.5rem;
+      }
+    }
   }
 
   select {
@@ -1013,13 +1077,7 @@ footer {
   }
 
   .g-4 {
-    width: calc(100% / 4) - 10%;
-  }
-
-  .d-flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    width: calc(25% - 10px);
   }
 
   .required {
@@ -1105,12 +1163,6 @@ footer {
     justify-content: space-between;
   }
 
-  .d-flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-
   .button-area {
     max-width: 600px;
     @include mq("sp") {
@@ -1135,8 +1187,11 @@ footer {
   @include headerTopMargin();
   margin-top: 6rem;
   //height: calc(100vh - 440px - 91px);
-  @include mq("pc") {
-    height: calc(100vh - 440px - 91px);
+
+  &.thanks {
+    @include mq("pc") {
+      height: calc(100vh - 440px - 91px);
+    }
   }
 
   .d-block {
@@ -1157,6 +1212,15 @@ footer {
       font-size: $font-sp-text;
     }
     line-height: 200%;
+  }
+
+  .radio {
+    transform: scale(1.5);
+  }
+
+  .radio-label {
+    align-items: center;
+    display: flex;
   }
 
   h2 {
@@ -1184,12 +1248,6 @@ footer {
 
   .between {
     justify-content: space-between;
-  }
-
-  .d-flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
   }
 
   .button-area {

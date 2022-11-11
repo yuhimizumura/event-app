@@ -5,6 +5,7 @@ import CardSlider from "../../component/cardSlider";
 import MovieSlider from "../../component/movieSlider";
 import Footer from "../../component/footer/Footer";
 import {useSelector} from "react-redux";
+import SpMenuBar from "../../component/spMenuBar/SpMenuBar";
 
 const twitter =  require("../../assets/img/img_icon01.svg")
 const instagram =  require("../../assets/img/img_icon02.svg")
@@ -29,7 +30,7 @@ const FrontTop = () => {
         window.scrollTo(0, 0)
     },[])
     return (
-        <div className="App">
+        <div id="Top" className="App">
             <Header />
             <div id="slider-wrap">
                 <CardSlider />
