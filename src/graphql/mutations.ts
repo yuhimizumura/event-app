@@ -113,3 +113,105 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
+export const createEventMaster = /* GraphQL */ `
+  mutation CreateEventMaster(
+    $input: CreateEventMasterInput!
+    $condition: ModelEventMasterConditionInput
+  ) {
+    createEventMaster(input: $input, condition: $condition) {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEventMaster = /* GraphQL */ `
+  mutation UpdateEventMaster(
+    $input: UpdateEventMasterInput!
+    $condition: ModelEventMasterConditionInput
+  ) {
+    updateEventMaster(input: $input, condition: $condition) {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEventMaster = /* GraphQL */ `
+  mutation DeleteEventMaster(
+    $input: DeleteEventMasterInput!
+    $condition: ModelEventMasterConditionInput
+  ) {
+    deleteEventMaster(input: $input, condition: $condition) {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEvent = /* GraphQL */ `
+  mutation CreateEvent(
+    $input: CreateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    createEvent(input: $input, condition: $condition) {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEvent = /* GraphQL */ `
+  mutation UpdateEvent(
+    $input: UpdateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    updateEvent(input: $input, condition: $condition) {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEvent = /* GraphQL */ `
+  mutation DeleteEvent(
+    $input: DeleteEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    deleteEvent(input: $input, condition: $condition) {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;

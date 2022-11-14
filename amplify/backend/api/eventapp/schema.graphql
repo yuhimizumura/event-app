@@ -18,3 +18,20 @@ type User @model {
   category: String
   image_type:String
 }
+
+type EventMaster @model {
+  id: String
+  dateTime: String
+  name: String
+  members: String
+  venue: String
+  rule: String
+  detail:String
+  owner:String
+  isActive:String
+}
+
+type Event @model @key(fields: ["user_id"]) {
+  user_id: ID
+  event_id: String
+}

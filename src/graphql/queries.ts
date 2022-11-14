@@ -78,3 +78,73 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getEventMaster = /* GraphQL */ `
+  query GetEventMaster($id: ID!) {
+    getEventMaster(id: $id) {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEventMasters = /* GraphQL */ `
+  query ListEventMasters(
+    $filter: ModelEventMasterFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventMasters(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        dateTime
+        name
+        members
+        venue
+        rule
+        detail
+        owner
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user_id
+        event_id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

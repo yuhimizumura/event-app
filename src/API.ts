@@ -144,13 +144,75 @@ export type DeleteUserInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
+export type CreateEventMasterInput = {
+  id?: string | null,
+  dateTime?: string | null,
+  name?: string | null,
+  members?: string | null,
+  venue?: string | null,
+  rule?: string | null,
+  detail?: string | null,
+  owner?: string | null,
+  isActive?: string | null,
+};
+
+export type ModelEventMasterConditionInput = {
+  dateTime?: ModelStringInput | null,
   name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  members?: ModelStringInput | null,
+  venue?: ModelStringInput | null,
+  rule?: ModelStringInput | null,
+  detail?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+  isActive?: ModelStringInput | null,
+  and?: Array< ModelEventMasterConditionInput | null > | null,
+  or?: Array< ModelEventMasterConditionInput | null > | null,
+  not?: ModelEventMasterConditionInput | null,
+};
+
+export type EventMaster = {
+  __typename: "EventMaster",
+  id?: string | null,
+  dateTime?: string | null,
+  name?: string | null,
+  members?: string | null,
+  venue?: string | null,
+  rule?: string | null,
+  detail?: string | null,
+  owner?: string | null,
+  isActive?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateEventMasterInput = {
+  id: string,
+  dateTime?: string | null,
+  name?: string | null,
+  members?: string | null,
+  venue?: string | null,
+  rule?: string | null,
+  detail?: string | null,
+  owner?: string | null,
+  isActive?: string | null,
+};
+
+export type DeleteEventMasterInput = {
+  id: string,
+};
+
+export type CreateEventInput = {
+  id?: string | null,
+  user_id?: string | null,
+  event_id?: string | null,
+};
+
+export type ModelEventConditionInput = {
+  user_id?: ModelIDInput | null,
+  event_id?: ModelStringInput | null,
+  and?: Array< ModelEventConditionInput | null > | null,
+  or?: Array< ModelEventConditionInput | null > | null,
+  not?: ModelEventConditionInput | null,
 };
 
 export type ModelIDInput = {
@@ -167,6 +229,33 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type Event = {
+  __typename: "Event",
+  id: string,
+  user_id?: string | null,
+  event_id?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateEventInput = {
+  user_id?: string | null,
+  event_id?: string | null,
+};
+
+export type DeleteEventInput = {
+  id: string,
+};
+
+export type ModelTodoFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  and?: Array< ModelTodoFilterInput | null > | null,
+  or?: Array< ModelTodoFilterInput | null > | null,
+  not?: ModelTodoFilterInput | null,
 };
 
 export type ModelTodoConnection = {
@@ -196,6 +285,41 @@ export type ModelUserFilterInput = {
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
   items:  Array<User >,
+  nextToken?: string | null,
+};
+
+export type ModelEventMasterFilterInput = {
+  id?: ModelStringInput | null,
+  dateTime?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  members?: ModelStringInput | null,
+  venue?: ModelStringInput | null,
+  rule?: ModelStringInput | null,
+  detail?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+  isActive?: ModelStringInput | null,
+  and?: Array< ModelEventMasterFilterInput | null > | null,
+  or?: Array< ModelEventMasterFilterInput | null > | null,
+  not?: ModelEventMasterFilterInput | null,
+};
+
+export type ModelEventMasterConnection = {
+  __typename: "ModelEventMasterConnection",
+  items:  Array<EventMaster >,
+  nextToken?: string | null,
+};
+
+export type ModelEventFilterInput = {
+  user_id?: ModelIDInput | null,
+  event_id?: ModelStringInput | null,
+  and?: Array< ModelEventFilterInput | null > | null,
+  or?: Array< ModelEventFilterInput | null > | null,
+  not?: ModelEventFilterInput | null,
+};
+
+export type ModelEventConnection = {
+  __typename: "ModelEventConnection",
+  items:  Array<Event >,
   nextToken?: string | null,
 };
 
@@ -322,6 +446,120 @@ export type DeleteUserMutation = {
   } | null,
 };
 
+export type CreateEventMasterMutationVariables = {
+  input: CreateEventMasterInput,
+  condition?: ModelEventMasterConditionInput | null,
+};
+
+export type CreateEventMasterMutation = {
+  createEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateEventMasterMutationVariables = {
+  input: UpdateEventMasterInput,
+  condition?: ModelEventMasterConditionInput | null,
+};
+
+export type UpdateEventMasterMutation = {
+  updateEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteEventMasterMutationVariables = {
+  input: DeleteEventMasterInput,
+  condition?: ModelEventMasterConditionInput | null,
+};
+
+export type DeleteEventMasterMutation = {
+  deleteEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateEventMutationVariables = {
+  input: CreateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type CreateEventMutation = {
+  createEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateEventMutationVariables = {
+  input: UpdateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type UpdateEventMutation = {
+  updateEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteEventMutationVariables = {
+  input: DeleteEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type DeleteEventMutation = {
+  deleteEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetTodoQueryVariables = {
   id: string,
 };
@@ -405,6 +643,90 @@ export type ListUsersQuery = {
       profile?: string | null,
       category?: string | null,
       image_type?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetEventMasterQueryVariables = {
+  id: string,
+};
+
+export type GetEventMasterQuery = {
+  getEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListEventMastersQueryVariables = {
+  filter?: ModelEventMasterFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEventMastersQuery = {
+  listEventMasters?:  {
+    __typename: "ModelEventMasterConnection",
+    items:  Array< {
+      __typename: "EventMaster",
+      id?: string | null,
+      dateTime?: string | null,
+      name?: string | null,
+      members?: string | null,
+      venue?: string | null,
+      rule?: string | null,
+      detail?: string | null,
+      owner?: string | null,
+      isActive?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetEventQueryVariables = {
+  id: string,
+};
+
+export type GetEventQuery = {
+  getEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListEventsQueryVariables = {
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEventsQuery = {
+  listEvents?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      user_id?: string | null,
+      event_id?: string | null,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -500,6 +822,90 @@ export type OnDeleteUserSubscription = {
     profile?: string | null,
     category?: string | null,
     image_type?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateEventMasterSubscription = {
+  onCreateEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateEventMasterSubscription = {
+  onUpdateEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteEventMasterSubscription = {
+  onDeleteEventMaster?:  {
+    __typename: "EventMaster",
+    id?: string | null,
+    dateTime?: string | null,
+    name?: string | null,
+    members?: string | null,
+    venue?: string | null,
+    rule?: string | null,
+    detail?: string | null,
+    owner?: string | null,
+    isActive?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateEventSubscription = {
+  onCreateEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateEventSubscription = {
+  onUpdateEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteEventSubscription = {
+  onDeleteEvent?:  {
+    __typename: "Event",
+    id: string,
+    user_id?: string | null,
+    event_id?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

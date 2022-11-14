@@ -16,9 +16,9 @@ $font-sp-text: 14px;
 $default-button-color: #242424;
 $default-background-color: #242424;
 $black: #222;
-$light-black:#1f1f1f;
+$light-black: #1f1f1f;
 $dark: #373a47;
-$gray-button:#b7b5b5;
+$gray-button: #b7b5b5;
 $gray-button-hover: #dbd9d9;
 $right-gray: #b3b3b3;
 $form-bg: #f3f3f3;
@@ -37,11 +37,11 @@ $dark-red: #cf1a1a;
 
 //Breakpoints
 $breakpoints: (
-  sp: 'screen and (max-width: 960px)',
-  pc: 'screen and (min-width: 961px)'
+    sp: 'screen and (max-width: 960px)',
+    pc: 'screen and (min-width: 961px)'
 );
 
-//mixin
+//レスポンシブ
 @mixin mq($bp) {
   @media #{map-get($breakpoints,$bp)} {
     @content
@@ -70,6 +70,10 @@ $breakpoints: (
   margin-top: 91px;
 }
 
+@mixin border-radius() {
+  border-radius: 4px;
+}
+
 // 基本設定
 * {
   margin: 0;
@@ -83,6 +87,14 @@ img {
 
 ul {
   list-style: none;
+}
+
+.align-bl {
+  align-items: baseline;
+}
+
+.align-c {
+  align-items: center;
 }
 
 
@@ -106,13 +118,14 @@ ul {
 
 .button {
   background: $button;
+  border-color: $button;
   color: $white;
   @extend .py-1, .w-100;
   min-width: 180px;
   max-width: 250px;
-  border-radius: 4px;
-  border-color: $button;
   font-size: $font-text;
+  display: block;
+  @include border-radius();
   @include mq("sp") {
     margin-bottom: 2rem;
     font-size: $font-sp-text;
@@ -195,6 +208,12 @@ ul {
     padding-top: 0em + $i;
     padding-bottom: 0em + $i;
   }
+  .pt-px-#{$i} {
+    padding-top: 0px + $i;
+  }
+  .pb-px-#{$i} {
+    padding-bottom: 0px + $i;
+  }
 }
 
 .mx-auto {
@@ -259,6 +278,7 @@ ul {
     @extend .text-center;
     width: calc(100% - 75px);
     margin-left: 60px;
+
     .icons {
       margin-left: auto;
 
@@ -439,28 +459,35 @@ ul {
   stroke: $white;
   z-index: 9999999999999999999999;
   padding: 5px 0;
+
   .wrap {
     width: 95%;
     @extend .mx-auto;
     @extend .d-flex-row;
+
     li {
       padding: 5px 0;
       width: 20%;
-      &:nth-of-type(3){
+
+      &:nth-of-type(3) {
         background: $button;
         border-radius: 60px;
       }
+
       white-space: nowrap;
+
       i {
         height: 16px;
         display: block;
         text-align: center;
         margin-bottom: 5px;
       }
+
       a {
         color: $white;
         text-decoration: none;
       }
+
       span {
         font-size: $font-sp-small;
         display: block;
@@ -727,10 +754,10 @@ ul {
     @extend .mt-3;
     @extend .px-2;
     @extend .py-1;
+    @include border-radius();
     display: block;
     background: $default-button-color;
     border: 1px solid $default-button-color;
-    border-radius: 2px;
     color: $white;
   }
 }
@@ -1014,7 +1041,7 @@ footer {
     line-height: 32px;
     max-width: 100%;
     border: 1px solid $gray-button-hover;
-    border-radius: 4px;
+    @include border-radius();
     padding-left: 5px;
     transform: scale(1.0);
   }
@@ -1041,7 +1068,7 @@ footer {
     line-height: 32px;
     max-width: 100%;
     border: 1px solid $gray-button-hover;
-    border-radius: 4px;
+    @include border-radius();
     padding-left: 5px;
   }
 
@@ -1084,7 +1111,7 @@ footer {
     display: block;
     width: 24px;
     background: $error;
-    border-radius: 4px;
+    @include border-radius();
     color: $white;
     font-size: $font-small;
     @include mq("sp") {
@@ -1330,7 +1357,7 @@ footer {
       width: 70%;
       max-width: 600px;
       padding: 10px 30px 25px;
-      border-radius: 2px;
+      @include border-radius();
       background: $white;
       box-shadow: 0 0 30px rgba(0, 0, 0, .6);
       vertical-align: middle;
@@ -1418,14 +1445,13 @@ footer {
   }
 
   .button {
-    max-width: 100px;
-    text-align: center;
-    display: block;
+    @extend .button;
     @extend .mx-auto;
     background: $button !important;
     border: 1px solid $button;
-    padding: 5px 0;
+    max-width: 100px;
     margin-bottom: 2em;
+    padding: 5px 0;
   }
 
   .button-active {
@@ -1455,8 +1481,13 @@ footer {
   }
 
   .user-area {
-    align-items: baseline;
     justify-content: center;
+
+    select {
+      max-width: 100%;
+      border: 1px solid $gray-button-hover;
+      @include border-radius();
+    }
 
     h2 {
       font-size: $font-title;
@@ -1472,9 +1503,9 @@ footer {
       padding: 5px;
       max-width: 200px;
       margin-right: 5px;
-      border-radius: 4px;
       font-size: $font-title;
-      border: 1px solid $right-gray;
+      border: 1px solid $gray-button-hover;
+      @include border-radius();
       @include mq("sp") {
         font-size: $font-sp-title;
       }
@@ -1499,7 +1530,7 @@ footer {
         width: calc(100% - 2em);
         min-height: 100px;
         border: 1px solid $right-gray;
-        border-radius: 4px;
+        @include border-radius();
         @extend .mt-2, .py-1, .px-1;
       }
 
@@ -1535,7 +1566,7 @@ footer {
         padding: 5px 0;
         line-height: 150%;
         border: 1px solid $black;
-        border-radius: 4px;
+        @include border-radius();
         width: calc(20% - 10px);
         min-width: 45px;
         text-align: center;
@@ -1563,7 +1594,7 @@ footer {
         padding: 5px 0;
         line-height: 150%;
         border: 1px solid $black;
-        border-radius: 4px;
+        @include border-radius();
         width: calc(20% - 11px);
         min-width: 45px;
         text-align: center;
@@ -1615,7 +1646,7 @@ footer {
       li {
         position: relative;
         border: 1px solid $black;
-        border-radius: 4px;
+        @include border-radius();
         @extend .mb-2;
 
         .max {
@@ -1702,3 +1733,6 @@ footer {
   }
 }
 
+#create-event {
+  @include sectionCommon();
+}

@@ -95,3 +95,87 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEventMaster = /* GraphQL */ `
+  subscription OnCreateEventMaster {
+    onCreateEventMaster {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEventMaster = /* GraphQL */ `
+  subscription OnUpdateEventMaster {
+    onUpdateEventMaster {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEventMaster = /* GraphQL */ `
+  subscription OnDeleteEventMaster {
+    onDeleteEventMaster {
+      id
+      dateTime
+      name
+      members
+      venue
+      rule
+      detail
+      owner
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateEvent = /* GraphQL */ `
+  subscription OnCreateEvent {
+    onCreateEvent {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEvent = /* GraphQL */ `
+  subscription OnUpdateEvent {
+    onUpdateEvent {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEvent = /* GraphQL */ `
+  subscription OnDeleteEvent {
+    onDeleteEvent {
+      id
+      user_id
+      event_id
+      createdAt
+      updatedAt
+    }
+  }
+`;

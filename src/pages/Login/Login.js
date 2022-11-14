@@ -77,6 +77,10 @@ const Login = () => {
         history.push("/")
     }
 
+    console.log(AuthState.SignedIn)
+    console.log(user)
+    console.log(authState)
+
     return authState === AuthState.SignedIn && user ? (
             <div id="login" className="App">
                 <Header />
@@ -96,23 +100,28 @@ const Login = () => {
                 <Footer />
             </div>
         ) : (
-        <AmplifyAuthenticator>
-            <AmplifySignUp slot="sign-up" formFields={[
-                {
-                    type: "username",
-                    label: " ユーザ名(Email)",
-                    placeholder: "ユーザ名を入力してください。",
-                    required: true,
-                },
-                {
-                    type: "password",
-                    label: " パスワード",
-                    placeholder: "パスワードを入力してください。",
-                    required: true,
-                },
+        <>
+            <Header />
+            <AmplifyAuthenticator>
+                <AmplifySignUp slot="sign-up" formFields={[
+                    {
+                        type: "username",
+                        label: " ユーザ名(Email)",
+                        placeholder: "ユーザ名を入力してください。",
+                        required: true,
+                    },
+                    {
+                        type: "password",
+                        label: " パスワード",
+                        placeholder: "パスワードを入力してください。",
+                        required: true,
+                    },
+
                 ]
-            }/>
-        </AmplifyAuthenticator>
+                }/>
+            </AmplifyAuthenticator>
+            <Footer disp={false}/>
+        </>
     );
 }
 

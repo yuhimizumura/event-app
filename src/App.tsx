@@ -12,6 +12,10 @@ import AddConfirm from "./pages/AddUser/confirm";
 import AddThanks from "./pages/AddUser/thanks";
 import {useSelector} from "react-redux";
 import {isEmpty} from "./util/util";
+import Company from "./pages/static/Company";
+import Privacy from "./pages/static/Privacy";
+import Guide from "./pages/static/Guide";
+import CreateEvent from "./pages/event/createEvent";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -47,6 +51,9 @@ const App = () => {
                 <Route exact path="/qr">
                     <QrHome />
                 </Route>
+                <Route exact path="/create-event">
+                    <CreateEvent />
+                </Route>
                 <Route exact path="/login">
                     {
                         isEmpty(state.signInUser) ? <Login /> : <Redirect to="/mypage" />
@@ -69,6 +76,16 @@ const App = () => {
                 </Route>
                 <Route exact path="/mypage">
                     <MyPage />
+                </Route>
+                {/*　静的ページ　*/}
+                <Route exact path="/company">
+                    <Company />
+                </Route>
+                <Route exact path="/privacy">
+                    <Privacy />
+                </Route>
+                <Route exact path="/guide">
+                    <Guide />
                 </Route>
             </Switch>
         </BrowserRouter>

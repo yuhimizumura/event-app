@@ -22,7 +22,7 @@ const SpMenuBar:React.VFC = () => {
     }
 
     return (
-        <div id="spMenuBar">
+        <div id="spMenuBar" className="dispSp">
             <ul className="wrap">
                <li>
                    <i className="fa-solid fa-bars"></i>

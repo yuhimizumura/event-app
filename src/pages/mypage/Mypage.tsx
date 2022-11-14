@@ -14,6 +14,7 @@ import awsconfig from "../../aws-exports";
 const guest_icon = require("../../assets/img/mypage/icon_user_1.svg")
 
 import { S3Client, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
+import {fetchEvent} from "../../services/event/fetchEvent";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -70,6 +71,13 @@ const MyPage = () => {
         const res = fetchUser(state.signInUser.id)
         res.then((data: any) => {
             updateUsers(data.data.getUser)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        const event = fetchEvent(state.signInUser.id)
+        event.then((data: any) => {
+            console.log(data)
         }).catch((error) => {
             console.log(error)
         })
@@ -289,7 +297,7 @@ const MyPage = () => {
                         onChange={(e) => handleImageChange(e)}
                     />
                 }
-                <div className="d-flex text-end user-area mt-1 mb-1">
+                <div className={`d-flex user-area mt-1 mb-1 ${isEdit ? "align-c" : "align-bl"}`}>
                     {
                         isEdit ?
                             <input type="text" defaultValue={name} onChange={(e) => handleChangeName(e)}/>
@@ -298,7 +306,7 @@ const MyPage = () => {
                     }
                     {
                         isEdit ?
-                            <select value={pref} className="w-25" name="pref" id="pref"
+                            <select value={pref} className="w-25 pt-px-10 pb-px-10" name="pref" id="pref"
                                     onChange={(event) => handleChangePref(event)}>
                                 <option value="0">都道府県を選択してください</option>
                                 {
@@ -434,8 +442,10 @@ const MyPage = () => {
                 </section>
 
 
-                <p>↓ログアウトボタン仮置き</p>
-                <button className="logout-button" onClick={() => handleLogout()}>ログアウト</button>
+                {
+                    isEdit &&
+                    <button className="button-active" onClick={() => handleLogout()}>ログアウト</button>
+                }
 
 
             </div>
