@@ -2,18 +2,36 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateUserInput = {
   id?: string | null,
-  name: string,
-  description?: string | null,
+  sei?: string | null,
+  email?: string | null,
+  gender?: string | null,
+  age?: string | null,
+  tel?: string | null,
+  sns?: string | null,
+  sns_name?: string | null,
+  pref?: string | null,
+  profile?: string | null,
+  category?: string | null,
+  image_type?: string | null,
 };
 
-export type ModelTodoConditionInput = {
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelUserConditionInput = {
+  sei?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  gender?: ModelStringInput | null,
+  age?: ModelStringInput | null,
+  tel?: ModelStringInput | null,
+  sns?: ModelStringInput | null,
+  sns_name?: ModelStringInput | null,
+  pref?: ModelStringInput | null,
+  profile?: ModelStringInput | null,
+  category?: ModelStringInput | null,
+  image_type?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -54,57 +72,6 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
-};
-
-export type Todo = {
-  __typename: "Todo",
-  id: string,
-  name: string,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTodoInput = {
-  id: string,
-  name?: string | null,
-  description?: string | null,
-};
-
-export type DeleteTodoInput = {
-  id: string,
-};
-
-export type CreateUserInput = {
-  id?: string | null,
-  sei?: string | null,
-  email?: string | null,
-  gender?: string | null,
-  age?: string | null,
-  tel?: string | null,
-  sns?: string | null,
-  sns_name?: string | null,
-  pref?: string | null,
-  profile?: string | null,
-  category?: string | null,
-  image_type?: string | null,
-};
-
-export type ModelUserConditionInput = {
-  sei?: ModelStringInput | null,
-  email?: ModelStringInput | null,
-  gender?: ModelStringInput | null,
-  age?: ModelStringInput | null,
-  tel?: ModelStringInput | null,
-  sns?: ModelStringInput | null,
-  sns_name?: ModelStringInput | null,
-  pref?: ModelStringInput | null,
-  profile?: ModelStringInput | null,
-  category?: ModelStringInput | null,
-  image_type?: ModelStringInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
 };
 
 export type User = {
@@ -202,66 +169,36 @@ export type DeleteEventMasterInput = {
 };
 
 export type CreateEventInput = {
-  id?: string | null,
-  user_id?: string | null,
-  event_id?: string | null,
+  id: string,
+  user_id: string,
+  event_id: string,
 };
 
 export type ModelEventConditionInput = {
-  user_id?: ModelIDInput | null,
+  user_id?: ModelStringInput | null,
   event_id?: ModelStringInput | null,
   and?: Array< ModelEventConditionInput | null > | null,
   or?: Array< ModelEventConditionInput | null > | null,
   not?: ModelEventConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type Event = {
   __typename: "Event",
   id: string,
-  user_id?: string | null,
-  event_id?: string | null,
+  user_id: string,
+  event_id: string,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateEventInput = {
+  id: string,
   user_id?: string | null,
   event_id?: string | null,
 };
 
 export type DeleteEventInput = {
   id: string,
-};
-
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
-};
-
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo >,
-  nextToken?: string | null,
 };
 
 export type ModelUserFilterInput = {
@@ -280,6 +217,22 @@ export type ModelUserFilterInput = {
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelUserConnection = {
@@ -310,7 +263,8 @@ export type ModelEventMasterConnection = {
 };
 
 export type ModelEventFilterInput = {
-  user_id?: ModelIDInput | null,
+  id?: ModelStringInput | null,
+  user_id?: ModelStringInput | null,
   event_id?: ModelStringInput | null,
   and?: Array< ModelEventFilterInput | null > | null,
   or?: Array< ModelEventFilterInput | null > | null,
@@ -323,53 +277,11 @@ export type ModelEventConnection = {
   nextToken?: string | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
 
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
@@ -521,8 +433,8 @@ export type CreateEventMutation = {
   createEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -537,8 +449,8 @@ export type UpdateEventMutation = {
   updateEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -553,46 +465,10 @@ export type DeleteEventMutation = {
   deleteEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type GetTodoQueryVariables = {
-  id: string,
-};
-
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
-    items:  Array< {
-      __typename: "Todo",
-      id: string,
-      name: string,
-      description?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } >,
-    nextToken?: string | null,
   } | null,
 };
 
@@ -706,8 +582,8 @@ export type GetEventQuery = {
   getEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -725,8 +601,8 @@ export type ListEventsQuery = {
     items:  Array< {
       __typename: "Event",
       id: string,
-      user_id?: string | null,
-      event_id?: string | null,
+      user_id: string,
+      event_id: string,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -734,36 +610,49 @@ export type ListEventsQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
+export type EventByUserIdQueryVariables = {
+  user_id?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type EventByUserIdQuery = {
+  eventByUserId?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      user_id: string,
+      event_id: string,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
   } | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type EventByEventIdQueryVariables = {
+  event_id?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
+export type EventByEventIdQuery = {
+  eventByEventId?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      user_id: string,
+      event_id: string,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -882,8 +771,8 @@ export type OnCreateEventSubscription = {
   onCreateEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -893,8 +782,8 @@ export type OnUpdateEventSubscription = {
   onUpdateEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -904,8 +793,8 @@ export type OnDeleteEventSubscription = {
   onDeleteEvent?:  {
     __typename: "Event",
     id: string,
-    user_id?: string | null,
-    event_id?: string | null,
+    user_id: string,
+    event_id: string,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -74,6 +74,11 @@ const App = () => {
                         isEmpty(state.signInUser) ? <AddThanks /> : <Redirect to="/mypage" />
                     }
                 </Route>
+                <Route exact path="/create-event">
+                    {
+                        isEmpty(state.signInUser) ? <CreateEvent /> : <Redirect to="/mypage" />
+                    }
+                </Route>
                 <Route exact path="/mypage">
                     <MyPage />
                 </Route>

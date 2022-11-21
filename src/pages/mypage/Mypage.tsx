@@ -14,7 +14,7 @@ import awsconfig from "../../aws-exports";
 const guest_icon = require("../../assets/img/mypage/icon_user_1.svg")
 
 import { S3Client, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
-import {fetchEvent} from "../../services/event/fetchEvent";
+import {fetchEvent, fetchEventByEventId, fetchEventMaster} from "../../services/event/fetchEvent";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -56,6 +56,8 @@ const MyPage = () => {
     const [name, setName] = useState<string>('')
     const [profile, setProfile] = useState<string>('')
     const [imageName,setImageName] = useState<string>('')
+    const [eventIdList,setEventIdList] = useState([])
+    const [eventList,setEventList] = useState([])
 
     useEffect(() => {
         let isMounted = true;
@@ -68,16 +70,15 @@ const MyPage = () => {
         window.scrollTo(0, 0)
 
         // マイページに入ったら再度APIコール
-        const res = fetchUser(state.signInUser.id)
-        res.then((data: any) => {
+        fetchUser(state.signInUser.id).then((data: any) => {
             updateUsers(data.data.getUser)
         }).catch((error) => {
             console.log(error)
         })
 
-        const event = fetchEvent(state.signInUser.id)
-        event.then((data: any) => {
-            console.log(data)
+
+        fetchEvent(state.signInUser.id).then((data: any) => {
+            setEventIdList(data.data.eventByUserId?.items)
         }).catch((error) => {
             console.log(error)
         })
@@ -92,12 +93,66 @@ const MyPage = () => {
         // window.location.reload()
     },[imageName])
 
+    useEffect(() => {
+        if (isEmpty(eventIdList)) return
+
+        let tmp:any = []
+        eventIdList.map((val:any) => {
+            let a = {}
+           fetchEventMaster(val.event_id).then((data: any) => {
+                getEventEntryCount(val.event_id).then((count) => {
+                    data.data.getEventMaster["count"] = count
+                })
+
+
+               //日付フォーマット
+               let date = data.data.getEventMaster.dateTime
+               console.log(date)
+               const dateTmp = new Date(date)
+               data.data.getEventMaster.dateTime = `${dateTmp.getFullYear()}年${dateTmp.getMonth()}月${dateTmp.getDate()}日 ${dayFormat(dateTmp.getDay())}`
+               a = data.data.getEventMaster
+               tmp.push(data.data.getEventMaster)
+
+            }).catch((error) => {
+                console.log(error)
+            })
+            console.log(a)
+        })
+
+        setEventList(tmp)
+
+    },[eventIdList])
+
+    const dayFormat = (num:number) => {
+        const data:any = {
+            0 : "(日)",
+            1 : "(月)",
+            2 : "(火)",
+            3 : "(水)",
+            4 : "(木)",
+            5 : "(金)",
+            6 : "(土)",
+        }
+
+        return data[num]
+    }
+
+    const getEventEntryCount = async (id:string) => {
+        let count = 0
+        await fetchEventByEventId(id).then((data: any) => {
+           count =  data.data.eventByEventId.items.length
+        }).catch((error) => {
+            console.log(error)
+        })
+        return await count
+    }
+
+
     /**
      * ユーザState更新
      *
      */
     const updateUsers = (user:any) => {
-        console.log("getUser:",user)
         dispatch(signInUserSet(user))
 
 
@@ -120,7 +175,6 @@ const MyPage = () => {
         Storage.get(iconName, {
             level: 'public'
         }).then(result => {
-            console.log("image:",result)
             setImageName(result)
         }).catch(err => {
             console.log(err)
@@ -395,18 +449,34 @@ const MyPage = () => {
                 </section>
 
                 <section id="event" className="mt-2">
-                    <h3>直近のイベント</h3>
+                    <h3>エントリーイベント</h3>
                     <ul className="event-area">
-                        <li>
-                            <p className="max">受付終了</p>
-                            <p className="day">2022年12月01日</p>
-                            <dl>
-                                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
-                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>
-                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>
-                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>
-                            </dl>
-                        </li>
+                        {
+                            !isEmpty(eventList) &&
+                                eventList.map((val:any,key) => {
+
+                                    return (
+                                        <li key={val.id}>
+                                            {
+                                                val.count == val.menbers ?
+                                                <p className="max">受付終了</p>
+                                                :
+                                                <p className="limit"><span>満員</span><span>御礼</span></p>
+                                            }
+
+
+                                            <p className="day">{val.dateTime}</p>
+                                            <dl>
+                                                <dt><i className="fa-solid fa-flag mr-px-5"></i>{val.name}</dt>
+                                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: {val.count}/{val.members}人</dd>
+                                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: {val.venue}</dd>
+                                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: {val.rule === null ? "なし" : val.rule}</dd>
+                                            </dl>
+                                        </li>
+                                    )
+                                })
+
+                        }
                         <li>
                             <p className="day">2022年11月15日</p>
                             <dl>
@@ -440,6 +510,53 @@ const MyPage = () => {
                         </li>
                     </ul>
                 </section>
+
+                {/*<section id="event" className="mt-2">*/}
+                {/*    <h3>自分のイベント</h3>*/}
+                {/*    <ul className="event-area">*/}
+                {/*        <li>*/}
+                {/*            <p className="max">受付終了</p>*/}
+                {/*            <p className="day">2022年12月01日</p>*/}
+                {/*            <dl>*/}
+                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
+                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>*/}
+                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
+                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
+                {/*            </dl>*/}
+                {/*        </li>*/}
+                {/*        <li>*/}
+                {/*            <p className="day">2022年11月15日</p>*/}
+                {/*            <dl>*/}
+                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
+                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>*/}
+                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
+                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
+                {/*            </dl>*/}
+                {/*        </li>*/}
+                {/*        <li>*/}
+                {/*            <p className="limit"><span>満員</span><span>御礼</span></p>*/}
+                {/*            <p className="day">2022年11月11日</p>*/}
+                {/*            <dl>*/}
+                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
+                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span*/}
+                {/*                    className="limit-text">8/8人</span></dd>*/}
+                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
+                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
+                {/*            </dl>*/}
+                {/*        </li>*/}
+                {/*        <li>*/}
+                {/*            <p className="little"><span>残り</span><span>僅か</span></p>*/}
+                {/*            <p className="day">2022年11月7日</p>*/}
+                {/*            <dl>*/}
+                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
+                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span*/}
+                {/*                    className="little-text">6/8人</span></dd>*/}
+                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
+                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
+                {/*            </dl>*/}
+                {/*        </li>*/}
+                {/*    </ul>*/}
+                {/*</section>*/}
 
 
                 {

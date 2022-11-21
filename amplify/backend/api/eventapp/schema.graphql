@@ -1,9 +1,3 @@
-type Todo @model {
-  id: ID!
-  name: String!
-  description: String
-}
-
 type User @model {
   id: ID!
   sei: String
@@ -31,7 +25,12 @@ type EventMaster @model {
   isActive:String
 }
 
-type Event @model @key(fields: ["user_id"]) {
-  user_id: ID
-  event_id: String
+type Event
+@model
+@key(name: "userId", fields: ["user_id"], queryField: "eventByUserId")
+@key(name: "eventId", fields: ["event_id"], queryField: "eventByEventId")
+{
+  id: String!
+  user_id: String!
+  event_id: String!
 }
