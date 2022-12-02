@@ -266,6 +266,15 @@ ul {
   justify-content: flex-end;
 }
 
+.center {
+  text-align: center;
+  font-size: $font-text;
+  @include mq("sp") {
+    font-size: $font-sp-text;
+  }
+  line-height: 200%;
+}
+
 // header設定
 #header {
   position: fixed;
@@ -1648,6 +1657,28 @@ footer {
         border: 1px solid $black;
         @include border-radius();
         @extend .mb-2;
+
+        .qrCode {
+          width: 128px;
+          height: 128px;
+          display: block;
+          @extend .mx-auto;
+          @extend .mb-2;
+        }
+
+        .blue-button {
+          @extend .button;
+        }
+
+        .red-button {
+          @extend .button;
+          background: $error !important;
+          border-color: $error !important;;
+          &:hover {
+            background: $error-hover !important;;
+            border-color: $error-hover !important;;
+          }
+        }
 
         .max {
           position: absolute;

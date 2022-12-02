@@ -10,11 +10,13 @@ import Image from "../../component/Image/Image";
 import {fetchUser, upUser} from "../../services/user";
 import Amplify, {Storage, Auth} from "aws-amplify";
 import awsconfig from "../../aws-exports";
-
 const guest_icon = require("../../assets/img/mypage/icon_user_1.svg")
+import QRCode from "qrcode.react"
 
 import { S3Client, HeadObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3'
-import {fetchEvent, fetchEventByEventId, fetchEventMaster} from "../../services/event/fetchEvent";
+import {fetchEvent, fetchEventByEventId, fetchEventMaster, getEventListMasters} from "../../services/event/fetchEvent";
+import {addEvent} from "../../services/event/createEvent";
+import QrHome from "../../component/qrreader/qrCodeApp";
 
 const config = {
     aws_project_region: awsconfig.aws_project_region,
@@ -56,8 +58,11 @@ const MyPage = () => {
     const [name, setName] = useState<string>('')
     const [profile, setProfile] = useState<string>('')
     const [imageName,setImageName] = useState<string>('')
-    const [eventIdList,setEventIdList] = useState([])
-    const [eventList,setEventList] = useState([])
+    const [eventIdList,setEventIdList] = useState<string[]>([])
+    const [eventList,setEventList] = useState<any>([])
+    const [reEventLists,setReEventLists] = useState([])
+    const [dataNull,setDataNull] = useState(0)
+    const [isQr,setIsQr] = useState(false)
 
     useEffect(() => {
         let isMounted = true;
@@ -76,9 +81,21 @@ const MyPage = () => {
             console.log(error)
         })
 
-
         fetchEvent(state.signInUser.id).then((data: any) => {
             setEventIdList(data.data.eventByUserId?.items)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+        getEventListMasters().then((data: any) => {
+            const tmp = data.data.listEventMasters?.items
+            tmp.map(async (val:any,key:number) => {
+                await getEventEntryCount(val.id).then((count) => {
+                    tmp[key]["count"] = count
+                })
+                return val
+            })
+            setReEventLists(tmp)
         }).catch((error) => {
             console.log(error)
         })
@@ -96,30 +113,28 @@ const MyPage = () => {
     useEffect(() => {
         if (isEmpty(eventIdList)) return
 
-        let tmp:any = []
-        eventIdList.map((val:any) => {
-            let a = {}
-           fetchEventMaster(val.event_id).then((data: any) => {
-                getEventEntryCount(val.event_id).then((count) => {
+        let res:any = []
+        const tmp = eventIdList
+        tmp.map(async (val:any,key) => {
+            return await fetchEventMaster(val.event_id).then(async(data: any) => {
+                await getEventEntryCount(val.event_id).then((count) => {
                     data.data.getEventMaster["count"] = count
                 })
-
-
-               //日付フォーマット
-               let date = data.data.getEventMaster.dateTime
-               console.log(date)
-               const dateTmp = new Date(date)
-               data.data.getEventMaster.dateTime = `${dateTmp.getFullYear()}年${dateTmp.getMonth()}月${dateTmp.getDate()}日 ${dayFormat(dateTmp.getDay())}`
-               a = data.data.getEventMaster
-               tmp.push(data.data.getEventMaster)
-
+                //日付フォーマット
+                let date = data.data.getEventMaster.dateTime
+                const dateTmp = new Date(date)
+                data.data.getEventMaster.dateTime = `${dateTmp.getFullYear()}年${dateTmp.getMonth() + 1}月${dateTmp.getDate()}日 ${dayFormat(dateTmp.getDay())}`
+                await res.push(data.data.getEventMaster)
+                if (tmp.length === res.length) {
+                    res.sort((a:any, b:any) => {
+                        return a.updatedAt > b.updatedAt ? -1 : 1;
+                    });
+                    await setEventList([...res])
+                }
             }).catch((error) => {
                 console.log(error)
             })
-            console.log(a)
         })
-
-        setEventList(tmp)
 
     },[eventIdList])
 
@@ -224,7 +239,6 @@ const MyPage = () => {
                 Storage.get(result.key, {
                     level: 'public'
                 }).then(result => {
-                    console.log(result)
                     setImageName(result)
                 }).catch(err => {
                     console.log(err)
@@ -332,6 +346,28 @@ const MyPage = () => {
      */
     const handleChangeProfile = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setProfile(e.target.value)
+    }
+
+    const handleEntry = (id:string) => {
+        const eventId = new Date().getTime().toString()  + Math.floor(Math.random() * 10).toString()
+        const payload = {
+            id: eventId,
+            user_id: state.signInUser.id,
+            event_id:id
+        }
+
+        addEvent(payload)
+
+        fetchEvent(state.signInUser.id).then((data: any) => {
+            setEventIdList(data.data.eventByUserId?.items)
+        }).catch((error) => {
+            console.log(error)
+        })
+
+    }
+
+    const handleViewQRCode = (id:string,type:boolean) => {
+        setIsQr(type)
     }
 
     // const imgPath = `https://eventappb633564a57ed4160b1452ab4919b316a14441-dev.s3.ap-northeast-1.amazonaws.com/public/%E3%81%82%E3%81%82%E3%81%82%E3%81%82.jpeg`
@@ -452,112 +488,110 @@ const MyPage = () => {
                     <h3>エントリーイベント</h3>
                     <ul className="event-area">
                         {
-                            !isEmpty(eventList) &&
-                                eventList.map((val:any,key) => {
+                            !isEmpty(eventList) ?
+                                eventList.map((val:any) => {
+                                    return (
+                                        <li key={val.id}>
+                                            {
+                                                val.count == val.menbers ?
+                                                    <p className="max">受付終了</p>
+                                                    :
+                                                    <p className="limit"><span>満員</span><span>御礼</span></p>
+                                            }
+
+                                            <p className="day">{val.dateTime}</p>
+                                            <div>
+                                                <dl>
+                                                    <dt><i className="fa-solid fa-flag mr-px-5"></i>{val.name}</dt>
+                                                    <dd><i
+                                                        className="fa-solid fa-users mr-px-5"></i>募集人数: {val.count}/{val.members}人
+                                                    </dd>
+                                                    <dd><i
+                                                        className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: {val.venue}
+                                                    </dd>
+                                                    <dd><i
+                                                        className="fa-solid fa-check mr-px-5"></i>参加条件: {val.rule === null ? "なし" : val.rule}
+                                                    </dd>
+                                                </dl>
+                                                {
+                                                    isQr ?
+                                                           <>
+                                                               <div className="qrCode">
+                                                                   <QRCode className="qrCode" value={`${state.signInUser.id}:${val.id}`} />
+                                                               </div>
+                                                               <button className="red-button" onClick={() => handleViewQRCode(val.id,false)}>閉じる</button>
+                                                           </>
+                                                        :
+                                                        <button className="blue-button" onClick={() => handleViewQRCode(val.id,true)}>QRコードを表示</button>
+                                                }
+                                            </div>
+                                        </li>
+                                    )
+                                })
+                                :
+                                <p　className="center">現在、エントリーしているイベントはありません。</p>
+                        }
+                    </ul>
+                </section>
+
+
+                <section id="event" className="mt-2">
+                    <h3>おすすめイベント</h3>
+                    <ul className="event-area">
+                        {
+                            !isEmpty(reEventLists) &&
+                                reEventLists.map((val:any) => {
+                                    console.log(val)
+                                    const s = eventIdList.filter((v:any) => {
+                                        if (v.event_id === val.id) {
+                                            return val
+                                        } else {
+                                            setDataNull(dataNull + 1)
+                                        }
+                                    })
+
+                                    if (s.length > 0) return
+
+                                    const dateTmp = new Date(val.dateTime)
+                                    const dateTime = `${dateTmp.getFullYear()}年${dateTmp.getMonth() + 1}月${dateTmp.getDate()}日 ${dayFormat(dateTmp.getDay())}`
 
                                     return (
                                         <li key={val.id}>
                                             {
                                                 val.count == val.menbers ?
-                                                <p className="max">受付終了</p>
-                                                :
-                                                <p className="limit"><span>満員</span><span>御礼</span></p>
+                                                    <p className="max">受付終了</p>
+                                                    :
+                                                    <p className="limit"><span>満員</span><span>御礼</span></p>
                                             }
 
-
-                                            <p className="day">{val.dateTime}</p>
-                                            <dl>
-                                                <dt><i className="fa-solid fa-flag mr-px-5"></i>{val.name}</dt>
-                                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: {val.count}/{val.members}人</dd>
-                                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: {val.venue}</dd>
-                                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: {val.rule === null ? "なし" : val.rule}</dd>
-                                            </dl>
+                                            <p className="day">{dateTime}</p>
+                                            <div>
+                                                <dl>
+                                                    <dt><i className="fa-solid fa-flag mr-px-5"></i>{val.name}</dt>
+                                                    <dd><i
+                                                        className="fa-solid fa-users mr-px-5"></i>募集人数: {val.count}/{val.members}人
+                                                    </dd>
+                                                    <dd><i
+                                                        className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: {val.venue}
+                                                    </dd>
+                                                    <dd><i
+                                                        className="fa-solid fa-check mr-px-5"></i>参加条件: {val.rule === null ? "なし" : val.rule}
+                                                    </dd>
+                                                </dl>
+                                                <button className="button" onClick={() => handleEntry(val.id)}>エントリー</button>
+                                            </div>
                                         </li>
                                     )
                                 })
-
                         }
-                        <li>
-                            <p className="day">2022年11月15日</p>
-                            <dl>
-                                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
-                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>
-                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>
-                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>
-                            </dl>
-                        </li>
-                        <li>
-                            <p className="limit"><span>満員</span><span>御礼</span></p>
-                            <p className="day">2022年11月11日</p>
-                            <dl>
-                                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
-                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span
-                                    className="limit-text">8/8人</span></dd>
-                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>
-                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>
-                            </dl>
-                        </li>
-                        <li>
-                            <p className="little"><span>残り</span><span>僅か</span></p>
-                            <p className="day">2022年11月7日</p>
-                            <dl>
-                                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>
-                                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span
-                                    className="little-text">6/8人</span></dd>
-                                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>
-                                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>
-                            </dl>
-                        </li>
+                        {
+                           isEmpty(eventIdList) || dataNull === 0 &&
+                            <p className="center">現在、おすすめのイベントはございません</p>
+                        }
+
+
                     </ul>
                 </section>
-
-                {/*<section id="event" className="mt-2">*/}
-                {/*    <h3>自分のイベント</h3>*/}
-                {/*    <ul className="event-area">*/}
-                {/*        <li>*/}
-                {/*            <p className="max">受付終了</p>*/}
-                {/*            <p className="day">2022年12月01日</p>*/}
-                {/*            <dl>*/}
-                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
-                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>*/}
-                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
-                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
-                {/*            </dl>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <p className="day">2022年11月15日</p>*/}
-                {/*            <dl>*/}
-                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
-                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: 2/8人</dd>*/}
-                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
-                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
-                {/*            </dl>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <p className="limit"><span>満員</span><span>御礼</span></p>*/}
-                {/*            <p className="day">2022年11月11日</p>*/}
-                {/*            <dl>*/}
-                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
-                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span*/}
-                {/*                    className="limit-text">8/8人</span></dd>*/}
-                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
-                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
-                {/*            </dl>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <p className="little"><span>残り</span><span>僅か</span></p>*/}
-                {/*            <p className="day">2022年11月7日</p>*/}
-                {/*            <dl>*/}
-                {/*                <dt><i className="fa-solid fa-flag mr-px-5"></i>バイク好き集まれ！SSツーリング！</dt>*/}
-                {/*                <dd><i className="fa-solid fa-users mr-px-5"></i>募集人数: <span*/}
-                {/*                    className="little-text">6/8人</span></dd>*/}
-                {/*                <dd><i className="fa-sharp fa-solid fa-map-pin mr-px-5"></i>開催地: 大阪府大阪市内</dd>*/}
-                {/*                <dd><i className="fa-solid fa-check mr-px-5"></i>参加条件: 18際以上</dd>*/}
-                {/*            </dl>*/}
-                {/*        </li>*/}
-                {/*    </ul>*/}
-                {/*</section>*/}
-
 
                 {
                     isEdit &&

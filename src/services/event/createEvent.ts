@@ -1,6 +1,6 @@
 import {API, graphqlOperation} from "aws-amplify";
 import {getUser} from "../../graphql/queries";
-import {createUser, updateUser} from "../../graphql/mutations";
+import {createEvent, createUser, updateUser} from "../../graphql/mutations";
 
 export const fetchUser = async (id:string) => {
     return await API.graphql(graphqlOperation(getUser,{
@@ -8,8 +8,8 @@ export const fetchUser = async (id:string) => {
     }))
 }
 
-export const addUser = async(payload:any) => {
-    return await API.graphql(graphqlOperation(createUser,{
+export const addEvent = async(payload:any) => {
+    return await API.graphql(graphqlOperation(createEvent,{
         input:payload
     }))
 }
